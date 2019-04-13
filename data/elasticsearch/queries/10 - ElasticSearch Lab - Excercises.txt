@@ -1,0 +1,74 @@
+## Excercises ##
+################
+
+
+# 1) Create an index named exercise.
+
+# 2) Add a document to the type default in the index exercise with id 2 containing 4 fields:
+#	number: 1
+#	title: “Add a document to index”
+#	labNumber: 0
+#	labDescription: “Managing documents”
+
+# 3) Retrieve the document you just created.
+
+# 4) Update the number field in document with id 2 to 2.
+
+# 5) Write an upset that changes the labNumber in labNumber +1 if it exists. Otherwise the labNumber should get the value 1.
+
+# 6) Add two documents to the exercise index with the bulk API:
+##	id 1:
+#	number: 1
+#	title: “Create an index named excercise”
+#	labNumber: 1
+#	labDescription: “Managing documents”
+
+##	id 3:
+#	number: 3
+#	title: “Retrieve the document you just created”
+#	labNumber: 1
+#	labDescription: “Managing documents”
+
+# 7) Remove the document with id 3.
+
+# 8) Remove the entire index.
+
+# 9) Retrieve documents in the product index where the sold field is less than 10.
+
+# 10) Retrieve documents in the product index where the sold field is between 10 (inclusive) and 30 (exclusive).
+
+# 11) Find documents in the product index containing the tag Meat.
+
+# 12) Return documents in the product index containing Tomato or Paste within the name field.
+
+# 13) Match documents in the product index containing “past” followed by an optional character in their name field.
+
+#14) Find documents in the product index containing a number within the name field.
+
+#15) Return documents in the product index created in the last rolling year.
+
+# 16) Perform a search within the recipe index for the sentence "Pasta with parmesan and spinach" in the title field.
+
+# 17) Retrieve documents in the recipe index where the words “sauce” and “carbonara” are present in the description field.
+
+# 18) Perform a search in the recipe index for the sentence "pasta carbonara" in the title field where the order is important.
+
+# 19) Perform a search in the recipe index for the sentence "pasta carbonara" in the title and description fields.
+
+# 20) Write a query that returns recipes of which the description contains “pasta”, but not “carbonara”.
+
+# 21) Write a query that returns recipes of which the description contains “pasta”, but not “carbonara” and of which the cooking time is less than 15 minutes.
+
+# 22) Write a query that returns recipes of which the description contains “pasta” and “carbonara”, but not “parmesan”. Additionally, the dishes should be created in the last year and recipes with “”parsley” should be preferred, but other recipes are also ok.
+
+# 23) Search within the department index for the managers below 40 years of age.
+
+# 24) Search for recipes of for which the title contains “tomato sauce” and return only the “title” field and “ingredients” with all it sub fields.
+
+# 25) Execute previous query, but now we want to apply pagination. Return result 11 until 20 (page 2).
+
+# 26) Run query 24 again, but make sure there are maximum two words between both words.
+
+# 27) Run query 24 again, but make sure you highlight the words “tomato” and “sauce”.
+
+# 28) Search for recipes that are mentioning a kind of “grease” in their description. For example olive oil or butter. Do this by creating synonyms.

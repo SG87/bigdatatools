@@ -1,0 +1,159 @@
+#########################
+### ElasticSearch Lab ###
+#########################
+
+## Managing Documents ##
+########################
+
+# List indexes
+GET /_cat/indices?v
+
+# Delete an index
+DELETE /product
+
+# Create index
+PUT /product
+
+# List indexes
+GET /_cat/indices?v
+
+# Adding Document
+POST /product/default
+{
+	"name": "Big Data Tools 2",
+	"instructor": {
+		"firstName": "Stijn",
+		"lastName": "Geuens"
+	}
+}
+
+# Adding document with id
+POST /product/default/1
+{
+	"name":  "Text Mining",
+	"instructor": {
+		"firstName": "Kristof",
+		"lastName": "Coussement"
+	}
+}
+
+
+# Retrieving document with id
+GET /product/default/1
+
+# Replacing document
+PUT /product/default/1
+{
+  "name": "Text Mining",
+  "price": 195,
+  "instructor": {
+    "firstName": "Kristof",
+    "lastName": "Coussement"
+  }
+}
+
+GET /product/default/1
+
+# Updating document
+POST /product/default/1/_update
+{
+  "doc": {
+    "price": 95,
+    "tags": [
+      "Elasticsearch"
+    ]
+  }
+}
+
+GET /product/default/1
+
+
+# Scripted updates
+# (https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html)
+POST /product/default/1/_update
+{
+  "script" : "ctx._source.price += 10"
+}
+
+GET /product/default/1
+
+# Upserts
+POST /product/default/1/_update
+{
+    "script" : "ctx._source.price += 5",
+    "upsert" : {
+        "price" : 100
+    }
+}
+
+GET /product/default/1
+
+DELETE /product/default/1
+
+# Deleting documents
+DELETE /product/default/1
+
+POST /product/default
+{
+  "name": "Processing Events with Logstash",
+  "category": "course"
+}
+
+POST /product/default
+{
+  "name": "The Art of Scalability",
+  "category": "book"
+}
+
+POST /product/_delete_by_query
+{
+  "query": {
+    "match": {
+      "category": "book"
+    }
+  }
+}
+
+# Deleting index
+DELETE /product
+
+GET /_cat/indices?v
+
+
+# Bulk processing
+POST /product/default/_bulk
+{ "index": { "_id": "100" } }
+{ "price": 100 }
+{ "index": { "_id": "101" } }
+{ "price": 101 }
+
+GET /product/default/100
+GET /product/default/101
+
+
+POST /product/default/_bulk
+{ "update": { "_id": "100" } }
+{ "doc": { "price": 1000 } }
+{ "delete": { "_id": "101" } }
+
+GET /product/default/100
+GET /product/default/101
+
+# Importing  data in bulk
+#POST /product/default/_bulk?pretty -binary-data @/data/products-bulk.json
+# curl -XPOST "http://localhost:9200/product/default/_bulk?pretty -binary-data @/data/products-bulk.json"
+
+
+### Fields: created, description, discount, in_stock, is_active, name, price, sold, tags
+
+# Exploring index
+GET /_cat/health?v
+
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-nodes.html
+GET /_cat/nodes?v
+
+GET /_cat/allocation?v
+
+GET /_cat/shards?v
+
+GET /_cat/indices?v

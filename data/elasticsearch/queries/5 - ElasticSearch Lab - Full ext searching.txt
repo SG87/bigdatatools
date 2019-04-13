@@ -1,0 +1,85 @@
+###################################################
+### 5: ElasticSearch Lab - Full text searching  ###
+###################################################
+
+### Full text search ###
+########################
+
+###POST /recipe/default/_bulk?pretty -binary @Downloads/recipes-bulk.json
+GET /recipe/default/_mapping
+
+# Flexible matching with match query
+GET /recipe/default/_search
+{
+  "query": {
+    "match": {
+      "title": "Recipes with pasta or spaghetti"
+    }
+  }
+}
+
+GET /recipe/default/_search
+{
+  "query": {
+    "match": {
+      "title": {
+        "query": "Recipes with pasta or spaghetti",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+GET /recipe/default/_search
+{
+  "query": {
+    "match": {
+      "title": {
+        "query": "pasta or spaghetti",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+GET /recipe/default/_search
+{
+  "query": {
+    "match": {
+      "title": {
+        "query": "pasta spaghetti",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+# match phrase (order is important)
+GET /recipe/default/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": "spaghetti puttanesca"
+    }
+  }
+}
+
+GET /recipe/default/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": "puttanesca spaghetti"
+    }
+  }
+}
+
+# Searching multiple fields
+GET /recipe/default/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "pasta",
+      "fields": [ "title", "description" ]
+    }
+  }
+}

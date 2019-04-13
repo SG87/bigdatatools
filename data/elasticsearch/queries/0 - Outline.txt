@@ -1,0 +1,330 @@
+#########################
+### ElasticSearch Lab ###
+#########################
+
+## Managing Documents ##
+########################
+
+# List indexes
+
+
+# Create index
+
+
+# List indexes
+
+
+# Adding Document
+
+
+# Adding document with id
+
+
+
+# Retrieving document with id
+
+
+# Replacing document
+
+
+# Scripted updates
+# (https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html)
+
+
+# Upserts
+
+
+# Deleting documents
+
+
+# Deleting index
+
+
+# Bulk processing
+
+
+# Importing  data in bulk
+
+
+# Exploring index
+
+
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-nodes.html
+
+#################################################################
+
+## Mapping ##
+#############g
+
+# Dynamic mapping
+
+
+# Meta Fields (5 of 10 fields)
+
+# Data types
+
+# Add mapping for new field in existing index (type)
+
+
+
+# Change mapping
+
+
+# Mapping parameters
+## https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-params.html
+
+# Adding multi-fields
+
+
+# Create date format
+
+
+# Picking up new field without dynamic mapping
+
+
+#################################################################
+
+
+### Searching ###
+#################
+
+# Search all document
+
+
+# Understand relevance score
+
+
+# Debugging
+
+
+# term level vs full text searches
+
+
+## Term level (term)
+
+
+## Full text (match) (=same results)
+
+
+#################################################################
+
+
+### Term-level queries ###
+##########################
+# Searching for a term
+
+
+# Score are all equal
+
+# Search multiple terms
+
+
+# Retrieve on ID's
+
+
+# Searching with range
+
+
+# Searching date ranges
+
+
+# Searching date ranges with random formats
+
+
+# Relative dates
+# (subtract 1 year from specified date)
+
+
+# (subtract 1 year + 1 day from specified date)
+
+
+# Date Math: https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#date-math
+
+
+# Non-null values
+
+
+# Searching on prefixes
+
+
+# Searching with wildcards`#
+# * = all possible characters / ? = 1 character
+# make processing slow
+
+
+# Regular expressions
+
+
+#################################################################
+
+
+### Full text search ###
+########################
+
+###POST /recipe/default/_bulk?pretty -binary @Downloads/recipes-bulk.json
+
+
+# Flexible matching with match query
+
+
+# match phrase (order is important)
+
+
+# Searching multiple fields
+
+
+################################################################
+
+
+### Boolean queries ###
+#######################
+
+# Adding query clauses to the must key
+
+
+# Moving the range query to the filter key
+
+
+# Adding a query clause to the must_not key
+
+
+# Adding a query clause to the should key
+
+
+# The behavior of the should query clause depends
+
+
+# Debugging bool queries with named queries
+
+
+# How does the match query work?
+
+
+################################################################
+
+
+### Query nested objects ###
+############################
+
+
+################################################################
+
+
+### Controlling Query results ###
+#################################
+
+## Returning pretty JSON
+
+
+# Excluding the _source field altogether
+
+
+## Only returning the created field
+
+
+## Only returning an object's key
+
+
+## Returning all of an object's keys
+
+
+## Returning the ingredients object with all keys, and the servings field
+
+
+## Including all of the ingredients object's keys, except the name key
+
+
+
+# Specifying the result size
+## Using a query parameter
+
+
+#Using a parameter within the request body
+
+
+# Specifying an offset
+
+
+## Specifying an offset with the from parameter
+
+
+# "size" and "from" can be used for pagination
+
+# Sorting results
+
+## Sorting by ascending order (implicitly)
+
+
+## Sorting by descending order
+
+
+## Sorting by multiple fields
+
+
+# Sorting by multi-value fields (arrays)
+## Sorting by the average rating (descending)
+
+
+################################################################
+
+
+### Improving search results ###
+################################
+# Proximity searches
+## Adding test documents
+
+
+## Adding the slop parameter to a match_phrase query
+
+
+# Affecting relevance scoring with proximity
+
+## A simple match query within a bool query
+
+
+## Boosting relevance based on proximity
+
+
+## Adding the slop parameter
+
+
+# Fuzzy match query
+## Searching with fuzziness set to auto
+
+
+## Fuzziness is per term (and specifying an integer)
+
+
+## Switching letters around with transpositions
+
+
+## Disabling transpositions
+
+
+# fuzzy query (=term level query)
+
+
+# Synonyms
+## Adding synonyms
+## Creating index with custom analyzer
+
+
+## Testing the analyzer (with synonyms)
+
+
+## Adding synonyms from file
+
+## Adding index with custom analyzer
+
+
+## Synonyms file (config/analysis/synonyms.txt)
+
+
+# Highlighting matches in fields
+## Adding a test document
+
+
+## Highlighting matches within the description field
+
+
+## Specifying a custom tag

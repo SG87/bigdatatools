@@ -1,0 +1,734 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n.\u003ccenter\u003e![ML Logo](http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png)\n\n![Streaming Logo](https://gcn.com/articles/2014/01/07/~/media/GIG/GCN/Redesign/Articles/2014/January/datastream.png) \u003c/center\u003e\n\n# Spark Streaming\n\n\nThis lab you need to fill in the gaps youself. We are going to do a really basic sentiment analysis on tweets about Donald trump. The steps taken here are roughly the same compared to the steps in the first streaming lab. The difference  is that now we listen to a different topic and include an extra sentiment analysis fuction.\n\n## This lab will cover:\n\n* Part 0: Load modules\n* Part 1: Define helper lists and functions\n* Part 2: Specifying arguments and parameters\n* Part 3: Initialize the StreamingContext()\n* Part 4: Initializing of the stream and creation of the  execution plan\n* Part 5: Create a Kafka producer\n* Part 6: Start the stream\n\n\n\u003e Note that, for reference, you can look up the details of the relevant Spark Streamin methods in [Spark\u0027s Streaming API](https://spark.apache.org/docs/latest/streaming-programming-guide.html)\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:44:08.445",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e.\u003ccenter\u003e\u003cimg src\u003d\"http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png\" alt\u003d\"ML Logo\" /\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg src\u003d\"https://gcn.com/articles/2014/01/07/~/media/GIG/GCN/Redesign/Articles/2014/January/datastream.png\" alt\u003d\"Streaming Logo\" /\u003e \u003c/center\u003e\u003c/p\u003e\n\u003ch1\u003eSpark Streaming\u003c/h1\u003e\n\u003cp\u003eThis lab you need to fill in the gaps youself. We are going to do a really basic sentiment analysis on tweets about Donald trump. The steps taken here are roughly the same compared to the steps in the first streaming lab. The difference is that now we listen to a different topic and include an extra sentiment analysis fuction.\u003c/p\u003e\n\u003ch2\u003eThis lab will cover:\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003ePart 0: Load modules\u003c/li\u003e\n  \u003cli\u003ePart 1: Define helper lists and functions\u003c/li\u003e\n  \u003cli\u003ePart 2: Specifying arguments and parameters\u003c/li\u003e\n  \u003cli\u003ePart 3: Initialize the StreamingContext()\u003c/li\u003e\n  \u003cli\u003ePart 4: Initializing of the stream and creation of the execution plan\u003c/li\u003e\n  \u003cli\u003ePart 5: Create a Kafka producer\u003c/li\u003e\n  \u003cli\u003ePart 6: Start the stream\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote that, for reference, you can look up the details of the relevant Spark Streamin methods in \u003ca href\u003d\"https://spark.apache.org/docs/latest/streaming-programming-guide.html\"\u003eSpark\u0026rsquo;s Streaming API\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001914_-100301641",
+      "id": "20171107-095812_1202665854",
+      "dateCreated": "2019-03-30 11:40:01.914",
+      "dateStarted": "2019-04-09 15:44:08.479",
+      "dateFinished": "2019-04-09 15:44:08.489",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 0: Load Modules\n\nPersonally, I prefer to load all the modules we need in a notebook before starting",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:44:08.579",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 0: Load Modules\u003c/h2\u003e\n\u003cp\u003ePersonally, I prefer to load all the modules we need in a notebook before starting\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001918_1405618094",
+      "id": "20171107-100205_100813349",
+      "dateCreated": "2019-03-30 11:40:01.918",
+      "dateStarted": "2019-04-09 15:44:08.607",
+      "dateFinished": "2019-04-09 15:44:08.610",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%dep z.load(\"/conf/spark-streaming-kafka-0-8_2.11-2.2.0.jar\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:45:04.505",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Must be used before SparkInterpreter (%spark) initialized\nHint: put this paragraph before any Spark code and restart Zeppelin/Interpreter"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1554824674134_38058614",
+      "id": "20190409-154434_1202272458",
+      "dateCreated": "2019-04-09 15:44:34.134",
+      "dateStarted": "2019-04-09 15:45:04.546",
+      "dateFinished": "2019-04-09 15:45:04.552",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nimport sys\nimport json\n\nfrom pyspark import SparkContext\nfrom pyspark.streaming import StreamingContext\nfrom pyspark.streaming.kafka import KafkaUtils\nfrom pyspark.sql.types import *\nfrom pyspark.sql.functions import col, udf",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:45:06.914",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001918_1241756453",
+      "id": "20171030-183117_1217424452",
+      "dateCreated": "2019-03-30 11:40:01.918",
+      "dateStarted": "2019-04-09 15:45:06.948",
+      "dateFinished": "2019-04-09 15:45:07.015",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part1: Define helper lists and functions\n\nThe helper functions that are defined here are exactly the same as in the first streaming lab we saw in class. I repeat:\nBefore running a streaming application it is smart to create some helper functions.\n\nTo be able to output some results, some things need to be done for each micro-batch of tweets (RDDs).\n\nKafka will create a stream of tweets. These tweets are of type string (containing a json structure). The following steps need to be done for each tweet:\n* Transform the string to a dictionary (key-value structure in Python). To do this, we can use the predefined `json.loads()` function in Python.\n* When we have a dictionary, we need to specify which fields (keys) we want to retain. To do this, we define a `selectFields()` function in Python.\n* After selecting the fields, we want to transform the RDD to a dataframe. To do this, we can use the predefined `toDF()` transformation. Unfortunately Spark will not be able to figure out the type of each field. Therefore we need to specify a schema for the `toDF()` transfromation. Therfore, we are also going to specify a `makeSchema()` function in Python.\n* The `toDF()` transformation will not work directly on the RDD, so we need to include it in a `foreachRDD()` transformation. In PySpark this `foreachRDD()` transformation can contain all futher transformation and actions the are going to be defined on the dataframe. In this case the helper functions `DFActions()` is defined and contains the following transactions and actions:\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- `toDF()` to transform the RDD to DF\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- `filter()` to remove tweets without _id_\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- `show()` to show some sample tweets\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- `count()`to count the number of tweet during the past 10 seconds\n\n**Addionally, two helper lists and one helper function will be created:**\n* The two lists contain respectively a series of positive and negative words.\n* The additional helper function `sentimentAnalysis()` returns a value of \"postive\", \"negative\", or \"neutral\", depending on the fact that the tweet has more, less, or equal positive vs negative words in its _text_ column. First a Python function is defined. Afterwards we use `udf()` to be able to apply the function on our dataframe within the  `DFActions()` helper function.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:44:08.833",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart1: Define helper lists and functions\u003c/h2\u003e\n\u003cp\u003eThe helper functions that are defined here are exactly the same as in the first streaming lab we saw in class. I repeat:\u003cbr/\u003eBefore running a streaming application it is smart to create some helper functions.\u003c/p\u003e\n\u003cp\u003eTo be able to output some results, some things need to be done for each micro-batch of tweets (RDDs).\u003c/p\u003e\n\u003cp\u003eKafka will create a stream of tweets. These tweets are of type string (containing a json structure). The following steps need to be done for each tweet:\u003cbr/\u003e* Transform the string to a dictionary (key-value structure in Python). To do this, we can use the predefined \u003ccode\u003ejson.loads()\u003c/code\u003e function in Python.\u003cbr/\u003e* When we have a dictionary, we need to specify which fields (keys) we want to retain. To do this, we define a \u003ccode\u003eselectFields()\u003c/code\u003e function in Python.\u003cbr/\u003e* After selecting the fields, we want to transform the RDD to a dataframe. To do this, we can use the predefined \u003ccode\u003etoDF()\u003c/code\u003e transformation. Unfortunately Spark will not be able to figure out the type of each field. Therefore we need to specify a schema for the \u003ccode\u003etoDF()\u003c/code\u003e transfromation. Therfore, we are also going to specify a \u003ccode\u003emakeSchema()\u003c/code\u003e function in Python.\u003cbr/\u003e* The \u003ccode\u003etoDF()\u003c/code\u003e transformation will not work directly on the RDD, so we need to include it in a \u003ccode\u003eforeachRDD()\u003c/code\u003e transformation. In PySpark this \u003ccode\u003eforeachRDD()\u003c/code\u003e transformation can contain all futher transformation and actions the are going to be defined on the dataframe. In this case the helper functions \u003ccode\u003eDFActions()\u003c/code\u003e is defined and contains the following transactions and actions:\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- \u003ccode\u003etoDF()\u003c/code\u003e to transform the RDD to DF\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- \u003ccode\u003efilter()\u003c/code\u003e to remove tweets without \u003cem\u003eid\u003c/em\u003e\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- \u003ccode\u003eshow()\u003c/code\u003e to show some sample tweets\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- \u003ccode\u003ecount()\u003c/code\u003eto count the number of tweet during the past 10 seconds\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eAddionally, two helper lists and one helper function will be created:\u003c/strong\u003e\u003cbr/\u003e* The two lists contain respectively a series of positive and negative words.\u003cbr/\u003e* The additional helper function \u003ccode\u003esentimentAnalysis()\u003c/code\u003e returns a value of \u0026ldquo;postive\u0026rdquo;, \u0026ldquo;negative\u0026rdquo;, or \u0026ldquo;neutral\u0026rdquo;, depending on the fact that the tweet has more, less, or equal positive vs negative words in its \u003cem\u003etext\u003c/em\u003e column. First a Python function is defined. Afterwards we use \u003ccode\u003eudf()\u003c/code\u003e to be able to apply the function on our dataframe within the \u003ccode\u003eDFActions()\u003c/code\u003e helper function.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001918_-414032319",
+      "id": "20171107-100234_156931830",
+      "dateCreated": "2019-03-30 11:40:01.918",
+      "dateStarted": "2019-04-09 15:44:08.870",
+      "dateFinished": "2019-04-09 15:44:08.881",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### 1a) Definition of sentiment lists",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:44:08.970",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e1a) Definition of sentiment lists\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001919_-1605405941",
+      "id": "20171107-101301_1134074589",
+      "dateCreated": "2019-03-30 11:40:01.919",
+      "dateStarted": "2019-04-09 15:44:08.997",
+      "dateFinished": "2019-04-09 15:44:09.001",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\npositive \u003d [x[\"_c0\"] for x in spark.read.csv(\"file:///data/positive-words.txt\").collect()]\nnegative \u003d [x[\"_c0\"] for x in spark.read.csv(\"file:///data/negative-words.txt\").collect()]\nprint(len(positive))\nprint(len(negative))",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:44:09.098",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "2006\n4783\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d83",
+            "http://172.20.0.3:4040/jobs/job?id\u003d84",
+            "http://172.20.0.3:4040/jobs/job?id\u003d85",
+            "http://172.20.0.3:4040/jobs/job?id\u003d86"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001919_-1359364581",
+      "id": "20171107-091810_498171053",
+      "dateCreated": "2019-03-30 11:40:01.919",
+      "dateStarted": "2019-04-09 15:44:09.132",
+      "dateFinished": "2019-04-09 15:44:09.642",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### 1b) Definition of helper functions\n\n4 helper functions need to be defined:\n* `selectFields()` helper function (similar to the lab in class)\n* `makeSchema()` helper function (similar to the lab in class)\n* `sentimentAnalysis()` helper function (NEW!!)\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- This function takes the itersection of the words in the text column and the positive and negative word lists. The number postive and negetive words in the text are counted. If **pos_words** \u003e **neg_words**, the sentiment is **positive**, else if **pos_words** \u003c **neg_words**, the sentiment is **negative**, else sentiment is **neutral**.\n* `DFActions()` helper function (similar to the lab in class, but with new components)",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:44:09.737",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e1b) Definition of helper functions\u003c/h3\u003e\n\u003cp\u003e4 helper functions need to be defined:\u003cbr/\u003e* \u003ccode\u003eselectFields()\u003c/code\u003e helper function (similar to the lab in class)\u003cbr/\u003e* \u003ccode\u003emakeSchema()\u003c/code\u003e helper function (similar to the lab in class)\u003cbr/\u003e* \u003ccode\u003esentimentAnalysis()\u003c/code\u003e helper function (NEW!!)\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;- This function takes the itersection of the words in the text column and the positive and negative word lists. The number postive and negetive words in the text are counted. If \u003cstrong\u003epos_words\u003c/strong\u003e \u0026gt; \u003cstrong\u003eneg_words\u003c/strong\u003e, the sentiment is \u003cstrong\u003epositive\u003c/strong\u003e, else if \u003cstrong\u003epos_words\u003c/strong\u003e \u0026lt; \u003cstrong\u003eneg_words\u003c/strong\u003e, the sentiment is \u003cstrong\u003enegative\u003c/strong\u003e, else sentiment is \u003cstrong\u003eneutral\u003c/strong\u003e.\u003cbr/\u003e* \u003ccode\u003eDFActions()\u003c/code\u003e helper function (similar to the lab in class, but with new components)\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001919_1899239204",
+      "id": "20171107-101332_1217894860",
+      "dateCreated": "2019-03-30 11:40:01.920",
+      "dateStarted": "2019-04-09 15:44:09.770",
+      "dateFinished": "2019-04-09 15:44:09.777",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Replace \u003cFILL IN\u003e with the appropriate code\ndef selectFields(tweet, fields):    \n    \u003cFILL IN\u003e\n    \n    \ndef makeSchema(fields):\n    \u003cFILL IN\u003e\n    \ndef sentimentAnalysis(text):\n    words \u003d text.lower().split()\n    pos_words \u003d len(list(set(words).intersection(positive)))\n    neg_words \u003d \u003cFILL IN\u003e\n    if pos_words \u003e neg_words:\n        sentiment \u003d \"positive\"\n    elif \u003cFILL IN\u003e\n        \u003cFILL IN\u003e\n    else:\n        \u003cFILL IN\u003e\n    return sentiment\n    \nudfSentimentAnalysis \u003d udf(sentimentAnalysis, StringType())\n    \ndef toDF(rdd):\n    DF \u003d rdd.toDF(schema).filter(col(\"id\").isNotNull())\n    DFSentiment \u003d \u003cFILL IN\u003e\n    DFSentiment.show(5)\n    print(\"Number of tweet last \" + str(seconds_to_run) + \" seconds: \" + str(DF.count()))\n    ",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:44:09.870",
+      "config": {
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[0;36m  File \u001b[0;32m\"\u003cipython-input-110-6f5e1cdf8142\u003e\"\u001b[0;36m, line \u001b[0;32m3\u001b[0m\n\u001b[0;31m    \u003cFILL IN\u003e\u001b[0m\n\u001b[0m    ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001920_1860493113",
+      "id": "20171030-205833_757769488",
+      "dateCreated": "2019-03-30 11:40:01.920",
+      "dateStarted": "2019-04-09 15:44:09.931",
+      "dateFinished": "2019-04-09 15:44:09.988",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 2: Specifying arguments and parameters\n\nThe helper functions defined above take arguments as input. In the cell below, the **fields** argument for the **selectFields** and **makeSchema** function is defined. Additionally we define to which topic Spark should listen, the interval Spark Streaming should run and finally the location of Zookeeper.\n\nHere we want to retain the \"id\", \"created_at\", \"text\", \"user.location\", \"lang\", and \"timestamp_ms\" fields\n\nWe want to consume the topic \"trump\" every 10 seconds.\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.920",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 2: Specifying arguments and parameters\u003c/h2\u003e\n\u003cp\u003eThe helper functions defined above take arguments as input. In the cell below, the \u003cstrong\u003efields\u003c/strong\u003e argument for the \u003cstrong\u003eselectFields\u003c/strong\u003e and \u003cstrong\u003emakeSchema\u003c/strong\u003e function is defined. Additionally we define to which topic Spark should listen, the interval Spark Streaming should run and finally the location of Zookeeper.\u003c/p\u003e\n\u003cp\u003eHere we want to retain the \u0026ldquo;id\u0026rdquo;, \u0026ldquo;created_at\u0026rdquo;, \u0026ldquo;text\u0026rdquo;, \u0026ldquo;user.location\u0026rdquo;, \u0026ldquo;lang\u0026rdquo;, and \u0026ldquo;timestamp_ms\u0026rdquo; fields\u003c/p\u003e\n\u003cp\u003eWe want to consume the topic \u0026ldquo;trump\u0026rdquo; every 10 seconds.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001920_-2110017849",
+      "id": "20171107-102151_245887405",
+      "dateCreated": "2019-03-30 11:40:01.920",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Replace \u003cFILL IN\u003e with the appropriate code\nfields \u003d \u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.921",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001920_-1893328581",
+      "id": "20171030-203558_547634945",
+      "dateCreated": "2019-03-30 11:40:01.920",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Replace \u003cFILL IN\u003e with the appropriate code\nzkQuorum \u003d \"localhost:2181\"\ntopic \u003d \u003cFILL IN\u003e\n\nseconds_to_run \u003d \u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.921",
+      "config": {
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001921_-610863211",
+      "id": "20171030-183328_1088012018",
+      "dateCreated": "2019-03-30 11:40:01.921",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 3: Initialize the StreamingContext (ssc)\n\nThe most import aspect of the Spark Streaming is the `StreamingContext()`. This context is build on top oft the `SparkContext()` (sc) and is defined by setting the SparkContext and interval to run.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.921",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 3: Initialize the StreamingContext (ssc)\u003c/h2\u003e\n\u003cp\u003eThe most import aspect of the Spark Streaming is the \u003ccode\u003eStreamingContext()\u003c/code\u003e. This context is build on top oft the \u003ccode\u003eSparkContext()\u003c/code\u003e (sc) and is defined by setting the SparkContext and interval to run.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001921_1228291128",
+      "id": "20171107-102407_146334504",
+      "dateCreated": "2019-03-30 11:40:01.921",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Replace \u003cFILL IN\u003e with the appropriate code\nssc \u003d \u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.922",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python"
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001921_-2061102528",
+      "id": "20171107-102406_268218665",
+      "dateCreated": "2019-03-30 11:40:01.921",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 4: Initializing of the stream and creation of the  execution plan\n\nIn the cell below, the `KafkaUtils.createStream()` method is used to create a stream. The argument given are the StreamingContext (ssc), the ZooKeeper location (which we specified above), the name of the stream application, a dict with topics to listen to (which we specified above) as key and the number of partitions as value. To see all possible arguments, type `help(KafkaUtils.createStream)`\n\nAfter the initialization of the stream, the transformations and actions to be executed on the stream are defined.\n\n\u003e Note: this is exatly the same as in class",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.922",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 4: Initializing of the stream and creation of the execution plan\u003c/h2\u003e\n\u003cp\u003eIn the cell below, the \u003ccode\u003eKafkaUtils.createStream()\u003c/code\u003e method is used to create a stream. The argument given are the StreamingContext (ssc), the ZooKeeper location (which we specified above), the name of the stream application, a dict with topics to listen to (which we specified above) as key and the number of partitions as value. To see all possible arguments, type \u003ccode\u003ehelp(KafkaUtils.createStream)\u003c/code\u003e\u003c/p\u003e\n\u003cp\u003eAfter the initialization of the stream, the transformations and actions to be executed on the stream are defined.\u003c/p\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote: this is exatly the same as in class\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001922_1409714068",
+      "id": "20171107-102524_966047661",
+      "dateCreated": "2019-03-30 11:40:01.922",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Replace \u003cFILL IN\u003e with the appropriate code\n# initialization of the Stream\n\u003cFILL IN\u003e\n\n# string to directory\n\u003cFILL IN\u003e\n\n# select the necessary fields\n\u003cFILL IN\u003e\n\n# define schema\n\u003cFILL IN\u003e\n\n# transform to DF and perform the DFActions\n\u003cFILL IN\u003e\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.922",
+      "config": {
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001922_72167686",
+      "id": "20171030-183514_638708508",
+      "dateCreated": "2019-03-30 11:40:01.922",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 5: Create Kafka producer\n\nTo have data running from Kafka to Spark, we need to create a Kafka producer.\nMake sure you make the proper adjustments in the **twitter_config.py** file so you only collect tweets about \"Trump\" and will put them in the \"trump\" topic.\nAfterwards you can start the **kafka-twitter-producer.py** script.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.922",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 5: Create Kafka producer\u003c/h2\u003e\n\u003cp\u003eTo have data running from Kafka to Spark, we need to create a Kafka producer.\u003cbr/\u003eMake sure you make the proper adjustments in the \u003cstrong\u003etwitter_config.py\u003c/strong\u003e file so you only collect tweets about \u0026ldquo;Trump\u0026rdquo; and will put them in the \u0026ldquo;trump\u0026rdquo; topic.\u003cbr/\u003eAfterwards you can start the \u003cstrong\u003ekafka-twitter-producer.py\u003c/strong\u003e script.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001922_754474816",
+      "id": "20171107-102900_380916800",
+      "dateCreated": "2019-03-30 11:40:01.922",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 6: Start the stream\nIn this part we start the stream, so nevertheless we have only two lines, this is were the magic happens.\n\nAdditionally, the `awaitTermination()`method is called on the stream. This means that the SparkContext waits untill all the transformations and actions are execute before starting a new micro-batch.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.923",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 6: Start the stream\u003c/h2\u003e\n\u003cp\u003eIn this part we start the stream, so nevertheless we have only two lines, this is were the magic happens.\u003c/p\u003e\n\u003cp\u003eAdditionally, the \u003ccode\u003eawaitTermination()\u003c/code\u003emethod is called on the stream. This means that the SparkContext waits untill all the transformations and actions are execute before starting a new micro-batch.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001923_-132602340",
+      "id": "20171107-102712_757453115",
+      "dateCreated": "2019-03-30 11:40:01.923",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nssc.start()\nssc.awaitTermination()",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.923",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001923_495749583",
+      "id": "20171030-183553_1289449604",
+      "dateCreated": "2019-03-30 11:40:01.923",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 11:40:01.924",
+      "config": {
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1553946001923_-2025347453",
+      "id": "20171030-184443_171016630",
+      "dateCreated": "2019-03-30 11:40:01.923",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Spark Streaming/Trump",
+  "id": "2E6G5AMJY",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

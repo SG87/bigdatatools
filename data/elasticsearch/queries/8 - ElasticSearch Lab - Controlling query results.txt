@@ -1,0 +1,174 @@
+########################################################
+### 8: ElasticSearch Lab - Controlling Query results ###
+########################################################
+
+
+### Controlling Query results ###
+#################################
+
+## Returning pretty JSON
+GET /recipe/default/_search?pretty
+{
+    "query": {
+      "match": { "title": "pasta" }
+    }
+}
+
+
+# Excluding the _source field altogether
+GET /recipe/default/_search
+{
+  "_source": false,
+  "query": {
+    "match": { "title": "pasta" }
+  }
+}
+
+## Only returning the created field
+GET /recipe/default/_search
+{
+  "_source": "created",
+  "query": {
+    "match": { "title": "pasta" }
+  }
+}
+
+## Only returning an object's key
+GET /recipe/default/_search
+{
+  "_source": "ingredients.name",
+  "query": {
+    "match": { "title": "pasta" }
+  }
+}
+
+## Returning all of an object's keys
+GET /recipe/default/_search
+{
+  "_source": "ingredients.*",
+  "query": {
+    "match": { "title": "pasta" }
+  }
+}
+
+## Returning the ingredients object with all keys, and the servings field
+
+GET /recipe/default/_search
+{
+  "_source": [ "ingredients.*", "servings" ],
+  "query": {
+    "match": { "title": "pasta" }
+  }
+}
+
+## Including all of the ingredients object's keys, except the name key
+GET /recipe/default/_search
+{
+  "_source": {
+    "includes": "ingredients.*",
+    "excludes": "ingredients.name"
+  },
+  "query": {
+    "match": { "title": "pasta" }
+  }
+}
+
+
+# Specifying the result size
+## Using a query parameter
+GET /recipe/default/_search?size=2
+{
+  "_source": false,
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+#Using a parameter within the request body
+GET /recipe/default/_search
+{
+  "_source": false,
+  "size": 2,
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+
+# Specifying an offset
+
+## Specifying an offset with the from parameter
+GET /recipe/default/_search
+{
+  "_source": false,
+  "size": 2,
+  "from": 2,
+  "query": {
+    "match": {
+      "title": "pasta"
+    }
+  }
+}
+
+# "size" and "from" can be used for pagination
+
+# Sorting results
+
+## Sorting by ascending order (implicitly)
+GET /recipe/default/_search
+{
+  "_source": false,
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    "preparation_time_minutes"
+  ]
+}
+
+## Sorting by descending order
+GET /recipe/default/_search
+{
+  "_source": "created",
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    { "created": "desc" }
+  ]
+}
+
+## Sorting by multiple fields
+GET /recipe/default/_search
+{
+  "_source": [ "preparation_time_minutes", "created" ],
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    { "preparation_time_minutes": "asc" },
+    { "created": "desc" }
+  ]
+}
+
+# Sorting by multi-value fields (arrays)
+## Sorting by the average rating (descending)
+GET /recipe/default/_search
+{
+  "_source": "ratings",
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "ratings": {
+        "order": "desc",
+        "mode": "avg"
+      }
+    }
+  ]
+}

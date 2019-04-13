@@ -1,0 +1,1497 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\r. \u003ccenter\u003e ![ML Logo](http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png) \u003c/center\u003e\r# Linear Regression Lab\r\rThis lab covers a common supervised learning pipeline, using a subset of the [Million Song Dataset](http://labrosa.ee.columbia.edu/millionsong/) from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD). Our goal is to train a linear regression model to predict the release year of a song given a set of audio features. A linear regression looks as follows:\r. \u003ccenter\u003e![Linear Regression](http://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png) \u003c/center\u003e\r\rThe ML proces for linear regression is similar to the proces of the decision tree we saw in the class lab. \r\r## This Lab will cover:\r* Part 0: Load modules\r* Part 1: Read and check the initial dataset\r* Intermezzo: Nice visualization with SQL\r* Part 2: Prepare data structure\r* Part 3: Split data\r* Part 4: Create a linear regresson model\r* Part 5: Make predictions and evaluate the linear regression model\r",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:15.765",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e. \u003ccenter\u003e \u003cimg src\u003d\"http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png\" alt\u003d\"ML Logo\" /\u003e \u003c/center\u003e\u003c/p\u003e\n\u003ch1\u003eLinear Regression Lab\u003c/h1\u003e\n\u003cp\u003eThis lab covers a common supervised learning pipeline, using a subset of the \u003ca href\u003d\"http://labrosa.ee.columbia.edu/millionsong/\"\u003eMillion Song Dataset\u003c/a\u003e from the \u003ca href\u003d\"https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD\"\u003eUCI Machine Learning Repository\u003c/a\u003e. Our goal is to train a linear regression model to predict the release year of a song given a set of audio features. A linear regression looks as follows:\u003cbr/\u003e. \u003ccenter\u003e\u003cimg src\u003d\"http://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png\" alt\u003d\"Linear Regression\" /\u003e \u003c/center\u003e\u003c/p\u003e\n\u003cp\u003eThe ML proces for linear regression is similar to the proces of the decision tree we saw in the class lab. \u003c/p\u003e\n\u003ch2\u003eThis Lab will cover:\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003ePart 0: Load modules\u003c/li\u003e\n  \u003cli\u003ePart 1: Read and check the initial dataset\u003c/li\u003e\n  \u003cli\u003eIntermezzo: Nice visualization with SQL\u003c/li\u003e\n  \u003cli\u003ePart 2: Prepare data structure\u003c/li\u003e\n  \u003cli\u003ePart 3: Split data\u003c/li\u003e\n  \u003cli\u003ePart 4: Create a linear regresson model\u003c/li\u003e\n  \u003cli\u003ePart 5: Make predictions and evaluate the linear regression model\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522307_1377377147",
+      "id": "20171028-231608_1232490554",
+      "dateCreated": "2019-03-30 14:35:22.307",
+      "dateStarted": "2019-04-09 15:42:15.804",
+      "dateFinished": "2019-04-09 15:42:15.819",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 0: Load Modules",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:15.905",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 0: Load Modules\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522308_1294935313",
+      "id": "20171029-100423_1913405669",
+      "dateCreated": "2019-03-30 14:35:22.308",
+      "dateStarted": "2019-04-09 15:42:15.944",
+      "dateFinished": "2019-04-09 15:42:15.948",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nimport os.path\nfrom pyspark.ml.feature import StringIndexer, VectorIndexer, VectorAssembler\nfrom pyspark.ml.regression import LinearRegression, LinearRegressionModel\nfrom pyspark.ml.evaluation import RegressionEvaluator\nfrom pyspark.sql.functions import col\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:16.044",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522308_1983989884",
+      "id": "20171029-100928_789356368",
+      "dateCreated": "2019-03-30 14:35:22.308",
+      "dateStarted": "2019-04-09 15:42:16.092",
+      "dateFinished": "2019-04-09 15:42:16.156",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003e Note: In our class example we imported different modules:\n- from pyspark.ml.classification import DecisionTreeClassifier\n- from pyspark.ml.evaluation import MulticlassClassificationEvaluator\n\n\u003e The modules to implement depend on the model you want to fit.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:16.192",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote: In our class example we imported different modules:\u003cbr/\u003e- from pyspark.ml.classification import DecisionTreeClassifier\u003cbr/\u003e- from pyspark.ml.evaluation import MulticlassClassificationEvaluator\u003c/p\u003e\n  \u003cp\u003eThe modules to implement depend on the model you want to fit.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522309_-377590464",
+      "id": "20171029-101221_1558163188",
+      "dateCreated": "2019-03-30 14:35:22.309",
+      "dateStarted": "2019-04-09 15:42:16.243",
+      "dateFinished": "2019-04-09 15:42:16.250",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 1: Read and check the initial dataset\n\n### (1a) Load and check the data\n\nThe raw data is currently stored in comma-delimited txt file. We will start by reading this raw data in as a DataFrame.\nIn the second cell, the DataFrame [`count()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.count) is used to check how many data points we have.  Then we use the `show()` method to see whether DataFrame is correctly created.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:16.342",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 1: Read and check the initial dataset\u003c/h2\u003e\n\u003ch3\u003e(1a) Load and check the data\u003c/h3\u003e\n\u003cp\u003eThe raw data is currently stored in comma-delimited txt file. We will start by reading this raw data in as a DataFrame.\u003cbr/\u003eIn the second cell, the DataFrame \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.count\"\u003e\u003ccode\u003ecount()\u003c/code\u003e method\u003c/a\u003e is used to check how many data points we have. Then we use the \u003ccode\u003eshow()\u003c/code\u003e method to see whether DataFrame is correctly created.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522309_2015715948",
+      "id": "20171029-101316_1435757240",
+      "dateCreated": "2019-03-30 14:35:22.309",
+      "dateStarted": "2019-04-09 15:42:16.449",
+      "dateFinished": "2019-04-09 15:42:16.460",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nfile_name \u003d os.path.join(\u0027/data\u0027, \u0027millionsong.txt\u0027)\n\n#raw_data_df \u003d sqlContext.\u003cFILL IN\u003e\nraw \u003d sqlContext.read.csv(file_name)\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:16.549",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d59"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522309_2065530101",
+      "id": "20171029-101508_1264494162",
+      "dateCreated": "2019-03-30 14:35:22.309",
+      "dateStarted": "2019-04-09 15:42:16.615",
+      "dateFinished": "2019-04-09 15:42:16.751",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nnum_points \u003d raw.count()\nprint num_points\n\nraw.show(5)\nraw",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:16.815",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "6724\n+------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+\n|   _c0|           _c1|           _c2|           _c3|           _c4|           _c5|           _c6|           _c7|           _c8|           _c9|          _c10|          _c11|          _c12|\n+------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+\n|2001.0|0.884123733793|0.610454259079|0.600498416968|0.474669212493|0.247232680947|0.357306088914|0.344136412234|0.339641227335|0.600858840135|0.425704689024| 0.60491501652|0.419193351817|\n|2001.0|0.854411946129|0.604124786151|0.593634078776|0.495885413963|0.266307830936|0.261472105188|0.506387076327|0.464453565511|0.665798573683|0.542968988766| 0.58044428577|0.445219373624|\n|2001.0|0.908982970575|0.632063159227|0.557428975183|0.498263761394|0.276396052336|0.312809861625|0.448530069406|0.448674249968|0.649791323916|0.489868662682|0.591908113534|  0.4500023818|\n|2001.0|0.842525219898|0.561826888508|0.508715259692|0.443531142139|0.296733836002|0.250213568176|0.488540873206|0.360508747659|0.575435243185|0.361005878554|0.678378718617|0.409036786173|\n|2001.0|0.909303285534|0.653607720915|0.585580794716|0.473250503005|0.251417011835|0.326976795524| 0.40432273022|0.371154511756|0.629401917965|0.482243251755|0.566901413923|0.463373691946|\n+------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+\nonly showing top 5 rows\n\nDataFrame[_c0: string, _c1: string, _c2: string, _c3: string, _c4: string, _c5: string, _c6: string, _c7: string, _c8: string, _c9: string, _c10: string, _c11: string, _c12: string]"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d60",
+            "http://172.20.0.3:4040/jobs/job?id\u003d61"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522310_108719852",
+      "id": "20171029-101705_407677493",
+      "dateCreated": "2019-03-30 14:35:22.310",
+      "dateStarted": "2019-04-09 15:42:16.861",
+      "dateFinished": "2019-04-09 15:42:17.111",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003e Note: The millionsong dataset does not contain column headers. In our case the first column (_c0) is the release year and our _label_.\n\n#### Rename the _c0 column to \"year\" for the sake of readability.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:17.162",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote: The millionsong dataset does not contain column headers. In our case the first column (_c0) is the release year and our \u003cem\u003elabel\u003c/em\u003e.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch4\u003eRename the _c0 column to \u0026ldquo;year\u0026rdquo; for the sake of readability.\u003c/h4\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522310_314937859",
+      "id": "20171029-101749_742779126",
+      "dateCreated": "2019-03-30 14:35:22.310",
+      "dateStarted": "2019-04-09 15:42:17.208",
+      "dateFinished": "2019-04-09 15:42:17.214",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n#raw \u003d raw.\u003cFILL IN\u003e\nraw \u003d raw.withColumnRenamed(\"_c0\", \"year\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:17.308",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522310_-317347771",
+      "id": "20171029-103934_398543423",
+      "dateCreated": "2019-03-30 14:35:22.310",
+      "dateStarted": "2019-04-09 15:42:17.346",
+      "dateFinished": "2019-04-09 15:42:17.421",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n#### In the cell below, the numeric columns are transformed from string to float.\n\u003e Note: In contrast to the class lab, here all columns should be float.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:17.447",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch4\u003eIn the cell below, the numeric columns are transformed from string to float.\u003c/h4\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote: In contrast to the class lab, here all columns should be float.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522310_27220354",
+      "id": "20171029-102108_829183884",
+      "dateCreated": "2019-03-30 14:35:22.311",
+      "dateStarted": "2019-04-09 15:42:17.492",
+      "dateFinished": "2019-04-09 15:42:17.503",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nraw \u003d raw.select( *(col(c).cast(\"float\").alias(c) for c in raw.columns))\nraw",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:17.593",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "DataFrame[year: float, _c1: float, _c2: float, _c3: float, _c4: float, _c5: float, _c6: float, _c7: float, _c8: float, _c9: float, _c10: float, _c11: float, _c12: float]"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522311_1851325615",
+      "id": "20171029-101730_737578971",
+      "dateCreated": "2019-03-30 14:35:22.311",
+      "dateStarted": "2019-04-09 15:42:17.636",
+      "dateFinished": "2019-04-09 15:42:17.777",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (1b) Descriptive statistics\n\nUse the [`describe()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.describe) together with the `show()` method to visualize some descriptive statistics.\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:17.838",
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": false,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(1b) Descriptive statistics\u003c/h3\u003e\n\u003cp\u003eUse the \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.describe\"\u003e\u003ccode\u003edescribe()\u003c/code\u003e method\u003c/a\u003e together with the \u003ccode\u003eshow()\u003c/code\u003e method to visualize some descriptive statistics.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522312_-2120590283",
+      "id": "20171029-102024_1605442088",
+      "dateCreated": "2019-03-30 14:35:22.312",
+      "dateStarted": "2019-04-09 15:42:17.878",
+      "dateFinished": "2019-04-09 15:42:17.882",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n#raw.\u003cFILL IN\u003e\nraw.describe().show()",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:17.978",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+------------------+-------------------+-------------------+-------------------+\n|summary|              year|                _c1|                _c2|                _c3|                _c4|                _c5|                _c6|                _c7|                _c8|               _c9|               _c10|               _c11|               _c12|\n+-------+------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+------------------+-------------------+-------------------+-------------------+\n|  count|              6724|               6724|               6724|               6724|               6724|               6724|               6724|               6724|               6724|              6724|               6724|               6724|               6724|\n|   mean|1975.7850981558597| 0.6619961472001848| 0.5339408277875785|0.46980402177750424|0.43768544039063784|0.27538175710434276|0.43894699170029233|0.43255858029242206|0.46940672136222694|0.5796878013044046| 0.5004352923473792| 0.5146442032477319|0.48302303874174857|\n| stddev|21.419860456122997|0.15636089581026497|0.12683383779779045|0.09394144760767369|0.08092113911775921|0.06501788028890414|0.12150318714322476|0.08062270664067647|0.09035315687522913|0.0767089624195652|0.10589433462018774|0.10038563930474344|0.09114408430613605|\n|    min|            1922.0|                0.0|                0.0|                0.0|                0.0|                0.0|                0.0|                0.0|                0.0|               0.0|                0.0|                0.0|                0.0|\n|    max|            2011.0|                1.0|                1.0|                1.0|                1.0|                1.0|                1.0|                1.0|                1.0|               1.0|                1.0|                1.0|                1.0|\n+-------+------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+------------------+-------------------+-------------------+-------------------+\n\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d62"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522312_1368115591",
+      "id": "20171029-102042_970271195",
+      "dateCreated": "2019-03-30 14:35:22.313",
+      "dateStarted": "2019-04-09 15:42:18.013",
+      "dateFinished": "2019-04-09 15:42:18.699",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Intermezzo: Nice visualization with SQL\n\nUse the [`registerTempTable()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.registerTempTable) to visualize univariate relationships between:\n* year and _c1\n* year and _c2",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:18.717",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eIntermezzo: Nice visualization with SQL\u003c/h2\u003e\n\u003cp\u003eUse the \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.registerTempTable\"\u003e\u003ccode\u003eregisterTempTable()\u003c/code\u003e method\u003c/a\u003e to visualize univariate relationships between:\u003cbr/\u003e* year and _c1\u003cbr/\u003e* year and _c2\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522313_1098723466",
+      "id": "20171029-102521_1285775288",
+      "dateCreated": "2019-03-30 14:35:22.313",
+      "dateStarted": "2019-04-09 15:42:18.794",
+      "dateFinished": "2019-04-09 15:42:18.800",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n#raw.\u003cFILL IN\u003e\nraw.registerTempTable(\"raw_data\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:18.895",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522313_621793186",
+      "id": "20171029-102819_700060027",
+      "dateCreated": "2019-03-30 14:35:22.313",
+      "dateStarted": "2019-04-09 15:42:18.938",
+      "dateFinished": "2019-04-09 15:42:18.990",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect  _c1, year\nfrom raw_data\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:19.039",
+      "config": {
+        "colWidth": 6.0,
+        "editorMode": "ace/mode/sql",
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "scatterChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true,
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "_c1\tyear\n0.88412374\t2001.0\n0.85441196\t2001.0\n0.908983\t2001.0\n0.84252524\t2001.0\n0.9093033\t2001.0\n0.89894015\t2001.0\n0.8996217\t2001.0\n0.8430506\t2001.0\n0.8794909\t2001.0\n0.7672436\t2007.0\n0.61892426\t2008.0\n0.58297396\t2002.0\n0.309617\t2004.0\n0.5834628\t2003.0\n0.6185856\t1999.0\n0.5188695\t2003.0\n0.48404202\t2002.0\n0.6742468\t1992.0\n0.5777096\t1997.0\n0.63315356\t1987.0\n0.57215637\t2000.0\n0.6740859\t2000.0\n0.6932028\t2005.0\n0.4744993\t2000.0\n0.7436303\t1997.0\n0.7000177\t1997.0\n0.78356814\t1996.0\n0.72407955\t1997.0\n0.670507\t1997.0\n0.6057806\t1997.0\n0.7757123\t1997.0\n0.6938716\t1997.0\n0.65326566\t1997.0\n0.6807171\t1997.0\n0.7910102\t1997.0\n0.7699165\t1998.0\n0.9066711\t2000.0\n0.87390286\t2000.0\n0.89321125\t2001.0\n0.72502875\t2000.0\n0.6796897\t2000.0\n0.76891804\t2000.0\n0.77891403\t2000.0\n0.90437055\t2000.0\n0.72740287\t1998.0\n0.83115524\t2000.0\n0.8057155\t2000.0\n0.79524446\t2000.0\n0.85861576\t2000.0\n0.7951843\t2003.0\n0.8546096\t2003.0\n0.81369394\t2001.0\n0.80138904\t2003.0\n0.8950358\t2001.0\n0.8096132\t2003.0\n0.8408415\t2003.0\n0.8395423\t2003.0\n0.74378973\t2003.0\n0.6845906\t2003.0\n0.743282\t2003.0\n0.7785027\t2003.0\n0.7394282\t2003.0\n0.8328201\t2007.0\n0.8121088\t2007.0\n0.8348649\t2007.0\n0.8727945\t2007.0\n0.7806034\t2009.0\n0.8358513\t2009.0\n0.86550254\t2009.0\n0.83197176\t2009.0\n0.8064861\t2009.0\n0.82388246\t2009.0\n0.85153943\t2009.0\n0.7484409\t2009.0\n0.8619119\t2009.0\n0.8807239\t2009.0\n0.8914728\t2009.0\n0.81449056\t2009.0\n0.9023059\t2009.0\n0.80559456\t2009.0\n0.91051024\t2008.0\n0.92421925\t2009.0\n0.87402695\t2009.0\n0.8857626\t2009.0\n0.7952888\t2009.0\n0.85368496\t2008.0\n0.93224996\t2008.0\n0.82549995\t2009.0\n0.8020971\t2009.0\n0.6535144\t2008.0\n0.6772922\t2008.0\n0.73498327\t2009.0\n0.80681646\t2009.0\n0.879006\t2009.0\n0.6512557\t2008.0\n0.6532044\t2008.0\n0.7017233\t2007.0\n0.5399119\t2008.0\n0.59601736\t2007.0\n0.62412214\t2008.0\n0.55620164\t2008.0\n0.8261325\t2009.0\n0.8858791\t2009.0\n0.8233154\t2009.0\n0.6992924\t2008.0\n0.71215236\t2008.0\n0.8182372\t2008.0\n0.9215834\t2008.0\n0.7850912\t2008.0\n0.89887124\t2008.0\n0.760464\t2007.0\n0.8010081\t2004.0\n0.6958538\t2007.0\n0.7203383\t2007.0\n0.7545919\t2007.0\n0.66606575\t2007.0\n0.7257059\t2007.0\n0.69327706\t2007.0\n0.59375626\t2007.0\n0.6480107\t2007.0\n0.70028603\t2007.0\n0.70515746\t2007.0\n0.6826152\t2007.0\n0.7984314\t2007.0\n0.73300815\t2007.0\n0.7239152\t2007.0\n0.7662638\t2007.0\n0.75936157\t2007.0\n0.6642003\t2007.0\n0.70561755\t2007.0\n0.7825491\t2007.0\n0.766406\t2007.0\n0.73317814\t2007.0\n0.7386203\t2007.0\n0.7502662\t2007.0\n0.72043395\t2007.0\n0.74073595\t2007.0\n0.887347\t2007.0\n0.90678984\t2007.0\n0.8420646\t2004.0\n0.78673154\t2004.0\n0.79905635\t2004.0\n0.82953775\t2004.0\n0.8602414\t2004.0\n0.8369244\t2004.0\n0.88490784\t2004.0\n0.85072094\t2004.0\n0.8276504\t2004.0\n0.84191895\t2004.0\n0.83083767\t2004.0\n0.86047316\t2004.0\n0.8157708\t2004.0\n0.82234883\t2004.0\n0.7563551\t2004.0\n0.8353402\t2004.0\n0.70283824\t2009.0\n0.6890191\t2009.0\n0.6673686\t2009.0\n0.77017796\t2009.0\n0.7633233\t2009.0\n0.71074605\t2009.0\n0.7634764\t2009.0\n0.71489465\t2009.0\n0.6780096\t2009.0\n0.78740895\t2009.0\n0.7746297\t2009.0\n0.7648182\t2009.0\n0.7725357\t2009.0\n0.74416864\t2009.0\n0.8007859\t2009.0\n0.65813833\t2009.0\n0.7514356\t2009.0\n0.7520014\t2006.0\n0.5990454\t2006.0\n0.7303137\t2009.0\n0.71366614\t2009.0\n0.7324914\t2009.0\n0.730182\t2009.0\n0.7322056\t2009.0\n0.6403925\t2009.0\n0.37482736\t1993.0\n0.51385117\t1993.0\n0.43045622\t1993.0\n0.5461549\t1993.0\n0.56126416\t1993.0\n0.45331433\t1993.0\n0.39421427\t1993.0\n0.4866315\t1993.0\n0.54504555\t1993.0\n0.5288503\t1993.0\n0.46420896\t1996.0\n0.7612241\t2005.0\n0.4808688\t1991.0\n0.49032274\t1991.0\n0.530394\t1933.0\n0.42416838\t1991.0\n0.45885387\t1991.0\n0.3485066\t1991.0\n0.31850073\t1991.0\n0.16985989\t1930.0\n0.3517799\t1935.0\n0.33010885\t2005.0\n0.37668133\t2000.0\n0.3487109\t1991.0\n0.43382564\t1991.0\n0.43840376\t1995.0\n0.3868902\t1999.0\n0.5022406\t1999.0\n0.4431182\t1941.0\n0.39439014\t1991.0\n0.45856225\t2005.0\n0.4805686\t1995.0\n0.4351128\t1990.0\n0.88763815\t1999.0\n0.5841049\t2000.0\n0.35308275\t1991.0\n0.50820374\t1991.0\n0.50614274\t1999.0\n0.5490409\t1997.0\n0.58247286\t2000.0\n0.5312519\t1930.0\n0.4102001\t1991.0\n0.5317969\t1930.0\n0.49123758\t1995.0\n0.4135423\t1991.0\n0.5634051\t1991.0\n0.403329\t1991.0\n0.4414558\t1991.0\n0.4802365\t1991.0\n0.46089128\t1995.0\n0.5058953\t1999.0\n0.49306676\t1999.0\n0.53597987\t1991.0\n0.35342586\t1991.0\n0.5237797\t1991.0\n0.44014904\t1997.0\n0.4410119\t1991.0\n0.4511239\t1999.0\n0.45264378\t1990.0\n0.42023727\t1941.0\n0.40132743\t1941.0\n0.38327965\t1997.0\n0.5012279\t1997.0\n0.4840398\t1997.0\n0.4002252\t1943.0\n0.6502043\t1991.0\n0.526637\t1996.0\n0.43109512\t2000.0\n0.65386975\t2000.0\n0.72066355\t2000.0\n0.62944514\t2000.0\n0.7270178\t2000.0\n0.66041976\t2000.0\n0.44912153\t2000.0\n0.65028745\t2000.0\n0.58820885\t2000.0\n0.73480743\t2007.0\n0.6103035\t2007.0\n0.5828552\t2007.0\n0.5287787\t2007.0\n0.7257819\t2007.0\n0.70727015\t2007.0\n0.74565667\t2007.0\n0.8064552\t2007.0\n0.70345384\t2007.0\n0.8121051\t2007.0\n0.6551074\t2007.0\n0.7278839\t2008.0\n0.75625944\t2007.0\n0.81147504\t2001.0\n0.76654166\t2009.0\n0.7674582\t2006.0\n0.68415546\t2002.0\n0.76259685\t2002.0\n0.6520143\t2002.0\n0.7457479\t2008.0\n0.7691856\t2008.0\n0.67948836\t2002.0\n0.6770293\t2002.0\n0.76029086\t2002.0\n0.6066228\t2002.0\n0.7298224\t2002.0\n0.7568385\t2002.0\n0.7040162\t2002.0\n0.6033294\t2006.0\n0.7506434\t2006.0\n0.70013565\t1999.0\n0.6783501\t1999.0\n0.49671602\t1999.0\n0.6612765\t1999.0\n0.6150528\t1999.0\n0.60818905\t1999.0\n0.4328463\t1999.0\n0.69892454\t2002.0\n0.58876073\t2000.0\n0.78593004\t2004.0\n0.75533676\t2006.0\n0.79934204\t2005.0\n0.7528321\t2006.0\n0.750043\t2006.0\n0.736421\t2006.0\n0.8000094\t2005.0\n0.81992584\t2006.0\n0.84614974\t2006.0\n0.85022354\t2006.0\n0.7809036\t2005.0\n0.8391739\t2005.0\n0.89242715\t2005.0\n0.8241665\t2005.0\n0.85136527\t2005.0\n0.6030047\t1998.0\n0.3209247\t1998.0\n0.3654774\t1998.0\n0.28123015\t1998.0\n0.26667595\t1998.0\n0.6028428\t1998.0\n0.39006636\t1998.0\n0.38196406\t1998.0\n0.32120427\t1998.0\n0.37291652\t1998.0\n0.43379328\t1998.0\n0.3619412\t1998.0\n0.27956703\t1998.0\n0.36604568\t1998.0\n0.40614268\t1998.0\n0.28176704\t1998.0\n0.2875538\t1998.0\n0.37922496\t1998.0\n0.54548335\t1998.0\n0.5793286\t1998.0\n0.33577225\t1998.0\n0.55523336\t1998.0\n0.62196976\t1998.0\n0.34082663\t1998.0\n0.30428818\t1998.0\n0.88050926\t2008.0\n0.7994674\t2008.0\n0.89890283\t2008.0\n0.7914183\t2008.0\n0.73820263\t2008.0\n0.8258252\t2008.0\n0.84224683\t2008.0\n0.87497026\t2008.0\n0.81900513\t2008.0\n0.85551953\t2000.0\n0.65660375\t2000.0\n0.8254112\t1999.0\n0.85758984\t2003.0\n0.816553\t2003.0\n0.8435566\t2003.0\n0.89164966\t2003.0\n0.8537912\t2003.0\n0.8621125\t2003.0\n0.8718613\t2003.0\n0.90487826\t2003.0\n0.8896255\t2003.0\n0.8014781\t2003.0\n0.56771094\t1994.0\n0.76950103\t1994.0\n0.63690066\t1994.0\n0.5414956\t2002.0\n0.55868644\t2002.0\n0.6528372\t1993.0\n0.5799442\t1995.0\n0.6919779\t2002.0\n0.6694396\t1995.0\n0.5417897\t1995.0\n0.67128354\t1994.0\n0.70006895\t2002.0\n0.6489758\t2008.0\n0.80483747\t2008.0\n0.6268201\t2008.0\n0.3581521\t2008.0\n0.5573313\t1996.0\n0.5123774\t1996.0\n0.6477254\t1996.0\n0.7726215\t2003.0\n0.58243144\t1993.0\n0.5181492\t2002.0\n0.47326216\t1993.0\n0.64089113\t2002.0\n0.61375093\t1994.0\n0.558812\t2002.0\n0.57938695\t1995.0\n0.5756496\t1995.0\n0.6061779\t1995.0\n0.6286331\t1995.0\n0.47231495\t1995.0\n0.36580065\t2002.0\n0.3649795\t2002.0\n0.72021663\t2002.0\n0.38616937\t2002.0\n0.5472925\t2000.0\n0.87381893\t2000.0\n0.7187971\t2000.0\n0.30722177\t2009.0\n0.6993454\t2009.0\n0.758251\t2009.0\n0.6890953\t1994.0\n0.69400454\t1994.0\n0.6227401\t1994.0\n0.64907926\t1994.0\n0.61862016\t1994.0\n0.51530266\t1994.0\n0.4242655\t2006.0\n0.5992973\t2006.0\n0.80631465\t1999.0\n0.83014554\t1999.0\n0.75665337\t1999.0\n0.7888327\t1999.0\n0.66243684\t2008.0\n0.8544419\t2008.0\n0.8001026\t2008.0\n0.8330318\t2008.0\n0.83187705\t2008.0\n0.7138209\t2008.0\n0.83644587\t2008.0\n0.76018614\t2008.0\n0.7110877\t2008.0\n0.8004977\t2002.0\n0.7502024\t2002.0\n0.70712006\t2002.0\n0.74188477\t1999.0\n0.5558161\t2002.0\n0.66746795\t2002.0\n0.5311626\t2002.0\n0.6946636\t2002.0\n0.45291996\t2004.0\n0.45811734\t2006.0\n0.40222067\t2006.0\n0.4205647\t2006.0\n0.50451493\t2006.0\n0.5517305\t2006.0\n0.9788536\t2008.0\n0.96919286\t2008.0\n0.9791209\t2008.0\n0.9733501\t2008.0\n0.95807016\t2008.0\n0.96418214\t2008.0\n0.983844\t2008.0\n0.9726006\t2008.0\n0.9793083\t2008.0\n0.9806842\t2008.0\n0.9732456\t2008.0\n0.96967065\t2008.0\n0.8684683\t2006.0\n0.92523783\t2006.0\n0.86625916\t2006.0\n0.8859973\t2006.0\n0.9287076\t2006.0\n0.9487489\t2006.0\n0.92420286\t2006.0\n0.91030025\t2006.0\n0.88951\t2006.0\n0.90737134\t2006.0\n0.88012326\t2006.0\n0.9434887\t2006.0\n0.70779306\t2008.0\n0.6074484\t1996.0\n0.7556566\t2006.0\n0.7877104\t2006.0\n0.688855\t2006.0\n0.54807264\t2006.0\n0.72593844\t2006.0\n0.6211\t2006.0\n0.7614799\t2006.0\n0.71687937\t2006.0\n0.83201295\t2006.0\n0.63681704\t2006.0\n0.7279739\t2006.0\n0.7788674\t2006.0\n0.84512234\t2006.0\n0.7925426\t2006.0\n0.5323308\t2004.0\n0.8548703\t2003.0\n0.84364164\t2003.0\n0.87267554\t2003.0\n0.91373837\t2003.0\n0.90756166\t2003.0\n0.8885959\t2003.0\n0.89673156\t2003.0\n0.9185591\t2003.0\n0.8581196\t2003.0\n0.8824491\t2003.0\n0.8790426\t2003.0\n0.9128974\t2003.0\n0.89378715\t2003.0\n0.8899853\t2003.0\n0.8994393\t2008.0\n0.96011883\t2008.0\n0.9267349\t2008.0\n0.95171684\t2008.0\n0.91577435\t2008.0\n0.9055662\t2008.0\n0.8853868\t2008.0\n0.7980117\t2008.0\n0.92237216\t2008.0\n0.9226216\t2008.0\n0.92161137\t2008.0\n0.6455828\t1996.0\n0.5359269\t1996.0\n0.56062865\t1996.0\n0.73268735\t1996.0\n0.8010844\t1996.0\n0.5771124\t1996.0\n0.6148159\t1996.0\n0.5630595\t1996.0\n0.6266118\t1996.0\n0.7326079\t1996.0\n0.80221754\t1996.0\n0.56571865\t1996.0\n0.41942668\t1990.0\n0.55082524\t1990.0\n0.49445003\t1990.0\n0.41207096\t1990.0\n0.1299402\t1990.0\n0.6224264\t1990.0\n0.23661612\t1990.0\n0.30827567\t1990.0\n0.44067636\t1990.0\n0.47374728\t1990.0\n0.2561676\t1990.0\n0.39553526\t1990.0\n0.47620976\t1990.0\n0.925359\t2008.0\n0.8633982\t1999.0\n0.8746095\t1974.0\n0.8224835\t1974.0\n0.69736296\t1974.0\n0.957687\t1974.0\n0.9141698\t1974.0\n0.8781312\t1974.0\n0.8762922\t1974.0\n0.91589576\t1976.0\n0.8672005\t1976.0\n0.8264494\t1976.0\n0.80069417\t1976.0\n0.8660998\t1976.0\n0.885755\t1976.0\n0.8574005\t1999.0\n0.8189612\t1975.0\n0.86851954\t1975.0\n0.88868\t1999.0\n0.8329312\t1975.0\n0.7979965\t1975.0\n0.9455862\t1975.0\n0.75378793\t1975.0\n0.56818014\t1970.0\n0.7930775\t1970.0\n0.82212585\t1970.0\n0.6903621\t1970.0\n0.7544347\t1970.0\n0.8407576\t1971.0\n0.859134\t1971.0\n0.9025941\t1971.0\n0.86130387\t1971.0\n0.8806628\t1971.0\n0.8718613\t1971.0\n0.8813746\t1970.0\n0.88473517\t1981.0\n0.81632465\t1981.0\n0.83777004\t1981.0\n0.74402785\t1981.0\n0.8594222\t1981.0\n0.78215593\t1981.0\n0.82383734\t1981.0\n0.8727101\t1981.0\n0.83952516\t2009.0\n0.8437003\t1989.0\n0.7999746\t1989.0\n0.620752\t1989.0\n0.80095685\t2002.0\n0.88235736\t2002.0\n0.8275401\t2002.0\n0.8810403\t2002.0\n0.8706075\t1999.0\n0.91550577\t1999.0\n0.7308906\t2002.0\n0.6604752\t1969.0\n0.69051516\t1969.0\n0.6271394\t1969.0\n0.79484296\t1969.0\n0.8631789\t1972.0\n0.6192951\t1972.0\n0.7849887\t1972.0\n0.75774944\t1972.0\n0.6511716\t1972.0\n0.6722001\t1972.0\n0.66153425\t1972.0\n0.7310272\t1972.0\n0.68511885\t1972.0\n0.8305296\t1971.0\n0.83600414\t1971.0\n0.71850127\t1971.0\n0.6504839\t1971.0\n0.85334504\t1971.0\n0.8186107\t1971.0\n0.65497494\t1971.0\n0.8187542\t1973.0\n0.8370612\t1973.0\n0.8429581\t1973.0\n0.7747698\t1973.0\n0.85302573\t1973.0\n0.79496163\t1983.0\n0.7195699\t1983.0\n0.80137503\t1983.0\n0.73340625\t1983.0\n0.80488575\t1983.0\n0.693436\t1983.0\n0.6801886\t1983.0\n0.7926944\t1983.0\n0.78975224\t1983.0\n0.8280186\t2009.0\n0.82577515\t2009.0\n0.81673545\t2009.0\n0.8723535\t2009.0\n0.83434397\t2009.0\n0.80345345\t2010.0\n0.897847\t2008.0\n0.8189723\t2008.0\n0.8602912\t2008.0\n0.8401427\t2008.0\n0.9336087\t2008.0\n0.9318413\t2008.0\n0.85849977\t2008.0\n0.83763075\t2008.0\n0.91374475\t2008.0\n0.82729846\t2008.0\n0.77040946\t2008.0\n0.8209528\t2008.0\n0.81402063\t2008.0\n0.81901026\t2008.0\n0.88138956\t2008.0\n0.8884661\t2008.0\n0.85242116\t2008.0\n0.85878426\t2008.0\n0.4629336\t2001.0\n0.5367689\t2008.0\n0.25701106\t2003.0\n0.28781477\t2003.0\n0.2974453\t2003.0\n0.38665155\t2003.0\n0.45089972\t2003.0\n0.15094952\t2003.0\n0.25294507\t2003.0\n0.27351955\t2003.0\n0.4300265\t2003.0\n0.38308957\t2003.0\n0.6397877\t2006.0\n0.55706644\t2004.0\n0.4190784\t2004.0\n0.60592824\t2004.0\n0.51467085\t2004.0\n0.6993822\t2004.0\n0.28570965\t2004.0\n0.3540829\t2004.0\n0.29587805\t2004.0\n0.4875672\t2004.0\n0.47523555\t2004.0\n0.42705736\t2006.0\n0.31563926\t2006.0\n0.12476072\t2006.0\n0.46544167\t2006.0\n0.5001176\t2006.0\n0.33287984\t2006.0\n0.26646745\t2006.0\n0.23334013\t2006.0\n0.6457645\t2008.0\n0.55378336\t2008.0\n0.17856161\t2008.0\n0.41533569\t2008.0\n0.6007144\t2008.0\n0.7488434\t2008.0\n0.44737625\t2008.0\n0.17651807\t2008.0\n0.5066843\t2008.0\n0.3367712\t2008.0\n0.7240183\t1985.0\n0.7245181\t1988.0\n0.55854195\t1989.0\n0.6053548\t1989.0\n0.50139594\t1989.0\n0.53866845\t1989.0\n0.5775546\t1989.0\n0.46114513\t1989.0\n0.3848008\t1993.0\n0.70120597\t1985.0\n0.55284643\t1987.0\n0.5459099\t2004.0\n0.49828082\t2004.0\n0.45409378\t1999.0\n0.6950457\t1993.0\n0.44857582\t2004.0\n0.6586492\t1991.0\n0.8581981\t1987.0\n0.8844438\t1987.0\n0.81977206\t1987.0\n0.79298234\t2001.0\n0.8049559\t2001.0\n0.66515166\t2001.0\n0.7686092\t1979.0\n0.7309175\t1980.0\n0.74703705\t1980.0\n0.74015516\t2001.0\n0.7595264\t2001.0\n0.80026644\t1979.0\n0.7828883\t1980.0\n0.69564533\t2000.0\n0.7326636\t1980.0\n0.8183976\t1980.0\n0.73708004\t1980.0\n0.8137945\t2001.0\n0.7648572\t2000.0\n0.7943262\t2001.0\n0.8176363\t1979.0\n0.7925529\t2000.0\n0.80578464\t1980.0\n0.68199813\t2000.0\n0.75364834\t1980.0\n0.7446663\t1980.0\n0.84301627\t1979.0\n0.6241155\t1980.0\n0.6855115\t1999.0\n0.6901169\t1989.0\n0.697904\t1986.0\n0.71012574\t1986.0\n0.61990386\t1986.0\n0.59399\t1986.0\n0.7239268\t1986.0\n0.5943746\t1986.0\n0.7047778\t1986.0\n0.63856995\t1986.0\n0.6412639\t1986.0\n0.66401464\t1986.0\n0.663686\t1986.0\n0.62970513\t1986.0\n0.7236327\t1986.0\n0.64503974\t1986.0\n0.6829215\t1970.0\n0.6243549\t1970.0\n0.7269335\t1970.0\n0.72176474\t1970.0\n0.6767892\t1970.0\n0.5020795\t1970.0\n0.55376816\t1970.0\n0.6580096\t1970.0\n0.6559432\t1970.0\n0.74452233\t1970.0\n0.7327413\t1970.0\n0.6620967\t1970.0\n0.5745484\t1970.0\n0.5351504\t1970.0\n0.635562\t1970.0\n0.6874405\t1971.0\n0.60429674\t1971.0\n0.54404783\t1971.0\n0.80414116\t2007.0\n0.90616095\t2007.0\n0.7245549\t2007.0\n0.78549516\t2007.0\n0.79477084\t2007.0\n0.81091315\t2007.0\n0.7972306\t2007.0\n0.74209964\t1958.0\n0.8371326\t2005.0\n0.68112326\t1958.0\n0.8170207\t1992.0\n0.7859092\t2006.0\n0.7778034\t1993.0\n0.80645275\t1992.0\n0.65291154\t1970.0\n0.6807272\t1970.0\n0.7853779\t1958.0\n0.6747224\t2005.0\n0.6334231\t1958.0\n0.7060777\t1958.0\n0.55438673\t1958.0\n0.54981595\t1958.0\n0.61111236\t1970.0\n0.56577605\t1997.0\n0.870802\t1997.0\n0.7463758\t2005.0\n0.88581383\t2009.0\n0.6180678\t1992.0\n0.7907311\t1970.0\n0.64133286\t1998.0\n0.6464851\t1994.0\n0.7304795\t2006.0\n0.736045\t2008.0\n0.6673041\t1992.0\n0.63982105\t1972.0\n0.6106707\t1992.0\n0.61232936\t1992.0\n0.6079269\t2008.0\n0.67924404\t1994.0\n0.6249149\t2005.0\n0.61209786\t1993.0\n0.71931016\t1993.0\n0.6620655\t1993.0\n0.7099602\t2000.0\n0.7457435\t1991.0\n0.6410704\t1997.0\n0.70520526\t1991.0\n0.8572521\t1978.0\n0.8317265\t1992.0\n0.9009469\t1995.0\n0.8906654\t1972.0\n0.90470016\t1995.0\n0.81776506\t1991.0\n0.2858892\t1987.0\n0.38869363\t1987.0\n0.888368\t1968.0\n0.8394839\t2003.0\n0.739324\t1962.0\n0.67113686\t1995.0\n0.67058426\t1995.0\n0.67440104\t1995.0\n0.6824521\t1995.0\n0.72342056\t1958.0\n0.66147393\t1980.0\n0.6920846\t1980.0\n0.6995021\t2005.0\n0.66482866\t2005.0\n0.61720866\t2005.0\n0.60193753\t2005.0\n0.7710165\t2005.0\n0.80041605\t2005.0\n0.68692034\t2005.0\n0.7222516\t2005.0\n0.78268373\t2005.0\n0.6739451\t2005.0\n0.5271472\t1981.0\n0.753758\t2005.0\n0.6744227\t2005.0\n0.67725396\t1981.0\n0.68143404\t2005.0\n0.7292532\t1981.0\n0.92138845\t2005.0\n0.7096149\t2003.0\n0.68196034\t2003.0\n0.79600644\t2003.0\n0.77306986\t2003.0\n0.810737\t2003.0\n0.7505811\t2003.0\n0.7826565\t2003.0\n0.73380184\t2003.0\n0.7025321\t2002.0\n0.8231545\t2003.0\n0.6390943\t1987.0\n0.65979046\t1987.0\n0.60894525\t1987.0\n0.77257466\t1987.0\n0.73019814\t2002.0\n0.6374545\t1992.0\n0.70477873\t1997.0\n0.7827386\t1997.0\n0.6529983\t1997.0\n0.702435\t1997.0\n0.65122706\t1997.0\n0.84553605\t1997.0\n0.80606574\t1997.0\n0.83133924\t2004.0\n0.8606505\t2004.0\n0.7404524\t2004.0\n0.8930543\t2004.0\n0.67047465\t2004.0\n0.82230955\t2004.0\n0.7213596\t2004.0\n0.7426409\t2004.0\n0.63835263\t2004.0\n0.85786134\t2004.0\n0.7799662\t2004.0\n0.5688129\t1997.0\n0.69520265\t1992.0\n0.830276\t2007.0\n0.835027\t2007.0\n0.8198812\t2007.0\n0.7214827\t2007.0\n0.7966177\t2007.0\n0.8623786\t2007.0\n0.7918718\t2007.0\n0.8041885\t2006.0\n0.8452859\t2006.0\n0.87830997\t2006.0\n0.82668215\t2006.0\n0.8802105\t2006.0\n0.8418858\t2006.0\n0.87939924\t2006.0\n0.8808362\t2006.0\n0.8826877\t2006.0\n0.8193745\t2006.0\n0.8441773\t2006.0\n0.90820354\t2008.0\n0.9397256\t2008.0\n0.9058303\t2010.0\n0.9367204\t2010.0\n0.8910728\t2010.0\n0.885884\t2010.0\n0.9480722\t2010.0\n0.9282414\t2010.0\n0.90921277\t2010.0\n0.8717575\t2010.0\n0.9228465\t2010.0\n0.8635485\t2010.0\n0.9190363\t2010.0\n0.875978\t2006.0\n0.8258198\t2005.0\n0.9223403\t2006.0\n0.81542623\t2006.0\n0.8336094\t2006.0\n0.7869447\t2006.0\n0.8344487\t2006.0\n0.837344\t2006.0\n0.8537603\t2006.0\n0.89541274\t2006.0\n0.75025123\t2006.0\n0.8779271\t2006.0\n0.768736\t2005.0\n0.7704345\t2005.0\n0.8458348\t2005.0\n0.80251676\t2006.0\n0.855884\t2006.0\n0.84829605\t2006.0\n0.79558975\t2006.0\n0.7501637\t2006.0\n0.80015194\t2006.0\n0.8527427\t2006.0\n0.8831155\t2006.0\n0.88310367\t2006.0\n0.7342703\t2006.0\n0.64578193\t2006.0\n0.7615417\t2004.0\n0.75759244\t2006.0\n0.8556481\t2006.0\n0.8743762\t2006.0\n0.7219011\t2005.0\n0.70410967\t2004.0\n0.6957476\t2005.0\n0.785839\t2004.0\n0.6999235\t2004.0\n0.789065\t2004.0\n0.72412616\t2004.0\n0.742609\t2005.0\n0.70263344\t2004.0\n0.73708767\t2004.0\n0.810896\t2004.0\n0.7883699\t2004.0\n0.7100855\t2004.0\n0.75681937\t2004.0\n0.6420235\t2004.0\n0.6966792\t2004.0\n0.7125629\t2004.0\n0.7080633\t2004.0\n0.73554593\t2004.0\n0.7148427\t1995.0\n0.79723155\t1994.0\n0.87189263\t1993.0\n0.788003\t1994.0\n0.7918664\t1996.0\n0.75330377\t1967.0\n0.7400995\t2006.0\n0.6728194\t1967.0\n0.7190244\t2006.0\n0.7074747\t2006.0\n0.84223044\t1972.0\n0.69305784\t2002.0\n0.7304898\t1972.0\n0.6739733\t2002.0\n0.7812793\t1972.0\n0.7314556\t1972.0\n0.68666625\t1972.0\n0.52295315\t1999.0\n0.5900783\t2006.0\n0.5911636\t2006.0\n0.5250279\t2006.0\n0.5877483\t2006.0\n0.58861184\t2006.0\n0.605485\t2004.0\n0.6497802\t1972.0\n0.7145182\t1972.0\n0.7199709\t1972.0\n0.6345594\t1972.0\n0.68628585\t1972.0\n0.66442174\t1972.0\n0.60332596\t1972.0\n0.62815213\t1972.0\n0.6751322\t2002.0\n0.58877224\t1972.0\n0.6466602\t1972.0\n0.6436827\t2002.0\n0.37514964\t2007.0\n0.5658224\t2005.0\n0.51208156\t2007.0\n0.5956205\t2007.0\n0.60084856\t2007.0\n0.72260946\t1993.0\n0.57734025\t1993.0\n0.71163243\t1993.0\n0.6593556\t1993.0\n0.51631117\t1993.0\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"result-alert alert-warning\" role\u003d\"alert\"\u003e\u003cbutton type\u003d\"button\" class\u003d\"close\" data-dismiss\u003d\"alert\" aria-label\u003d\"Close\"\u003e\u003cspan aria-hidden\u003d\"true\"\u003e\u0026times;\u003c/span\u003e\u003c/button\u003e\u003cstrong\u003eOutput is truncated\u003c/strong\u003e to 1000 rows. Learn more about \u003cstrong\u003ezeppelin.spark.maxResult\u003c/strong\u003e\u003c/div\u003e\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d63"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522314_-129040356",
+      "id": "20171029-102909_2100190641",
+      "dateCreated": "2019-03-30 14:35:22.314",
+      "dateStarted": "2019-04-09 15:42:19.080",
+      "dateFinished": "2019-04-09 15:42:19.144",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect  _c2, year\nfrom raw_data",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:19.179",
+      "config": {
+        "colWidth": 6.0,
+        "editorMode": "ace/mode/sql",
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "scatterChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true,
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "_c2\tyear\n0.61045426\t2001.0\n0.6041248\t2001.0\n0.63206315\t2001.0\n0.5618269\t2001.0\n0.6536077\t2001.0\n0.5664339\t2001.0\n0.63481486\t2001.0\n0.5844528\t2001.0\n0.6365156\t2001.0\n0.66220635\t2007.0\n0.5178819\t2008.0\n0.49490672\t2002.0\n0.25749004\t2004.0\n0.5099244\t2003.0\n0.5485112\t1999.0\n0.4243299\t2003.0\n0.36570954\t2002.0\n0.52252406\t1992.0\n0.5895526\t1997.0\n0.5555228\t1987.0\n0.38172725\t2000.0\n0.5660727\t2000.0\n0.48907682\t2005.0\n0.36807406\t2000.0\n0.5980821\t1997.0\n0.5928029\t1997.0\n0.64507955\t1996.0\n0.5735743\t1997.0\n0.55971813\t1997.0\n0.53321445\t1997.0\n0.57158273\t1997.0\n0.5497343\t1997.0\n0.51638365\t1997.0\n0.578233\t1997.0\n0.6453516\t1997.0\n0.5838587\t1998.0\n0.6834908\t2000.0\n0.6567371\t2000.0\n0.6533003\t2001.0\n0.55771726\t2000.0\n0.48410183\t2000.0\n0.54560614\t2000.0\n0.62699354\t2000.0\n0.6278684\t2000.0\n0.5480134\t1998.0\n0.7172623\t2000.0\n0.642066\t2000.0\n0.54973966\t2000.0\n0.5609105\t2000.0\n0.5928908\t2003.0\n0.68744284\t2003.0\n0.5888413\t2001.0\n0.6494527\t2003.0\n0.63466287\t2001.0\n0.53581774\t2003.0\n0.6516073\t2003.0\n0.5872103\t2003.0\n0.6308009\t2003.0\n0.56480515\t2003.0\n0.6164995\t2003.0\n0.6338969\t2003.0\n0.5462467\t2003.0\n0.65238655\t2007.0\n0.725095\t2007.0\n0.6988975\t2007.0\n0.6553412\t2007.0\n0.568603\t2009.0\n0.66284204\t2009.0\n0.6723141\t2009.0\n0.7064571\t2009.0\n0.7269566\t2009.0\n0.6565004\t2009.0\n0.6924914\t2009.0\n0.6021851\t2009.0\n0.7249517\t2009.0\n0.6782301\t2009.0\n0.60708857\t2009.0\n0.61817664\t2009.0\n0.68790126\t2009.0\n0.71338904\t2009.0\n0.706455\t2008.0\n0.6308398\t2009.0\n0.622577\t2009.0\n0.71528226\t2009.0\n0.65173656\t2009.0\n0.67035407\t2008.0\n0.66806644\t2008.0\n0.6620782\t2009.0\n0.77580017\t2009.0\n0.65686595\t2008.0\n0.7664447\t2008.0\n0.73708266\t2009.0\n0.6370555\t2009.0\n0.7867212\t2009.0\n0.6823801\t2008.0\n0.7631343\t2008.0\n0.6793\t2007.0\n0.64584655\t2008.0\n0.7259232\t2007.0\n0.61243224\t2008.0\n0.650598\t2008.0\n0.6573369\t2009.0\n0.74472106\t2009.0\n0.6460457\t2009.0\n0.6300194\t2008.0\n0.6018477\t2008.0\n0.7258885\t2008.0\n0.61673933\t2008.0\n0.72092974\t2008.0\n0.6587133\t2008.0\n0.57623094\t2007.0\n0.70670766\t2004.0\n0.6062879\t2007.0\n0.6127513\t2007.0\n0.65171224\t2007.0\n0.58071953\t2007.0\n0.5338709\t2007.0\n0.65861183\t2007.0\n0.58850706\t2007.0\n0.7494338\t2007.0\n0.6278298\t2007.0\n0.5904001\t2007.0\n0.6376762\t2007.0\n0.57409745\t2007.0\n0.6759585\t2007.0\n0.6539354\t2007.0\n0.6397941\t2007.0\n0.6184526\t2007.0\n0.5647255\t2007.0\n0.5679503\t2007.0\n0.68008095\t2007.0\n0.6257423\t2007.0\n0.5962766\t2007.0\n0.65076476\t2007.0\n0.65110904\t2007.0\n0.6453541\t2007.0\n0.5628406\t2007.0\n0.6009032\t2007.0\n0.6560967\t2007.0\n0.68852913\t2004.0\n0.6496438\t2004.0\n0.6561512\t2004.0\n0.6757222\t2004.0\n0.70779955\t2004.0\n0.6863559\t2004.0\n0.67577356\t2004.0\n0.64826655\t2004.0\n0.77554756\t2004.0\n0.6411635\t2004.0\n0.54604965\t2004.0\n0.70403373\t2004.0\n0.7341177\t2004.0\n0.6280445\t2004.0\n0.6545972\t2004.0\n0.6752262\t2004.0\n0.70063245\t2009.0\n0.4382295\t2009.0\n0.67872405\t2009.0\n0.5369513\t2009.0\n0.64398605\t2009.0\n0.6322346\t2009.0\n0.6396834\t2009.0\n0.56818455\t2009.0\n0.5913605\t2009.0\n0.71408015\t2009.0\n0.53009236\t2009.0\n0.5721687\t2009.0\n0.63536316\t2009.0\n0.5004697\t2009.0\n0.7042893\t2009.0\n0.47002625\t2009.0\n0.4560449\t2009.0\n0.51505566\t2006.0\n0.5039108\t2006.0\n0.49448207\t2009.0\n0.492073\t2009.0\n0.54091984\t2009.0\n0.52211964\t2009.0\n0.67358094\t2009.0\n0.7112099\t2009.0\n0.47050482\t1993.0\n0.62947464\t1993.0\n0.4521784\t1993.0\n0.57204634\t1993.0\n0.6051396\t1993.0\n0.5906863\t1993.0\n0.50819266\t1993.0\n0.6212249\t1993.0\n0.6311304\t1993.0\n0.60953903\t1993.0\n0.44688156\t1996.0\n0.77321786\t2005.0\n0.47834074\t1991.0\n0.32253602\t1991.0\n0.20562723\t1933.0\n0.3607606\t1991.0\n0.42346388\t1991.0\n0.34669605\t1991.0\n0.40148443\t1991.0\n0.34716302\t1930.0\n0.1286146\t1935.0\n0.2060648\t2005.0\n0.3713712\t2000.0\n0.38944316\t1991.0\n0.40509456\t1991.0\n0.27295718\t1995.0\n0.4375367\t1999.0\n0.3475723\t1999.0\n0.35416877\t1941.0\n0.3604369\t1991.0\n0.43107635\t2005.0\n0.40755036\t1995.0\n0.49104407\t1990.0\n0.708089\t1999.0\n0.38340288\t2000.0\n0.42251098\t1991.0\n0.3565494\t1991.0\n0.2858977\t1999.0\n0.27314883\t1997.0\n0.23164341\t2000.0\n0.44804087\t1930.0\n0.3749122\t1991.0\n0.41214734\t1930.0\n0.20434694\t1995.0\n0.39485347\t1991.0\n0.27515447\t1991.0\n0.3859139\t1991.0\n0.33810422\t1991.0\n0.40482903\t1991.0\n0.25437143\t1995.0\n0.2962704\t1999.0\n0.21209922\t1999.0\n0.37036654\t1991.0\n0.41361752\t1991.0\n0.30856112\t1991.0\n0.3794303\t1997.0\n0.32392198\t1991.0\n0.39087754\t1999.0\n0.490031\t1990.0\n0.41111833\t1941.0\n0.4359524\t1941.0\n0.37927857\t1997.0\n0.41274518\t1997.0\n0.4234147\t1997.0\n0.4080476\t1943.0\n0.3992453\t1991.0\n0.4513345\t1996.0\n0.28077796\t2000.0\n0.45958054\t2000.0\n0.60965896\t2000.0\n0.44901332\t2000.0\n0.6706308\t2000.0\n0.56713057\t2000.0\n0.45036277\t2000.0\n0.5793156\t2000.0\n0.59225255\t2000.0\n0.5350989\t2007.0\n0.4591451\t2007.0\n0.45115682\t2007.0\n0.3726783\t2007.0\n0.5001508\t2007.0\n0.4667898\t2007.0\n0.5347805\t2007.0\n0.58868384\t2007.0\n0.4840832\t2007.0\n0.57309914\t2007.0\n0.44273514\t2007.0\n0.52415866\t2008.0\n0.4891403\t2007.0\n0.536985\t2001.0\n0.6135441\t2009.0\n0.6526383\t2006.0\n0.60855216\t2002.0\n0.58738637\t2002.0\n0.6105272\t2002.0\n0.45513067\t2008.0\n0.59499687\t2008.0\n0.48979318\t2002.0\n0.5539647\t2002.0\n0.57264954\t2002.0\n0.5784505\t2002.0\n0.56098616\t2002.0\n0.56552887\t2002.0\n0.60228527\t2002.0\n0.5340832\t2006.0\n0.56997824\t2006.0\n0.5712375\t1999.0\n0.49448603\t1999.0\n0.48163128\t1999.0\n0.5690485\t1999.0\n0.54017097\t1999.0\n0.6351734\t1999.0\n0.4370247\t1999.0\n0.6103244\t2002.0\n0.5692611\t2000.0\n0.53831923\t2004.0\n0.69634795\t2006.0\n0.67540187\t2005.0\n0.6141772\t2006.0\n0.6281426\t2006.0\n0.62315965\t2006.0\n0.65716463\t2005.0\n0.75999933\t2006.0\n0.6692537\t2006.0\n0.64918625\t2006.0\n0.5127479\t2005.0\n0.5307084\t2005.0\n0.66018647\t2005.0\n0.49527606\t2005.0\n0.5335635\t2005.0\n0.4204678\t1998.0\n0.37832165\t1998.0\n0.43278506\t1998.0\n0.40922758\t1998.0\n0.40578696\t1998.0\n0.54907024\t1998.0\n0.46592596\t1998.0\n0.50228244\t1998.0\n0.43237388\t1998.0\n0.39266068\t1998.0\n0.37357306\t1998.0\n0.45626056\t1998.0\n0.36630487\t1998.0\n0.45822\t1998.0\n0.38947055\t1998.0\n0.34852558\t1998.0\n0.4483007\t1998.0\n0.5304682\t1998.0\n0.46903315\t1998.0\n0.5494125\t1998.0\n0.41162163\t1998.0\n0.51294583\t1998.0\n0.5897898\t1998.0\n0.48494494\t1998.0\n0.4186102\t1998.0\n0.6827983\t2008.0\n0.66229963\t2008.0\n0.63431096\t2008.0\n0.65847373\t2008.0\n0.6359771\t2008.0\n0.6126806\t2008.0\n0.60804784\t2008.0\n0.671684\t2008.0\n0.6603845\t2008.0\n0.6142093\t2000.0\n0.47774667\t2000.0\n0.54654175\t1999.0\n0.68851256\t2003.0\n0.6124941\t2003.0\n0.6825939\t2003.0\n0.66941243\t2003.0\n0.6413902\t2003.0\n0.6085017\t2003.0\n0.7063796\t2003.0\n0.6985466\t2003.0\n0.650457\t2003.0\n0.642213\t2003.0\n0.467337\t1994.0\n0.5927982\t1994.0\n0.5303478\t1994.0\n0.5599343\t2002.0\n0.41461885\t2002.0\n0.5523288\t1993.0\n0.5542842\t1995.0\n0.5503144\t2002.0\n0.57881624\t1995.0\n0.3036883\t1995.0\n0.55021465\t1994.0\n0.65629417\t2002.0\n0.6007367\t2008.0\n0.6029426\t2008.0\n0.53990924\t2008.0\n0.47324035\t2008.0\n0.379128\t1996.0\n0.30327788\t1996.0\n0.5202505\t1996.0\n0.5166656\t2003.0\n0.5416973\t1993.0\n0.25986537\t2002.0\n0.47854343\t1993.0\n0.50032413\t2002.0\n0.47193107\t1994.0\n0.3638802\t2002.0\n0.57206386\t1995.0\n0.50972426\t1995.0\n0.66656035\t1995.0\n0.512616\t1995.0\n0.32898015\t1995.0\n0.3330954\t2002.0\n0.370193\t2002.0\n0.55028343\t2002.0\n0.39706436\t2002.0\n0.489698\t2000.0\n0.6300858\t2000.0\n0.5480713\t2000.0\n0.5199947\t2009.0\n0.5685255\t2009.0\n0.6018974\t2009.0\n0.5672283\t1994.0\n0.6049051\t1994.0\n0.6601683\t1994.0\n0.55017245\t1994.0\n0.6107939\t1994.0\n0.37236083\t1994.0\n0.33548933\t2006.0\n0.4497169\t2006.0\n0.53194374\t1999.0\n0.44904065\t1999.0\n0.37617478\t1999.0\n0.4979866\t1999.0\n0.20218447\t2008.0\n0.5073027\t2008.0\n0.48920193\t2008.0\n0.41723782\t2008.0\n0.4165283\t2008.0\n0.41994634\t2008.0\n0.44879872\t2008.0\n0.5039252\t2008.0\n0.43939042\t2008.0\n0.56373626\t2002.0\n0.57756335\t2002.0\n0.55436915\t2002.0\n0.5325159\t1999.0\n0.3912494\t2002.0\n0.5219365\t2002.0\n0.36106327\t2002.0\n0.53361326\t2002.0\n0.32389888\t2004.0\n0.36212996\t2006.0\n0.32371357\t2006.0\n0.32261932\t2006.0\n0.36869803\t2006.0\n0.3684678\t2006.0\n0.68204534\t2008.0\n0.6745699\t2008.0\n0.65556335\t2008.0\n0.65247685\t2008.0\n0.6947895\t2008.0\n0.679147\t2008.0\n0.6674519\t2008.0\n0.6799827\t2008.0\n0.6618415\t2008.0\n0.70653516\t2008.0\n0.6831151\t2008.0\n0.6612875\t2008.0\n0.709516\t2006.0\n0.6925761\t2006.0\n0.7206358\t2006.0\n0.68901837\t2006.0\n0.7212759\t2006.0\n0.7063455\t2006.0\n0.7095953\t2006.0\n0.7072376\t2006.0\n0.7161732\t2006.0\n0.70887655\t2006.0\n0.71684456\t2006.0\n0.7118739\t2006.0\n0.6535964\t2008.0\n0.46049207\t1996.0\n0.566137\t2006.0\n0.5419918\t2006.0\n0.5010249\t2006.0\n0.38010216\t2006.0\n0.44684032\t2006.0\n0.3871414\t2006.0\n0.5482484\t2006.0\n0.38993064\t2006.0\n0.51735145\t2006.0\n0.45240524\t2006.0\n0.52619934\t2006.0\n0.4490633\t2006.0\n0.49600562\t2006.0\n0.5466236\t2006.0\n0.38216516\t2004.0\n0.5521505\t2003.0\n0.5159881\t2003.0\n0.5375914\t2003.0\n0.5510838\t2003.0\n0.5288003\t2003.0\n0.5338932\t2003.0\n0.5485427\t2003.0\n0.56953466\t2003.0\n0.5500647\t2003.0\n0.50632\t2003.0\n0.6378496\t2003.0\n0.5382853\t2003.0\n0.56809694\t2003.0\n0.5285188\t2003.0\n0.6550757\t2008.0\n0.6653553\t2008.0\n0.63453543\t2008.0\n0.663638\t2008.0\n0.6621944\t2008.0\n0.6620804\t2008.0\n0.61077\t2008.0\n0.6348721\t2008.0\n0.661825\t2008.0\n0.64178157\t2008.0\n0.6546035\t2008.0\n0.70190775\t1996.0\n0.40449026\t1996.0\n0.4315321\t1996.0\n0.66225076\t1996.0\n0.56104076\t1996.0\n0.5131606\t1996.0\n0.5028002\t1996.0\n0.43480164\t1996.0\n0.6250731\t1996.0\n0.5717873\t1996.0\n0.64776254\t1996.0\n0.550194\t1996.0\n0.68286276\t1990.0\n0.4726841\t1990.0\n0.44844377\t1990.0\n0.44648662\t1990.0\n0.41590017\t1990.0\n0.5477467\t1990.0\n0.3832869\t1990.0\n0.5406777\t1990.0\n0.39660558\t1990.0\n0.68779147\t1990.0\n0.47381932\t1990.0\n0.6676623\t1990.0\n0.56360775\t1990.0\n0.63125896\t2008.0\n0.64832276\t1999.0\n0.6148927\t1974.0\n0.52451843\t1974.0\n0.6048037\t1974.0\n0.5971334\t1974.0\n0.6226998\t1974.0\n0.5801148\t1974.0\n0.5622203\t1974.0\n0.63698846\t1976.0\n0.6224434\t1976.0\n0.5809596\t1976.0\n0.48968875\t1976.0\n0.565433\t1976.0\n0.64634675\t1976.0\n0.60658795\t1999.0\n0.5472001\t1975.0\n0.56427366\t1975.0\n0.59280443\t1999.0\n0.59740245\t1975.0\n0.5983223\t1975.0\n0.621386\t1975.0\n0.60328746\t1975.0\n0.5128954\t1970.0\n0.55534947\t1970.0\n0.60278386\t1970.0\n0.4206212\t1970.0\n0.51818496\t1970.0\n0.5039142\t1971.0\n0.590778\t1971.0\n0.53334224\t1971.0\n0.58136624\t1971.0\n0.51246\t1971.0\n0.5495961\t1971.0\n0.59206915\t1970.0\n0.63656557\t1981.0\n0.64256495\t1981.0\n0.6121311\t1981.0\n0.59023523\t1981.0\n0.64544296\t1981.0\n0.57272774\t1981.0\n0.6444982\t1981.0\n0.6537376\t1981.0\n0.58248377\t2009.0\n0.55741477\t1989.0\n0.5527665\t1989.0\n0.68237835\t1989.0\n0.50075144\t2002.0\n0.53871346\t2002.0\n0.5197033\t2002.0\n0.5289174\t2002.0\n0.5793028\t1999.0\n0.59118503\t1999.0\n0.5496543\t2002.0\n0.61824054\t1969.0\n0.594362\t1969.0\n0.58688456\t1969.0\n0.5963217\t1969.0\n0.56044674\t1972.0\n0.5477564\t1972.0\n0.5464922\t1972.0\n0.5597445\t1972.0\n0.5985869\t1972.0\n0.5596594\t1972.0\n0.45618942\t1972.0\n0.5304553\t1972.0\n0.51396126\t1972.0\n0.45313382\t1971.0\n0.5516134\t1971.0\n0.4993043\t1971.0\n0.43193382\t1971.0\n0.5011254\t1971.0\n0.5117747\t1971.0\n0.485016\t1971.0\n0.501167\t1973.0\n0.5923819\t1973.0\n0.6097406\t1973.0\n0.6172643\t1973.0\n0.5948292\t1973.0\n0.55178976\t1983.0\n0.6484035\t1983.0\n0.4904921\t1983.0\n0.65149325\t1983.0\n0.53069013\t1983.0\n0.52192664\t1983.0\n0.54237694\t1983.0\n0.49940434\t1983.0\n0.48478308\t1983.0\n0.6725968\t2009.0\n0.5942893\t2009.0\n0.5930562\t2009.0\n0.7269253\t2009.0\n0.538447\t2009.0\n0.68040186\t2010.0\n0.75437206\t2008.0\n0.8517479\t2008.0\n0.65426385\t2008.0\n0.57053196\t2008.0\n0.71020174\t2008.0\n0.69291866\t2008.0\n0.65487885\t2008.0\n0.5897569\t2008.0\n0.7184871\t2008.0\n0.85399\t2008.0\n0.64326715\t2008.0\n0.594595\t2008.0\n0.72773\t2008.0\n0.72178787\t2008.0\n0.65664744\t2008.0\n0.75590885\t2008.0\n0.6071265\t2008.0\n0.608983\t2008.0\n0.57487714\t2001.0\n0.52487236\t2008.0\n0.09902041\t2003.0\n0.11420871\t2003.0\n0.14592148\t2003.0\n0.41252857\t2003.0\n0.4986599\t2003.0\n0.28778985\t2003.0\n0.062221494\t2003.0\n0.12925611\t2003.0\n0.26373383\t2003.0\n0.514354\t2003.0\n0.46179435\t2006.0\n0.4185195\t2004.0\n0.21356763\t2004.0\n0.52103317\t2004.0\n0.331891\t2004.0\n0.40920442\t2004.0\n0.5264668\t2004.0\n0.6304152\t2004.0\n0.84180945\t2004.0\n0.22008686\t2004.0\n0.3097525\t2004.0\n0.5342791\t2006.0\n0.3438255\t2006.0\n0.344449\t2006.0\n0.43739158\t2006.0\n0.6608135\t2006.0\n0.7461616\t2006.0\n0.22898017\t2006.0\n0.2639985\t2006.0\n0.6174099\t2008.0\n0.53210133\t2008.0\n0.5127171\t2008.0\n0.7829931\t2008.0\n0.603205\t2008.0\n0.55545557\t2008.0\n0.72640896\t2008.0\n0.12874378\t2008.0\n0.5270751\t2008.0\n0.43700674\t2008.0\n0.5218403\t1985.0\n0.59348726\t1988.0\n0.5674661\t1989.0\n0.4604878\t1989.0\n0.4821196\t1989.0\n0.52389914\t1989.0\n0.55199146\t1989.0\n0.5438932\t1989.0\n0.38921732\t1993.0\n0.5179442\t1985.0\n0.5110369\t1987.0\n0.5142106\t2004.0\n0.40003255\t2004.0\n0.48476493\t1999.0\n0.58461946\t1993.0\n0.44977048\t2004.0\n0.5736341\t1991.0\n0.5810749\t1987.0\n0.62160176\t1987.0\n0.6383127\t1987.0\n0.54903865\t2001.0\n0.61019486\t2001.0\n0.5207942\t2001.0\n0.69232035\t1979.0\n0.66550744\t1980.0\n0.66611326\t1980.0\n0.6063568\t2001.0\n0.5936068\t2001.0\n0.71128947\t1979.0\n0.6785028\t1980.0\n0.68575585\t2000.0\n0.6658266\t1980.0\n0.68782383\t1980.0\n0.5949894\t1980.0\n0.6300035\t2001.0\n0.7090192\t2000.0\n0.61079526\t2001.0\n0.71991867\t1979.0\n0.71776205\t2000.0\n0.678027\t1980.0\n0.61589473\t2000.0\n0.6605772\t1980.0\n0.68536246\t1980.0\n0.6690585\t1979.0\n0.6453706\t1980.0\n0.6881954\t1999.0\n0.72551155\t1989.0\n0.722033\t1986.0\n0.69339097\t1986.0\n0.6992043\t1986.0\n0.6211172\t1986.0\n0.7038775\t1986.0\n0.58149827\t1986.0\n0.68286085\t1986.0\n0.65584975\t1986.0\n0.6788332\t1986.0\n0.65817857\t1986.0\n0.671117\t1986.0\n0.60008633\t1986.0\n0.7278562\t1986.0\n0.61271626\t1986.0\n0.47999102\t1970.0\n0.47340906\t1970.0\n0.6140585\t1970.0\n0.5530949\t1970.0\n0.53469175\t1970.0\n0.4350642\t1970.0\n0.44020942\t1970.0\n0.62247753\t1970.0\n0.54526997\t1970.0\n0.5189047\t1970.0\n0.5579444\t1970.0\n0.543747\t1970.0\n0.45195243\t1970.0\n0.57170504\t1970.0\n0.58487546\t1970.0\n0.5761137\t1971.0\n0.76148915\t1971.0\n0.5703545\t1971.0\n0.49131602\t2007.0\n0.5488113\t2007.0\n0.50820696\t2007.0\n0.52061456\t2007.0\n0.43174422\t2007.0\n0.49801952\t2007.0\n0.48233405\t2007.0\n0.60044676\t1958.0\n0.6347677\t2005.0\n0.60338604\t1958.0\n0.705648\t1992.0\n0.6071461\t2006.0\n0.6366662\t1993.0\n0.5477943\t1992.0\n0.6567816\t1970.0\n0.69305444\t1970.0\n0.58916706\t1958.0\n0.59141636\t2005.0\n0.5710032\t1958.0\n0.59722495\t1958.0\n0.4329089\t1958.0\n0.588088\t1958.0\n0.58910495\t1970.0\n0.43092626\t1997.0\n0.5523545\t1997.0\n0.52630544\t2005.0\n0.59997845\t2009.0\n0.54504985\t1992.0\n0.588681\t1970.0\n0.70923233\t1998.0\n0.5687072\t1994.0\n0.39818707\t2006.0\n0.5157543\t2008.0\n0.45988244\t1992.0\n0.59175324\t1972.0\n0.35593465\t1992.0\n0.46747088\t1992.0\n0.488207\t2008.0\n0.5811875\t1994.0\n0.50281817\t2005.0\n0.53652674\t1993.0\n0.49172926\t1993.0\n0.582912\t1993.0\n0.6214212\t2000.0\n0.530294\t1991.0\n0.52765715\t1997.0\n0.5669514\t1991.0\n0.5103548\t1978.0\n0.61795497\t1992.0\n0.5719533\t1995.0\n0.56818\t1972.0\n0.6042296\t1995.0\n0.6615847\t1991.0\n0.72811395\t1987.0\n0.52008766\t1987.0\n0.7370213\t1968.0\n0.6293818\t2003.0\n0.67958415\t1962.0\n0.58787847\t1995.0\n0.65311396\t1995.0\n0.5941111\t1995.0\n0.6340979\t1995.0\n0.42343658\t1958.0\n0.5733673\t1980.0\n0.633323\t1980.0\n0.57312363\t2005.0\n0.62146026\t2005.0\n0.50330687\t2005.0\n0.61665905\t2005.0\n0.753893\t2005.0\n0.7150185\t2005.0\n0.60006005\t2005.0\n0.52381164\t2005.0\n0.7214205\t2005.0\n0.64219034\t2005.0\n0.63510805\t1981.0\n0.65507305\t2005.0\n0.5315932\t2005.0\n0.5421568\t1981.0\n0.54541594\t2005.0\n0.6182596\t1981.0\n0.7107979\t2005.0\n0.5523663\t2003.0\n0.6071873\t2003.0\n0.64986444\t2003.0\n0.7372235\t2003.0\n0.63957095\t2003.0\n0.6861137\t2003.0\n0.58928484\t2003.0\n0.6597596\t2003.0\n0.6061228\t2002.0\n0.65643924\t2003.0\n0.5085234\t1987.0\n0.5135635\t1987.0\n0.5366372\t1987.0\n0.5871291\t1987.0\n0.5461339\t2002.0\n0.6771516\t1992.0\n0.6047771\t1997.0\n0.610194\t1997.0\n0.5495319\t1997.0\n0.6473868\t1997.0\n0.5374206\t1997.0\n0.611102\t1997.0\n0.5943311\t1997.0\n0.63306993\t2004.0\n0.5563875\t2004.0\n0.6157947\t2004.0\n0.61051315\t2004.0\n0.4069553\t2004.0\n0.6344332\t2004.0\n0.54986495\t2004.0\n0.5784799\t2004.0\n0.42290843\t2004.0\n0.6364\t2004.0\n0.6204674\t2004.0\n0.5923227\t1997.0\n0.65672255\t1992.0\n0.55555284\t2007.0\n0.6095642\t2007.0\n0.5723794\t2007.0\n0.42526457\t2007.0\n0.5779525\t2007.0\n0.6215491\t2007.0\n0.4560014\t2007.0\n0.5517544\t2006.0\n0.4989508\t2006.0\n0.60026604\t2006.0\n0.56829476\t2006.0\n0.6287073\t2006.0\n0.58603346\t2006.0\n0.59224296\t2006.0\n0.6197663\t2006.0\n0.6371046\t2006.0\n0.5813204\t2006.0\n0.5585171\t2006.0\n0.63277763\t2008.0\n0.58344096\t2008.0\n0.6209491\t2010.0\n0.65196484\t2010.0\n0.62560946\t2010.0\n0.6493494\t2010.0\n0.63856757\t2010.0\n0.6395986\t2010.0\n0.62027967\t2010.0\n0.6199971\t2010.0\n0.63564646\t2010.0\n0.62104446\t2010.0\n0.6734361\t2010.0\n0.5832894\t2006.0\n0.5689155\t2005.0\n0.6860444\t2006.0\n0.7012247\t2006.0\n0.6682214\t2006.0\n0.6086894\t2006.0\n0.62021965\t2006.0\n0.59871286\t2006.0\n0.6330426\t2006.0\n0.7020721\t2006.0\n0.56642413\t2006.0\n0.661176\t2006.0\n0.6154367\t2005.0\n0.5840663\t2005.0\n0.6863519\t2005.0\n0.5660176\t2006.0\n0.5917764\t2006.0\n0.5931318\t2006.0\n0.5020482\t2006.0\n0.556859\t2006.0\n0.58641994\t2006.0\n0.6345254\t2006.0\n0.60323757\t2006.0\n0.5975556\t2006.0\n0.5785213\t2006.0\n0.54418284\t2006.0\n0.61617464\t2004.0\n0.5062352\t2006.0\n0.5684753\t2006.0\n0.59315354\t2006.0\n0.47515583\t2005.0\n0.5153598\t2004.0\n0.44719377\t2005.0\n0.6853309\t2004.0\n0.58648294\t2004.0\n0.6318477\t2004.0\n0.6431452\t2004.0\n0.62316203\t2005.0\n0.57904464\t2004.0\n0.6061975\t2004.0\n0.62843585\t2004.0\n0.523607\t2004.0\n0.55259037\t2004.0\n0.6007899\t2004.0\n0.5297646\t2004.0\n0.501937\t2004.0\n0.53262967\t2004.0\n0.5779955\t2004.0\n0.52779716\t2004.0\n0.42662022\t1995.0\n0.58326584\t1994.0\n0.5748246\t1993.0\n0.6207014\t1994.0\n0.5543133\t1996.0\n0.59157676\t1967.0\n0.67433745\t2006.0\n0.5408121\t1967.0\n0.5838117\t2006.0\n0.63563263\t2006.0\n0.6246008\t1972.0\n0.63473374\t2002.0\n0.61838627\t1972.0\n0.5885966\t2002.0\n0.5903564\t1972.0\n0.56112313\t1972.0\n0.5870455\t1972.0\n0.50056905\t1999.0\n0.56024957\t2006.0\n0.5946791\t2006.0\n0.5384187\t2006.0\n0.61595935\t2006.0\n0.51809794\t2006.0\n0.55948\t2004.0\n0.5357793\t1972.0\n0.5615564\t1972.0\n0.6048534\t1972.0\n0.50138533\t1972.0\n0.5695441\t1972.0\n0.67272866\t1972.0\n0.55159837\t1972.0\n0.55572313\t1972.0\n0.5744915\t2002.0\n0.44963625\t1972.0\n0.6884999\t1972.0\n0.52112335\t2002.0\n0.46049717\t2007.0\n0.65071315\t2005.0\n0.4404862\t2007.0\n0.43481064\t2007.0\n0.52755654\t2007.0\n0.69108284\t1993.0\n0.61161315\t1993.0\n0.60875946\t1993.0\n0.5665227\t1993.0\n0.47225514\t1993.0\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"result-alert alert-warning\" role\u003d\"alert\"\u003e\u003cbutton type\u003d\"button\" class\u003d\"close\" data-dismiss\u003d\"alert\" aria-label\u003d\"Close\"\u003e\u003cspan aria-hidden\u003d\"true\"\u003e\u0026times;\u003c/span\u003e\u003c/button\u003e\u003cstrong\u003eOutput is truncated\u003c/strong\u003e to 1000 rows. Learn more about \u003cstrong\u003ezeppelin.spark.maxResult\u003c/strong\u003e\u003c/div\u003e\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d64"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522315_610605769",
+      "id": "20171029-103110_1670445121",
+      "dateCreated": "2019-03-30 14:35:22.315",
+      "dateStarted": "2019-04-09 15:42:19.231",
+      "dateFinished": "2019-04-09 15:42:19.293",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 2: Prepare data structure\n\nLike a Spark ML Decision Tree, a Spark ML Linear Regression requires two input columns an **labelCol** and **featuresCol**. In this specific case, the labelColl is the \"_c0\" column.\nNext to that, there are multiple columns containing independent variables (_c1, ..., _c12). These variables need to be combined into a featureCol that contains a vector (\u003dlist). In this Part, two things are done:\n\n\u003e Note that here the _c0 column is already float, so no need to fit a `StringIndexer()`\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:19.331",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 2: Prepare data structure\u003c/h2\u003e\n\u003cp\u003eLike a Spark ML Decision Tree, a Spark ML Linear Regression requires two input columns an \u003cstrong\u003elabelCol\u003c/strong\u003e and \u003cstrong\u003efeaturesCol\u003c/strong\u003e. In this specific case, the labelColl is the \u0026quot;_c0\u0026quot; column.\u003cbr/\u003eNext to that, there are multiple columns containing independent variables (_c1, \u0026hellip;, _c12). These variables need to be combined into a featureCol that contains a vector (\u003dlist). In this Part, two things are done:\u003c/p\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote that here the _c0 column is already float, so no need to fit a \u003ccode\u003eStringIndexer()\u003c/code\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522316_447821911",
+      "id": "20171029-103043_2074658091",
+      "dateCreated": "2019-03-30 14:35:22.316",
+      "dateStarted": "2019-04-09 15:42:19.396",
+      "dateFinished": "2019-04-09 15:42:19.409",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nYou need to combine multiple columns (1:] into one featuresCol named _features_ containing a vector, the [`VectorAssembler()` method](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.feature.VectorAssembler) is used to do this.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:19.497",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eYou need to combine multiple columns (1:] into one featuresCol named \u003cem\u003efeatures\u003c/em\u003e containing a vector, the \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.feature.VectorAssembler\"\u003e\u003ccode\u003eVectorAssembler()\u003c/code\u003e method\u003c/a\u003e is used to do this.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522316_-493437529",
+      "id": "20171029-103437_594590623",
+      "dateCreated": "2019-03-30 14:35:22.316",
+      "dateStarted": "2019-04-09 15:42:19.533",
+      "dateFinished": "2019-04-09 15:42:19.538",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\n#parsed \u003d \u003cFILL IN\u003e\nparsed \u003d (VectorAssembler(inputCols\u003draw.columns[1:], outputCol\u003d\"features\")\n                    .transform(raw))\n\nparsed \u003d parsed.select(\"year\", \"features\")\nparsed.sample(False, 0.001).show(5, truncate\u003dFalse)\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:19.634",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|year  |features                                                                                                                                                                                                                                 |\n+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|1999.0|[0.8063146471977234,0.5319437384605408,0.41080331802368164,0.38689300417900085,0.174518421292305,0.38632825016975403,0.4038469195365906,0.4014091193675995,0.6026594638824463,0.4776509702205658,0.6088333129882812,0.6200068593025208]  |\n|1981.0|[0.660300076007843,0.7090980410575867,0.539344072341919,0.5684861540794373,0.3161337971687317,0.38395142555236816,0.4958713948726654,0.6247511506080627,0.46051740646362305,0.4696083068847656,0.668059229850769,0.4654102921485901]     |\n|1956.0|[0.7814319133758545,0.448505699634552,0.43300265073776245,0.37814560532569885,0.20870716869831085,0.5064138174057007,0.3776630759239197,0.31505605578422546,0.7097634077072144,0.5303900241851807,0.4504307508468628,0.41084587574005127]|\n|1954.0|[0.7831389307975769,0.48836567997932434,0.5505714416503906,0.43252474069595337,0.2659620940685272,0.5386137366294861,0.3185214400291443,0.32493457198143005,0.6689559817314148,0.493906170129776,0.6208459734916687,0.5017098784446716]  |\n|1956.0|[0.7366864085197449,0.5218242406845093,0.5400882363319397,0.6128943562507629,0.33238643407821655,0.6416884660720825,0.4907221794128418,0.32758498191833496,0.545492947101593,0.4103497266769409,0.6364463567733765,0.5296328067779541]   |\n+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\nonly showing top 5 rows\n\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d65"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522317_-846717146",
+      "id": "20171029-103532_518049380",
+      "dateCreated": "2019-03-30 14:35:22.317",
+      "dateStarted": "2019-04-09 15:42:19.673",
+      "dateFinished": "2019-04-09 15:42:19.878",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 3: Split data\n\nUse the [`randomSplit()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.randomSplit) to split the data into [0.7, 0.2, 0.1]  train-, validation-, and test sample.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:19.974",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 3: Split data\u003c/h2\u003e\n\u003cp\u003eUse the \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.randomSplit\"\u003e\u003ccode\u003erandomSplit()\u003c/code\u003e method\u003c/a\u003e to split the data into [0.7, 0.2, 0.1] train-, validation-, and test sample.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522318_1134952739",
+      "id": "20171029-103614_964284567",
+      "dateCreated": "2019-03-30 14:35:22.318",
+      "dateStarted": "2019-04-09 15:42:20.020",
+      "dateFinished": "2019-04-09 15:42:20.026",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\n#weights \u003d \u003cFILL IN\u003e\nweights \u003d [.7, .2, .1]\nseed \u003d 42\n#train, val, test \u003d parsed.\u003cFILL IN\u003e\ntrain, val, test \u003d parsed.randomSplit(weights, seed\u003dseed)\n\n# caching\ntrain.cache()\nval.cache()\ntest.cache()\n\n# Checking is split is done correctly\nn_train \u003d train.count()\nn_val \u003d val.count()\nn_test \u003d test.count()\n\nprint n_train, n_val, n_test, n_train + n_val + n_test\nprint parsed.count()",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:20.120",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "4728 1321 675 6724\n6724\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d66",
+            "http://172.20.0.3:4040/jobs/job?id\u003d67",
+            "http://172.20.0.3:4040/jobs/job?id\u003d68",
+            "http://172.20.0.3:4040/jobs/job?id\u003d69"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522318_2036717720",
+      "id": "20171029-104304_329778966",
+      "dateCreated": "2019-03-30 14:35:22.318",
+      "dateStarted": "2019-04-09 15:42:20.159",
+      "dateFinished": "2019-04-09 15:42:21.183",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 4: Create a Linear model\nUse the [`LinearRegression()`  method](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.regression.LinearRegression) to initialize the regression. In this case we limt ourself to setting the _labelCol_ and _maxIter_ arguments. Set them respectively to _\"year\"_ and _100_.\n\n`fit()` the linear regression _(lr)_ to the _train_ dataframe.\n\n\u003e Tip: If you are stuck, visit [this page](https://spark.apache.org/docs/latest/ml-classification-regression.html#linear-regression) about linear regression in Spark.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:21.264",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 4: Create a Linear model\u003c/h2\u003e\n\u003cp\u003eUse the \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.regression.LinearRegression\"\u003e\u003ccode\u003eLinearRegression()\u003c/code\u003e method\u003c/a\u003e to initialize the regression. In this case we limt ourself to setting the \u003cem\u003elabelCol\u003c/em\u003e and \u003cem\u003emaxIter\u003c/em\u003e arguments. Set them respectively to \u003cem\u003e\u0026ldquo;year\u0026rdquo;\u003c/em\u003e and \u003cem\u003e100\u003c/em\u003e.\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003efit()\u003c/code\u003e the linear regression \u003cem\u003e(lr)\u003c/em\u003e to the \u003cem\u003etrain\u003c/em\u003e dataframe.\u003c/p\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eTip: If you are stuck, visit \u003ca href\u003d\"https://spark.apache.org/docs/latest/ml-classification-regression.html#linear-regression\"\u003ethis page\u003c/a\u003e about linear regression in Spark.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522319_1072614511",
+      "id": "20171029-104430_1593671362",
+      "dateCreated": "2019-03-30 14:35:22.319",
+      "dateStarted": "2019-04-09 15:42:21.310",
+      "dateFinished": "2019-04-09 15:42:21.319",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n#lr \u003d \u003cFILL IN\u003e\nlr \u003d LinearRegression(maxIter\u003d100, labelCol \u003d\"year\")\n\n#linReg \u003d lr.\u003cFILL IN\u003e\nlinReg \u003d lr.fit(train)",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:21.411",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d70",
+            "http://172.20.0.3:4040/jobs/job?id\u003d71",
+            "http://172.20.0.3:4040/jobs/job?id\u003d72",
+            "http://172.20.0.3:4040/jobs/job?id\u003d73",
+            "http://172.20.0.3:4040/jobs/job?id\u003d74"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522319_-912965711",
+      "id": "20171029-104605_53948665",
+      "dateCreated": "2019-03-30 14:35:22.319",
+      "dateStarted": "2019-04-09 15:42:21.454",
+      "dateFinished": "2019-04-09 15:42:21.749",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 5: Make predictions and evaluate the linear regression model\n\nUse the `transform()` method to return predictions. Make a prediction for the train-, val-, and test dataframe.\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:21.757",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 5: Make predictions and evaluate the linear regression model\u003c/h2\u003e\n\u003cp\u003eUse the \u003ccode\u003etransform()\u003c/code\u003e method to return predictions. Make a prediction for the train-, val-, and test dataframe.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522320_788089224",
+      "id": "20171029-104626_1709916447",
+      "dateCreated": "2019-03-30 14:35:22.320",
+      "dateStarted": "2019-04-09 15:42:21.825",
+      "dateFinished": "2019-04-09 15:42:21.833",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Make predictions.\ntrain_predictions \u003d linReg.transform(train)\nval_predictions \u003d linReg.transform(val)\ntest_predictions \u003d linReg.transform(test)\n\n#Show predictions\ntest_predictions.select(\"prediction\", \"year\", \"features\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:21.925",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------------------+------+--------------------+\n|        prediction|  year|            features|\n+------------------+------+--------------------+\n|1987.1860706384816|1922.0|[0.66389566659927...|\n| 1928.900047357864|1925.0|[0.55284595489501...|\n|1947.2162673211612|1926.0|[0.57977348566055...|\n| 1939.666622240887|1927.0|[0.40483176708221...|\n| 1970.472312143516|1927.0|[0.40506672859191...|\n| 1945.397160222609|1928.0|[0.45740437507629...|\n|1942.7833397062539|1929.0|[0.36722686886787...|\n| 1941.747365698934|1929.0|[0.39063635468482...|\n|1950.9112108223908|1929.0|[0.53488969802856...|\n|1959.1266025751397|1929.0|[0.60055619478225...|\n|1947.4081036543878|1930.0|[0.59126925468444...|\n|1948.7436355515797|1930.0|[0.59365224838256...|\n|1945.4366722830534|1931.0|[0.52380150556564...|\n| 1957.269559399038|1931.0|[0.53911679983139...|\n|1951.6105170947199|1931.0|[0.56446731090545...|\n|1950.3830500399636|1931.0|[0.66608566045761...|\n|1941.8152190776445|1932.0|[0.51756399869918...|\n|1945.3607637459336|1934.0|[0.15799890458583...|\n|1943.1936684972468|1934.0|[0.38164743781089...|\n| 1952.397912448698|1935.0|[0.35576322674751...|\n+------------------+------+--------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d75"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522320_625305807",
+      "id": "20171029-105049_616733039",
+      "dateCreated": "2019-03-30 14:35:22.320",
+      "dateStarted": "2019-04-09 15:42:21.964",
+      "dateFinished": "2019-04-09 15:42:22.102",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nUse the [`RegressionEvaluator()` method](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.RegressionEvaluator) to evaluate the train-, val-, and test predictions. evalute on _r2_ (R-squared) and _mae_ (Mean absolute error). ",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:22.164",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eUse the \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.RegressionEvaluator\"\u003e\u003ccode\u003eRegressionEvaluator()\u003c/code\u003e method\u003c/a\u003e to evaluate the train-, val-, and test predictions. evalute on \u003cem\u003er2\u003c/em\u003e (R-squared) and \u003cem\u003emae\u003c/em\u003e (Mean absolute error).\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522320_-933681619",
+      "id": "20171029-105312_1449561866",
+      "dateCreated": "2019-03-30 14:35:22.320",
+      "dateStarted": "2019-04-09 15:42:22.206",
+      "dateFinished": "2019-04-09 15:42:22.212",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\n#evaluator \u003d \u003cFILL IN\u003e\nevaluator \u003d RegressionEvaluator(labelCol\u003d\"year\")\n\ntrain_r2 \u003d evaluator.evaluate(train_predictions, {evaluator.metricName: \"r2\"})\ntrain_mae \u003d evaluator.evaluate(train_predictions, {evaluator.metricName: \"mae\"})\n\nval_r2 \u003d evaluator.evaluate(val_predictions, {evaluator.metricName: \"r2\"})\nval_mae \u003d evaluator.evaluate(val_predictions, {evaluator.metricName: \"mae\"})\n\ntest_r2 \u003d evaluator.evaluate(test_predictions, {evaluator.metricName: \"r2\"})\ntest_mae \u003d evaluator.evaluate(test_predictions, {evaluator.metricName: \"mae\"})\n\nprint(\"Train R2 \u003d %g \" % (train_r2))\nprint(\"Validation R2 \u003d %g \" % (val_r2))\nprint(\"Test R2 \u003d %g \" % (test_r2))\nprint(\"-----------------\")\nprint(\"Train MAE \u003d %g \" % (train_mae))\nprint(\"Validation MAE \u003d %g \" % (val_mae))\nprint(\"Test MAE \u003d %g \" % (test_mae))",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:22.306",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Train R2 \u003d 0.473621 \nValidation R2 \u003d 0.465606 \nTest R2 \u003d 0.455219 \n-----------------\nTrain MAE \u003d 12.2358 \nValidation MAE \u003d 12.3571 \nTest MAE \u003d 12.8228 \n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d76",
+            "http://172.20.0.3:4040/jobs/job?id\u003d77",
+            "http://172.20.0.3:4040/jobs/job?id\u003d78",
+            "http://172.20.0.3:4040/jobs/job?id\u003d79",
+            "http://172.20.0.3:4040/jobs/job?id\u003d80",
+            "http://172.20.0.3:4040/jobs/job?id\u003d81"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522321_-1932450106",
+      "id": "20171029-110115_537501006",
+      "dateCreated": "2019-03-30 14:35:22.321",
+      "dateStarted": "2019-04-09 15:42:22.348",
+      "dateFinished": "2019-04-09 15:42:22.753",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n#### In a linear regression model, it is also important to know the parameter estimates. Visit [this page](https://spark.apache.org/docs/latest/ml-classification-regression.html#linear-regression) about linear regression in Spark to see how you can print the parameter values and the intercept.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:22.850",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch4\u003eIn a linear regression model, it is also important to know the parameter estimates. Visit \u003ca href\u003d\"https://spark.apache.org/docs/latest/ml-classification-regression.html#linear-regression\"\u003ethis page\u003c/a\u003e about linear regression in Spark to see how you can print the parameter values and the intercept.\u003c/h4\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522321_-1602389745",
+      "id": "20171029-110346_1812676517",
+      "dateCreated": "2019-03-30 14:35:22.321",
+      "dateStarted": "2019-04-09 15:42:22.898",
+      "dateFinished": "2019-04-09 15:42:22.903",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Print the coefficients and intercept for linear regression\nprint(\"Coefficients: %s\" % str(linReg.coefficients))\nprint(\"Intercept: %s\" % str(linReg.intercept))",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:22.999",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Coefficients: [22.7258280958,26.4998226007,-66.2237108154,54.0033165655,-8.03347013482,-47.6126493867,35.5265155896,-22.6973336648,4.68086335715,-5.72601079899,-12.1811337702,-15.3993486715]\nIntercept: 1986.31279219\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522321_-1959622010",
+      "id": "20171029-110510_365304272",
+      "dateCreated": "2019-03-30 14:35:22.321",
+      "dateStarted": "2019-04-09 15:42:23.041",
+      "dateFinished": "2019-04-09 15:42:23.111",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ntest_predictions.select(\"year\", \"prediction\").registerTempTable(\"testPred\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:23.140",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522322_1562040009",
+      "id": "20171029-110755_400080425",
+      "dateCreated": "2019-03-30 14:35:22.322",
+      "dateStarted": "2019-04-09 15:42:23.181",
+      "dateFinished": "2019-04-09 15:42:23.253",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect *\nfrom testPred\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:23.281",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "scatterChart",
+              "height": 300.0,
+              "optionOpen": true,
+              "setting": {
+                "scatterChart": {
+                  "xAxis": {
+                    "name": "year",
+                    "index": 0.0,
+                    "aggr": "sum"
+                  },
+                  "yAxis": {
+                    "name": "prediction",
+                    "index": 1.0,
+                    "aggr": "sum"
+                  }
+                },
+                "lineChart": {
+                  "forceY": false,
+                  "lineWithFocus": false
+                }
+              },
+              "keys": [
+                {
+                  "name": "year",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "prediction",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true,
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "year\tprediction\n1922.0\t1987.1860706384816\n1925.0\t1928.900047357864\n1926.0\t1947.2162673211612\n1927.0\t1939.666622240887\n1927.0\t1970.472312143516\n1928.0\t1945.397160222609\n1929.0\t1942.7833397062539\n1929.0\t1941.747365698934\n1929.0\t1950.9112108223908\n1929.0\t1959.1266025751397\n1930.0\t1947.4081036543878\n1930.0\t1948.7436355515797\n1931.0\t1945.4366722830534\n1931.0\t1957.269559399038\n1931.0\t1951.6105170947199\n1931.0\t1950.3830500399636\n1932.0\t1941.8152190776445\n1934.0\t1945.3607637459336\n1934.0\t1943.1936684972468\n1935.0\t1952.397912448698\n1935.0\t1941.8524415565485\n1935.0\t1944.2043035986717\n1935.0\t1941.1389643913324\n1935.0\t1971.5878017277153\n1936.0\t1947.404379944808\n1936.0\t1950.1154634270883\n1938.0\t1945.5351133458294\n1938.0\t1946.557911929942\n1938.0\t1950.6141700891285\n1939.0\t1952.9078636377149\n1939.0\t1953.2016709652773\n1939.0\t1939.0514241728852\n1939.0\t1948.133544878297\n1939.0\t1945.775517178296\n1940.0\t1948.9162065959745\n1941.0\t1947.931858559017\n1941.0\t1954.9835534368328\n1941.0\t1944.6895082145465\n1941.0\t1936.239281727586\n1942.0\t1950.9516287790036\n1942.0\t1952.0090776393547\n1942.0\t1947.3037112985226\n1943.0\t1975.3334768128725\n1945.0\t1957.9200693683406\n1946.0\t1950.7635073809217\n1946.0\t1967.320860933394\n1946.0\t1969.2227922525094\n1947.0\t1953.4577349971537\n1947.0\t1955.8250238385021\n1947.0\t1969.1509761304092\n1947.0\t1954.672062106794\n1948.0\t1961.5419743823186\n1948.0\t1942.2725372461668\n1948.0\t1966.1059916932181\n1948.0\t1944.7771624101886\n1948.0\t1978.4099918588254\n1948.0\t1955.6502304857127\n1948.0\t1974.7213865354536\n1949.0\t1947.6436896148196\n1949.0\t1953.3570838788196\n1949.0\t1943.5885268769393\n1949.0\t1958.2744192028376\n1949.0\t1958.5968889166268\n1949.0\t1957.651125548704\n1949.0\t1960.9828080410605\n1949.0\t1964.2839366905425\n1949.0\t1959.4606764911346\n1949.0\t1962.610969393476\n1950.0\t1960.0034483150773\n1950.0\t1945.424890107909\n1950.0\t1946.7066564546371\n1950.0\t1972.1336102429004\n1950.0\t1966.4600823111361\n1950.0\t1970.4059798434305\n1950.0\t1959.7646155122288\n1950.0\t1974.1629115418943\n1950.0\t1970.4145354274747\n1950.0\t1957.9512476524546\n1950.0\t1967.4876354520006\n1951.0\t1956.2683749674347\n1951.0\t1958.0321132761649\n1951.0\t1969.6219609073385\n1951.0\t1965.5155872698472\n1951.0\t1950.7921430894203\n1951.0\t1948.4499173861047\n1951.0\t1969.5341791070953\n1951.0\t1964.6262013805367\n1952.0\t1946.2659965495398\n1952.0\t1960.1390194759117\n1952.0\t1970.2347276065238\n1952.0\t1971.924905816777\n1952.0\t1968.5611648075983\n1952.0\t1978.5107014014732\n1953.0\t1951.297254873511\n1953.0\t1951.0322627372302\n1953.0\t1961.4378949541565\n1953.0\t1956.7955224619675\n1953.0\t1957.3078832353367\n1953.0\t1958.6196843675398\n1953.0\t1962.1469462745072\n1953.0\t1970.5877972781916\n1953.0\t1959.1385367591356\n1953.0\t1974.1723647659742\n1953.0\t1969.4314854360466\n1954.0\t1962.4343467187653\n1954.0\t1954.3307457484623\n1954.0\t1969.1243410547393\n1954.0\t1979.4944846711023\n1954.0\t1967.1506001906014\n1954.0\t1967.4874098601042\n1954.0\t1967.706933369689\n1954.0\t1965.0642819117527\n1954.0\t1964.815390751966\n1954.0\t1955.4275388922938\n1954.0\t1969.567291908789\n1955.0\t1943.651172130308\n1955.0\t1968.616635694911\n1955.0\t1960.1848358373786\n1955.0\t1965.5103577882198\n1955.0\t1979.0644446639824\n1955.0\t1971.011024355093\n1955.0\t1983.6599126128438\n1955.0\t1974.1056878338852\n1956.0\t1967.145099443464\n1956.0\t1944.2331002813232\n1956.0\t1958.270488049834\n1956.0\t1940.1252148583455\n1956.0\t1952.2862157130653\n1956.0\t1970.4141785248662\n1956.0\t1958.500630575953\n1956.0\t1967.928037297697\n1956.0\t1955.637523167465\n1956.0\t1976.2391560483627\n1956.0\t1976.5694969729448\n1957.0\t1970.8543225151768\n1957.0\t1962.0003714538077\n1957.0\t1950.5423252821683\n1957.0\t1948.4571115799363\n1957.0\t1955.426247435268\n1957.0\t1964.3453349482895\n1957.0\t1974.8779723455295\n1957.0\t1970.2335196714687\n1957.0\t1971.4828750989113\n1957.0\t1972.9778680266422\n1957.0\t1981.9648051894446\n1957.0\t1977.3338375499573\n1958.0\t1965.7972472821587\n1958.0\t1980.4518261547394\n1958.0\t1970.7872334511019\n1958.0\t1980.6272512652931\n1958.0\t1977.6662835127229\n1958.0\t1981.2620062886795\n1959.0\t1961.4360261840377\n1959.0\t1972.3955297330053\n1959.0\t1933.013124724535\n1959.0\t1978.8640841433426\n1959.0\t1970.2718761850374\n1959.0\t1974.938133418387\n1959.0\t1978.371598521627\n1959.0\t1975.2940399235777\n1959.0\t1953.7583932993998\n1959.0\t1971.9177615512585\n1959.0\t1967.6229382316023\n1959.0\t1953.1929711505902\n1959.0\t1976.3898032857178\n1959.0\t1966.206152894003\n1959.0\t1979.0867670670568\n1960.0\t1961.0321494606644\n1960.0\t1964.3479527893185\n1960.0\t1990.3409114173921\n1960.0\t1979.2470984186323\n1960.0\t1977.6095550741388\n1960.0\t1969.5697682957846\n1960.0\t1971.1548998241442\n1960.0\t1973.6732830093367\n1960.0\t1966.6614587522959\n1960.0\t1983.025751415339\n1960.0\t1971.2643962485104\n1961.0\t1969.3650793701377\n1961.0\t1974.0293089332038\n1961.0\t1962.2127535638858\n1961.0\t1969.6059804158638\n1961.0\t1979.0069050748716\n1961.0\t1973.658040558768\n1961.0\t1980.3669543989424\n1961.0\t1963.2373221963528\n1961.0\t1974.497136170933\n1961.0\t1964.9490565210704\n1961.0\t1972.3534876787455\n1962.0\t1959.5053963241792\n1962.0\t1970.5380119515883\n1962.0\t1966.0412983006222\n1962.0\t1973.9290121590436\n1962.0\t1974.2471095051449\n1962.0\t1978.2554487229768\n1962.0\t1986.876312893913\n1962.0\t1983.8229202176708\n1963.0\t1940.9187015291081\n1963.0\t1975.0552555442362\n1963.0\t1982.0678673880673\n1963.0\t1981.4620231907923\n1963.0\t1972.520802812469\n1963.0\t1983.1371146380397\n1963.0\t1992.020933019647\n1963.0\t1981.1690375187927\n1963.0\t1996.9124530235367\n1964.0\t1972.5375004620448\n1964.0\t1966.5411518821854\n1964.0\t1984.2384895314478\n1964.0\t1979.0759024813535\n1964.0\t1976.090560446386\n1964.0\t1964.9127781939455\n1964.0\t1980.8987708287045\n1964.0\t1967.523210910716\n1964.0\t1984.809787510932\n1964.0\t1970.9721907225246\n1964.0\t1991.4480355721785\n1964.0\t1983.4087000782872\n1965.0\t1971.096364142843\n1965.0\t1961.0309251741623\n1965.0\t1982.2914194545913\n1965.0\t1978.7509424648758\n1965.0\t1970.9813625134477\n1965.0\t1988.1614439750092\n1965.0\t1983.0939443197447\n1966.0\t1966.1054441429953\n1966.0\t1988.3549661503023\n1966.0\t1977.4210114244197\n1966.0\t1984.9347272510618\n1966.0\t1989.642615058285\n1966.0\t1985.7446258111179\n1967.0\t1963.1410598107636\n1967.0\t1972.5808422112864\n1967.0\t1969.3756788650774\n1967.0\t1965.9731952376085\n1967.0\t1959.463461357801\n1967.0\t1984.1854471111315\n1967.0\t1979.9609840750306\n1967.0\t1974.82542209414\n1968.0\t1966.7408056634354\n1968.0\t1980.1389046976033\n1968.0\t1966.9723463438556\n1968.0\t1973.5841759010866\n1968.0\t1984.8625872964383\n1968.0\t1992.1859700982357\n1968.0\t1984.4486388877885\n1968.0\t1981.3038266667072\n1968.0\t1984.681565011926\n1968.0\t1981.9135394975326\n1969.0\t1978.459704257654\n1969.0\t1977.538506982727\n1969.0\t1979.6007495895\n1969.0\t1983.684412761485\n1969.0\t1985.0050119291898\n1969.0\t1971.9039313313517\n1969.0\t1979.5926571672483\n1969.0\t1979.7288493429983\n1969.0\t1988.2512119225316\n1969.0\t1989.1323428075073\n1969.0\t1984.8080868279033\n1970.0\t1966.1692658531078\n1970.0\t1964.1806844127693\n1970.0\t1975.5408865568156\n1970.0\t1980.209560890069\n1970.0\t1978.4897340869186\n1970.0\t1987.9657388341734\n1970.0\t1971.056241642529\n1970.0\t1987.9101527465705\n1970.0\t1979.546206544231\n1970.0\t1982.8362270669686\n1971.0\t1963.0699758497321\n1971.0\t1977.3694715362415\n1971.0\t1972.9416059865052\n1971.0\t1989.801788494194\n1971.0\t1974.1582988779576\n1971.0\t1971.569689974799\n1971.0\t1971.0710095713455\n1971.0\t1987.7878700386002\n1971.0\t1981.7020704245792\n1971.0\t1974.6097863134721\n1971.0\t1978.944806801768\n1971.0\t1984.2331188419666\n1971.0\t1983.9675776292688\n1971.0\t1987.7492756409154\n1971.0\t1991.5428623699281\n1971.0\t1988.7996092922397\n1972.0\t1979.0523106325572\n1972.0\t1980.8598065522208\n1972.0\t1974.9701132204955\n1972.0\t1976.2589939842264\n1972.0\t1981.4703658166802\n1972.0\t1984.7843104179224\n1973.0\t1973.1251947563403\n1973.0\t1984.777094682559\n1973.0\t1974.914151667026\n1973.0\t1981.932131773347\n1973.0\t1987.3374724978953\n1974.0\t1982.3441531834212\n1974.0\t1991.4163150542151\n1974.0\t1966.432965454133\n1974.0\t1980.650273405543\n1974.0\t1988.6445676926362\n1974.0\t1973.6385906299663\n1974.0\t1984.3904155160035\n1974.0\t1977.6610083000003\n1974.0\t1981.0707548170453\n1974.0\t1980.4949906798158\n1975.0\t1972.462864303828\n1975.0\t1977.721347866751\n1975.0\t1968.7443177204548\n1975.0\t1981.612777663686\n1975.0\t1980.2798017940283\n1975.0\t1980.362507822642\n1975.0\t1981.8693358233081\n1975.0\t1981.555225910424\n1976.0\t1980.542294911547\n1976.0\t1984.6571775777222\n1976.0\t1984.9781662018108\n1976.0\t1971.1570630216074\n1976.0\t1990.5919857288986\n1977.0\t1970.4519067382817\n1977.0\t1979.9365908492211\n1977.0\t1958.939477128352\n1977.0\t1984.9720406302652\n1977.0\t1985.1860815616446\n1977.0\t1976.5578794137011\n1977.0\t1988.4565618101028\n1977.0\t1987.996725133276\n1977.0\t1985.6618245931552\n1977.0\t1986.1735862608418\n1977.0\t1985.8484401157182\n1978.0\t1964.7791048002848\n1978.0\t1978.7034177612961\n1978.0\t1973.0784167253298\n1978.0\t1967.1715962603564\n1978.0\t1979.8534860259927\n1978.0\t1984.5858014165983\n1978.0\t1981.6504864683177\n1978.0\t1982.633384315574\n1978.0\t1982.420808870582\n1979.0\t1960.5161058100161\n1979.0\t1962.5674015017291\n1979.0\t1982.968935626495\n1979.0\t1976.2971769863066\n1979.0\t1982.9411783531066\n1979.0\t1979.4535146674784\n1979.0\t1985.2318128124653\n1979.0\t1991.9974840196728\n1979.0\t1984.892880150522\n1979.0\t1987.036038682611\n1979.0\t1984.7487253730033\n1979.0\t1985.6561840159172\n1979.0\t1994.712189135405\n1979.0\t1986.1523374251828\n1980.0\t1980.8958304203659\n1980.0\t1979.7208845803646\n1980.0\t1989.7397783132417\n1980.0\t1977.1437030609645\n1980.0\t1974.1556850944112\n1980.0\t1978.9042420876451\n1980.0\t1987.2772992746993\n1980.0\t1986.9979621559087\n1980.0\t1988.4501040244475\n1981.0\t1980.7184385199353\n1981.0\t1981.1302916651123\n1981.0\t1980.9255563257236\n1981.0\t1981.4724671140202\n1981.0\t1974.6942853692778\n1981.0\t1979.9588449249054\n1981.0\t1982.281834179051\n1981.0\t1983.7286424022698\n1981.0\t1979.4315791136135\n1981.0\t1985.9926452700897\n1982.0\t1969.3906300387368\n1982.0\t1984.3135096329863\n1982.0\t1973.29985194676\n1982.0\t1973.342168557618\n1982.0\t1992.4757988129445\n1982.0\t1981.326551565506\n1982.0\t1981.1445412386474\n1982.0\t1973.6476903436703\n1982.0\t1981.3078938073256\n1983.0\t1982.7058016990143\n1983.0\t1983.1982291026418\n1983.0\t1981.677385154537\n1983.0\t1989.1688687899425\n1983.0\t1976.918309807693\n1983.0\t1983.6840000932998\n1983.0\t1982.9752792945735\n1983.0\t1987.6928719703103\n1983.0\t1983.864727243241\n1984.0\t1955.114930155282\n1984.0\t1996.7923269526746\n1984.0\t1977.3990805740575\n1984.0\t1981.2091920699163\n1984.0\t1965.1825032756124\n1984.0\t1986.5560456001654\n1985.0\t1989.9568035413572\n1985.0\t1977.1651795836403\n1985.0\t1987.800664913122\n1985.0\t1978.319276505394\n1985.0\t1996.5844786415587\n1985.0\t1993.0146507016807\n1985.0\t1990.1624624058584\n1985.0\t1989.621735031065\n1985.0\t1993.7714926234166\n1985.0\t1987.09949737246\n1986.0\t1991.2614011672972\n1986.0\t1977.3287439810451\n1986.0\t1984.6852110043967\n1986.0\t1976.082894560975\n1986.0\t1992.604670825472\n1986.0\t1984.019732710246\n1986.0\t1993.7447288003975\n1987.0\t1969.29707958835\n1987.0\t1985.312000090502\n1987.0\t1988.3441462169822\n1987.0\t1976.0330139455168\n1987.0\t1965.6159986731104\n1987.0\t1989.2576475273615\n1987.0\t1983.3911962471911\n1987.0\t1982.4162124584423\n1987.0\t1981.7956195887791\n1987.0\t1978.632837274491\n1987.0\t1992.9747251038095\n1988.0\t1953.7315158872689\n1988.0\t1953.0567283542316\n1988.0\t1977.336475501773\n1988.0\t1975.9811527741697\n1988.0\t2005.027076963732\n1988.0\t1982.9124804990543\n1988.0\t1979.0364379675636\n1988.0\t1986.3982463989414\n1989.0\t1963.077609526666\n1989.0\t1969.4911891467407\n1989.0\t1984.8924421670247\n1989.0\t1977.5740039849838\n1989.0\t1972.1599808358758\n1989.0\t1987.1136671794384\n1989.0\t1980.8800623045624\n1989.0\t1972.5139482458399\n1990.0\t1963.326251852723\n1990.0\t1977.3698174339638\n1990.0\t1977.1612083577897\n1990.0\t1987.3252279269557\n1990.0\t1978.710828061541\n1990.0\t1972.5995168867062\n1990.0\t1986.1149105744041\n1990.0\t1988.3155182544679\n1991.0\t1979.2451755724933\n1991.0\t1983.8803365748668\n1991.0\t1980.4344270513438\n1992.0\t1978.7486229813915\n1992.0\t1960.1351976210585\n1992.0\t1982.4934028892555\n1992.0\t1976.1694780034334\n1992.0\t1984.5913102060456\n1992.0\t1972.5277012753954\n1992.0\t1992.7784459203863\n1992.0\t1991.0966607315338\n1992.0\t1996.9466355951367\n1992.0\t1987.6994518660263\n1992.0\t1984.140594368429\n1993.0\t1958.615001483339\n1993.0\t1985.2954775089102\n1993.0\t1984.7572571124058\n1993.0\t1987.3738628939689\n1993.0\t1984.3916478361643\n1993.0\t2000.331521073302\n1993.0\t1984.9226698532984\n1993.0\t1969.5954206159638\n1993.0\t1990.596518182387\n1993.0\t1989.5478713971127\n1993.0\t1986.9356772596727\n1994.0\t1973.7997801423892\n1994.0\t1977.2653249481473\n1994.0\t1973.682250358538\n1994.0\t1975.9169486836126\n1994.0\t1975.483716192765\n1994.0\t1976.4534921242766\n1994.0\t1989.3519406712992\n1994.0\t1989.9402783626833\n1994.0\t1994.6916072311665\n1995.0\t1965.3235163424943\n1995.0\t1971.9367393883972\n1995.0\t1977.1251562063592\n1995.0\t1962.2313142861422\n1995.0\t1993.8036052664413\n1995.0\t1989.5348646660962\n1995.0\t1988.9379478285348\n1995.0\t1993.8465906212657\n1995.0\t1989.6718793032655\n1995.0\t1993.4015959483693\n1995.0\t1978.0578526359218\n1996.0\t1980.3451119789202\n1996.0\t1965.4157985063007\n1996.0\t1977.0439898934071\n1996.0\t1961.5170576455412\n1996.0\t1968.4443772798666\n1996.0\t1969.6343248559854\n1996.0\t1967.0436677446319\n1996.0\t1991.4531476711509\n1996.0\t1978.1498221907636\n1996.0\t1983.7495632621224\n1997.0\t1938.3597783476046\n1997.0\t1958.3995509006318\n1997.0\t1975.5607462223882\n1997.0\t1989.0228660795494\n1997.0\t1957.5184249274873\n1997.0\t1989.1331318525329\n1997.0\t1995.8621473850847\n1997.0\t1991.3648143354462\n1997.0\t1988.5808518772483\n1997.0\t1983.5477085113762\n1997.0\t1989.5131195108054\n1997.0\t1985.3150491907404\n1997.0\t1990.4752947271065\n1997.0\t1988.222457934342\n1997.0\t1989.358932699747\n1998.0\t1970.9100024382396\n1998.0\t1967.9678599253496\n1998.0\t1965.3183453802662\n1998.0\t1971.74211513619\n1998.0\t1984.073721509874\n1998.0\t1995.9146881987385\n1998.0\t1998.358127179015\n1998.0\t1980.6578571520213\n1998.0\t1994.4915066596416\n1998.0\t1994.8648644777377\n1998.0\t1993.8173670547153\n1999.0\t1972.879367580393\n1999.0\t1941.7861806640594\n1999.0\t1977.3785001740123\n1999.0\t1985.8897974235745\n1999.0\t1999.1445951837197\n1999.0\t1999.3152291113424\n1999.0\t1988.0584502736647\n1999.0\t2000.1985748367103\n1999.0\t1981.1008165570418\n1999.0\t1986.3380306589636\n1999.0\t1983.1482630748706\n1999.0\t1985.7339228195847\n1999.0\t1989.3905219043563\n1999.0\t1984.3686819518796\n1999.0\t1982.9263065136793\n1999.0\t1990.0662471732182\n1999.0\t1981.8071831517332\n2000.0\t1952.0835650086128\n2000.0\t1993.000158219906\n2000.0\t1987.0366845646029\n2000.0\t1978.4763160145772\n2000.0\t1984.2912617689547\n2000.0\t1987.3072709735552\n2000.0\t1995.360932606975\n2001.0\t1989.1676060606053\n2001.0\t1969.426952062334\n2001.0\t1987.0179744404188\n2001.0\t1981.1832646735986\n2001.0\t1983.3687994484808\n2001.0\t1991.55398997974\n2001.0\t1981.168640417801\n2001.0\t1983.7102064847547\n2001.0\t1993.1766393490543\n2001.0\t1983.9722261276336\n2001.0\t1988.413619768524\n2001.0\t1988.446237370365\n2002.0\t1981.3405299165206\n2002.0\t1999.1752121536108\n2002.0\t1999.531840484318\n2002.0\t1974.1249637108947\n2002.0\t1988.7493820598118\n2002.0\t1976.8058857874264\n2002.0\t1987.4294229686263\n2002.0\t1983.9930055577045\n2002.0\t1981.300855671663\n2002.0\t1996.0496482519384\n2002.0\t1981.3142720951175\n2002.0\t1992.0086505988706\n2002.0\t1990.6539452992363\n2002.0\t1989.3937733858725\n2002.0\t1988.8957361126115\n2003.0\t1991.0815492053791\n2003.0\t1978.178354469917\n2003.0\t1972.569721275263\n2003.0\t1974.4808510841442\n2003.0\t1987.2097270798458\n2003.0\t1983.2946311209466\n2003.0\t1995.9149015441767\n2003.0\t1994.0335522694156\n2003.0\t1981.901262234251\n2003.0\t1996.6944311971515\n2003.0\t1992.6881419751587\n2003.0\t1983.677808586229\n2003.0\t1989.174403450874\n2003.0\t1993.7843969729072\n2004.0\t1978.7970477374927\n2004.0\t1985.9604962732878\n2004.0\t1984.6425819484223\n2004.0\t1987.6577020568307\n2004.0\t1985.2072741938957\n2004.0\t1975.844419486124\n2004.0\t1989.3407695702545\n2004.0\t1989.0445973403237\n2004.0\t1987.3229759134394\n2005.0\t1964.9756958677133\n2005.0\t1983.4289238912538\n2005.0\t1984.2178353492993\n2005.0\t1989.4543581502742\n2005.0\t1985.8806617320392\n2005.0\t1980.3197794091816\n2005.0\t1990.6342643115408\n2005.0\t1980.371378463086\n2005.0\t1991.3169654633955\n2005.0\t1993.5128660999449\n2005.0\t2003.3179122942895\n2005.0\t1993.8192916878575\n2005.0\t1988.919945924671\n2006.0\t1984.404202942166\n2006.0\t1976.2698872811757\n2006.0\t1975.5468154133412\n2006.0\t1972.0489818932022\n2006.0\t1979.1923472112508\n2006.0\t1987.5088625974072\n2006.0\t1987.1833681926746\n2006.0\t1992.558362720627\n2007.0\t2009.3150870807822\n2007.0\t1979.8634066429872\n2007.0\t1974.900648894371\n2007.0\t1988.3363742723686\n2007.0\t1979.6745663276383\n2007.0\t1982.6559689549197\n2007.0\t1999.382930054517\n2007.0\t1978.6651612105368\n2007.0\t1994.5777002975954\n2007.0\t1989.1888805947997\n2008.0\t1988.6104365169033\n2008.0\t1992.9911657882367\n2008.0\t1993.216189815346\n2008.0\t1964.9112730768404\n2008.0\t1975.7489368701636\n2008.0\t1978.3105197016887\n2008.0\t1986.5390209667428\n2008.0\t1983.6588561296762\n2008.0\t1985.596871523279\n2008.0\t1977.6194009043704\n2008.0\t1992.3558635862025\n2008.0\t1988.8655871662363\n2008.0\t1993.0041325718853\n2008.0\t1995.0214807961372\n2008.0\t1998.605867767991\n2008.0\t1997.1404092768303\n2008.0\t2000.0951373533753\n2008.0\t1998.7449465323434\n2009.0\t1987.224478141687\n2009.0\t1996.4570162999082\n2009.0\t1995.822251414471\n2009.0\t1989.2211149842337\n2009.0\t1989.6868216538899\n2009.0\t2001.284843878653\n2009.0\t1988.1734152179442\n2009.0\t1994.5974580719221\n2009.0\t1990.832692231568\n2009.0\t1994.957701129519\n2010.0\t1971.6186044806861\n2010.0\t1973.161120378914\n2010.0\t1975.7293218557438\n2010.0\t2003.1258095392036\n2010.0\t1999.5645278015336\n2010.0\t1988.5902605824456\n2010.0\t1987.3108125206686\n2010.0\t2001.4462534114932\n2010.0\t1989.3026609327553\n2010.0\t1997.8117943413197\n2010.0\t1962.0504578203163\n2011.0\t1989.1204507005177\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.20.0.3:4040/jobs/job?id\u003d82"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522322_227152411",
+      "id": "20171029-124328_841013611",
+      "dateCreated": "2019-03-30 14:35:22.322",
+      "dateStarted": "2019-04-09 15:42:23.323",
+      "dateFinished": "2019-04-09 15:42:23.426",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-09 15:42:23.522",
+      "config": {
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956522323_2044264435",
+      "id": "20171029-124422_92293183",
+      "dateCreated": "2019-03-30 14:35:22.323",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Spark ML/5 - Spark_ML_Lab_solved",
+  "id": "2E6FP1PMF",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

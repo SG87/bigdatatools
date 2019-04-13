@@ -1,0 +1,350 @@
+########################################################
+### 89: ElasticSearch Lab - Improving search results ###
+########################################################
+
+### Improving search results ###
+################################
+# Proximity searches
+## Adding test documents
+PUT /proximity/default/1
+{
+  "title": "Spicy Sauce"
+}
+PUT /proximity/default/2
+{
+  "title": "Spicy Tomato Sauce"
+}
+PUT /proximity/default/3
+{
+  "title": "Spicy Tomato and Garlic Sauce"
+}
+PUT /proximity/default/4
+{
+  "title": "Tomato Sauce (spicy)"
+}
+PUT /proximity/default/5
+{
+  "title": "Spicy and very delicious Tomato Sauce"
+}
+
+## Adding the slop parameter to a match_phrase query
+GET /proximity/default/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": {
+        "query": "spicy sauce",
+        "slop": 1
+      }
+    }
+  }
+}
+
+GET /proximity/default/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": {
+        "query": "spicy sauce",
+        "slop": 2
+      }
+    }
+  }
+}
+
+# Affecting relevance scoring with proximity
+
+## A simple match query within a bool query
+GET /proximity/default/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "title": {
+              "query": "spicy sauce"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+## Boosting relevance based on proximity
+GET /proximity/default/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "title": {
+              "query": "spicy sauce"
+            }
+          }
+        }
+      ],
+      "should": [
+        {
+          "match_phrase": {
+            "title": {
+              "query": "spicy sauce"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+## Adding the slop parameter
+GET /proximity/default/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "title": {
+              "query": "spicy sauce"
+            }
+          }
+        }
+      ],
+      "should": [
+        {
+          "match_phrase": {
+            "title": {
+              "query": "spicy sauce",
+              "slop": 5
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+# Fuzzy match query
+## Searching with fuzziness set to auto
+GET /product/default/_search
+{
+  "query": {
+    "match": {
+      "name": {
+        "query": "l0bster",
+        "fuzziness": "auto"
+      }
+    }
+  }
+}
+
+GET /product/default/_search
+{
+  "query": {
+    "match": {
+      "name": {
+        "query": "lobster",
+        "fuzziness": "auto"
+      }
+    }
+  }
+}
+
+## Fuzziness is per term (and specifying an integer)
+GET /product/default/_search
+{
+  "query": {
+    "match": {
+      "name": {
+        "query": "l0bster love",
+        "operator": "and",
+        "fuzziness": 1
+      }
+    }
+  }
+}
+
+## Switching letters around with transpositions
+GET /product/default/_search
+{
+  "query": {
+    "match": {
+      "name": {
+        "query": "lvie",
+        "fuzziness": 1
+      }
+    }
+  }
+}
+
+
+## Disabling transpositions
+GET /product/default/_search
+{
+  "query": {
+    "match": {
+      "name": {
+        "query": "lvie",
+        "fuzziness": 1,
+        "fuzzy_transpositions": false
+      }
+    }
+  }
+}
+
+# fuzzy query (=term level query)
+GET /product/default/_search
+{
+  "query": {
+    "fuzzy": {
+      "name": {
+        "value": "LOBSTER",
+        "fuzziness": "auto"
+      }
+    }
+  }
+}
+GET /product/default/_search
+{
+  "query": {
+    "fuzzy": {
+      "name": {
+        "value": "lobster",
+        "fuzziness": "auto"
+      }
+    }
+  }
+}
+
+# Synonyms
+## Adding synonyms
+## Creating index with custom analyzer
+PUT /synonyms
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "synonym_test": {
+          "type": "synonym",
+          "synonyms": [
+            "awful => terrible",
+            "awesome => great, super",
+            "elasticsearch, logstash, kibana => elk",
+            "weird, strange"
+          ]
+        }
+      },
+      "analyzer": {
+        "my_analyzer": {
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "synonym_test"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "default": {
+      "properties": {
+        "description": {
+          "type": "text",
+          "analyzer": "my_analyzer"
+        }
+      }
+    }
+  }
+}
+
+## Testing the analyzer (with synonyms)
+POST /synonyms/_analyze
+{
+  "analyzer": "my_analyzer",
+  "text": "awesome"
+}
+
+## Adding synonyms from file
+
+## Adding index with custom analyzer
+DELETE /synonyms
+PUT /synonyms
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "synonym_test": {
+          "type": "synonym",
+          "synonyms_path": "analysis/synonyms.txt"
+        }
+      },
+      "analyzer": {
+        "my_analyzer": {
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "synonym_test"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "default": {
+      "properties": {
+        "description": {
+          "type": "text",
+          "analyzer": "my_analyzer"
+        }
+      }
+    }
+  }
+}
+
+## Synonyms file (config/analysis/synonyms.txt)
+POST /synonyms/_analyze
+{
+  "analyzer": "my_analyzer",
+  "text": "Elasticsearch"
+}
+
+
+# Highlighting matches in fields
+## Adding a test document
+POST /highlighting/default/1
+{
+  "description": "Let me tell you a story about Elasticsearch. It's a full-text search engine that is built on Apache Lucene. It's really easy to use, but also packs lots of advanced features that you can use to tweak its searching capabilities. Lots of well-known and established companies use Elasticsearch, and so should you!"
+}
+
+## Highlighting matches within the description field
+GET /highlighting/default/_search
+{
+  "_source": false,
+  "query": {
+    "match": { "description": "Elasticsearch story" }
+  },
+  "highlight": {
+    "fields": {
+      "description" : {}
+    }
+  }
+}
+
+## Specifying a custom tag
+GET /highlighting/default/_search
+{
+  "_source": false,
+  "query": {
+    "match": { "description": "Elasticsearch story" }
+  },
+  "highlight": {
+    "pre_tags": [ "<strong>" ],
+    "post_tags": [ "</strong>" ],
+    "fields": {
+      "description" : {}
+    }
+  }
+}

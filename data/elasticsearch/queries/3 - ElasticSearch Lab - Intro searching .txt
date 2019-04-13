@@ -1,0 +1,75 @@
+###############################################
+### 3: ElasticSearch Lab - Intro searching  ###
+###############################################
+
+### Searching ###
+#################
+
+# Search all document
+GET /product/default/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+# Understand relevance score
+GET /product/default/_search?explain
+{
+  "query": {
+    "term": {
+      "name": "lobster"
+    }
+  }
+}
+
+# Debugging
+GET /product/default/1/_explain
+{
+  "query": {
+    "term": {
+      "name": "lobster"
+    }
+  }
+}
+
+# term level vs full text searches
+
+## Term level (term)
+GET /product/default/_search
+{
+  "query": {
+    "term": {
+      "name": "lobster"
+    }
+  }
+}
+
+## Capitalized L
+GET /product/default/_search
+{
+  "query": {
+    "term": {
+      "name": "Lobster"
+    }
+  }
+}
+
+## Full text (match) (=same results)
+GET /product/default/_search
+{
+  "query": {
+    "match": {
+      "name": "Lobster"
+    }
+  }
+}
+
+GET /product/default/_search
+{
+  "query": {
+    "match": {
+      "name": "Lobster"
+    }
+  }
+}

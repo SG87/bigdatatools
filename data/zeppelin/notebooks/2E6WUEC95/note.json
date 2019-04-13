@@ -1,0 +1,2167 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n.\u003ccenter\u003e![Spark Logo](http://spark-mooc.github.io/web-assets/images/ta_Spark-logo-small.png)  \n\n![Python Logo](http://spark-mooc.github.io/web-assets/images/python-logo-master-v3-TM-flattened_small.png)\u003c/center\u003e\n\n# Individual Assignment Big Data Tools 2\n\nIn this assignment you are going to consult a Belgian second hand car dealer. He has given you a set of cars that is available for sale on the market and is mainly interested in three things:\n- **Body styles** (SUV, 4x4, break, etc.):\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* How many cars are available for each body style (desciptive)\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* What is the average price of each car body style (desciptive)\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;*What are the features that distinguish between, body styles (ML)\n- **Age groups**:\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* How many cars are available for each age group (desciptive)\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* What is the average price of each car age group (desciptive)\n- **Selling price**:\n\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* What are the most important features that lead to a higher or lower price (ML)\n\nAs you can see, you need to perform some transformations, actions, desciptive statistics and machine learning. Can you help the Belgian car dealer by answering his questions?\n\n\n.\u003ccenter\u003e![Used Cars Logo](https://www.ocbc.com/assets/images/uploads/loans/inside_carloan/autofinancing_used_car.png)\u003c/center\u003e\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-06 13:53:09.663",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e.\u003ccenter\u003e\u003cimg src\u003d\"http://spark-mooc.github.io/web-assets/images/ta_Spark-logo-small.png\" alt\u003d\"Spark Logo\" /\u003e \u003c/p\u003e\n\u003cp\u003e\u003cimg src\u003d\"http://spark-mooc.github.io/web-assets/images/python-logo-master-v3-TM-flattened_small.png\" alt\u003d\"Python Logo\" /\u003e\u003c/center\u003e\u003c/p\u003e\n\u003ch1\u003eIndividual Assignment Big Data Tools 2\u003c/h1\u003e\n\u003cp\u003eIn this assignment you are going to consult a Belgian second hand car dealer. He has given you a set of cars that is available for sale on the market and is mainly interested in three things:\u003cbr/\u003e- \u003cstrong\u003eBody styles\u003c/strong\u003e (SUV, 4x4, break, etc.):\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* How many cars are available for each body style (desciptive)\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* What is the average price of each car body style (desciptive)\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;*What are the features that distinguish between, body styles (ML)\u003cbr/\u003e- \u003cstrong\u003eAge groups\u003c/strong\u003e:\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* How many cars are available for each age group (desciptive)\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* What is the average price of each car age group (desciptive)\u003cbr/\u003e- \u003cstrong\u003eSelling price\u003c/strong\u003e:\u003cbr/\u003e\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;\u0026nbsp;* What are the most important features that lead to a higher or lower price (ML)\u003c/p\u003e\n\u003cp\u003eAs you can see, you need to perform some transformations, actions, desciptive statistics and machine learning. Can you help the Belgian car dealer by answering his questions?\u003c/p\u003e\n\u003cp\u003e.\u003ccenter\u003e\u003cimg src\u003d\"https://www.ocbc.com/assets/images/uploads/loans/inside_carloan/autofinancing_used_car.png\" alt\u003d\"Used Cars Logo\" /\u003e\u003c/center\u003e\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552285_1539876855",
+      "id": "20171029-125141_66295864",
+      "dateCreated": "2019-03-30 14:35:52.285",
+      "dateStarted": "2019-04-06 13:53:09.663",
+      "dateFinished": "2019-04-06 13:53:09.708",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Practical\n\nGrading percentage: 35%\n\nDue Date: 24/05/2019\n\nSend assignment to: s.geuens@ieseg.fr\n\nAccepted formats: Exported Zeppelin notebook (.json)\n\nIf you have finished the assignment, save this notebook pressing the \"Export this note\" icon on top in the middle of this page. The notebook will be saved as a .json file on your local machine. Rename this file as **lastname_firstname.json**. and send it to s.geuens@ieseg.fr.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-06 13:53:14.753",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePractical\u003c/h2\u003e\n\u003cp\u003eGrading percentage: 35%\u003c/p\u003e\n\u003cp\u003eDue Date: 24/05/2019\u003c/p\u003e\n\u003cp\u003eSend assignment to: \u003ca href\u003d\"mailto:\u0026#115;\u0026#46;\u0026#103;\u0026#101;\u0026#117;\u0026#x65;\u0026#x6e;\u0026#115;\u0026#64;\u0026#105;\u0026#101;\u0026#x73;\u0026#101;\u0026#103;\u0026#46;\u0026#x66;\u0026#114;\"\u003e\u0026#115;\u0026#46;\u0026#103;\u0026#101;\u0026#117;\u0026#x65;\u0026#x6e;\u0026#115;\u0026#64;\u0026#105;\u0026#101;\u0026#x73;\u0026#101;\u0026#103;\u0026#46;\u0026#x66;\u0026#114;\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eAccepted formats: Exported Zeppelin notebook (.json)\u003c/p\u003e\n\u003cp\u003eIf you have finished the assignment, save this notebook pressing the \u0026ldquo;Export this note\u0026rdquo; icon on top in the middle of this page. The notebook will be saved as a .json file on your local machine. Rename this file as \u003cstrong\u003elastname_firstname.json\u003c/strong\u003e. and send it to \u003ca href\u003d\"mailto:\u0026#115;\u0026#x2e;\u0026#103;\u0026#x65;\u0026#x75;\u0026#x65;\u0026#x6e;\u0026#115;\u0026#x40;\u0026#105;\u0026#101;s\u0026#101;\u0026#x67;\u0026#x2e;f\u0026#x72;\"\u003e\u0026#115;\u0026#x2e;\u0026#103;\u0026#x65;\u0026#x75;\u0026#x65;\u0026#x6e;\u0026#115;\u0026#x40;\u0026#105;\u0026#101;s\u0026#101;\u0026#x67;\u0026#x2e;f\u0026#x72;\u003c/a\u003e.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552285_-191875761",
+      "id": "20171030-081728_359422691",
+      "dateCreated": "2019-03-30 14:35:52.285",
+      "dateStarted": "2019-04-06 13:53:14.753",
+      "dateFinished": "2019-04-06 13:53:14.781",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## The assignment\n\n**The assignment consists of four major parts:**\n- Part 1: Putting the base file into HDFS\n- Part 2: Reading the file in Spark from HDFS\n- Part 3: Doing transformations and basic actions in Spark\n- Part 4: Calculating ML models in Spark\n- Part 5: Theoretical questions\n\nThis notebook is divided into these five parts. At the start of each part, an explanation of the expectations are given.\n\nThe assignment is grades based on logic and effort, not (only) on final results. If you make mistakes try to complete the steps that follow, even if you cannot complete them correctly anymore. Showing that you understand what you need to do, is as important as the final results. At the end of each block a test paragraph is included. This test paragraph already gives you an indication whether your answer is right or wrong.\n\n\u003e As mentioned, grades are not only give based on final results. Try to be as complete as possible. Make notes by adding comments (#) or %md cells.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.286",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eThe assignment\u003c/h2\u003e\n\u003cp\u003e\u003cstrong\u003eThe assignment consists of four major parts:\u003c/strong\u003e\u003cbr/\u003e- Part 1: Putting the base file into HDFS\u003cbr/\u003e- Part 2: Reading the file in Spark from HDFS\u003cbr/\u003e- Part 3: Doing transformations and basic actions in Spark\u003cbr/\u003e- Part 4: Calculating ML models in Spark\u003cbr/\u003e- Part 5: Theoretical questions\u003c/p\u003e\n\u003cp\u003eThis notebook is divided into these five parts. At the start of each part, an explanation of the expectations are given.\u003c/p\u003e\n\u003cp\u003eThe assignment is grades based on logic and effort, not (only) on final results. If you make mistakes try to complete the steps that follow, even if you cannot complete them correctly anymore. Showing that you understand what you need to do, is as important as the final results. At the end of each block a test paragraph is included. This test paragraph already gives you an indication whether your answer is right or wrong.\u003c/p\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eAs mentioned, grades are not only give based on final results. Try to be as complete as possible. Make notes by adding comments (#) or %md cells.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552286_1007984878",
+      "id": "20171029-125559_1433266229",
+      "dateCreated": "2019-03-30 14:35:52.286",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## The Dataset\n**The dataset that is going to be used is the second_hand_cars.csv dataset containing 27412 cars and 9 columns (car features):**\n- brandName (informative)\n- modelName (informative)\n- bodyStyleName (feature/label)\n- cylinderCapcityValue (feature)\n- enginePowerValue (feature)\n- mileageValue (feature)\n- accident (filter)\n- age (feature)\n- sellingPrice (label/feature)",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-06 13:53:18.829",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eThe Dataset\u003c/h2\u003e\n\u003cp\u003e\u003cstrong\u003eThe dataset that is going to be used is the second_hand_cars.csv dataset containing 27412 cars and 9 columns (car features):\u003c/strong\u003e\u003cbr/\u003e- brandName (informative)\u003cbr/\u003e- modelName (informative)\u003cbr/\u003e- bodyStyleName (feature/label)\u003cbr/\u003e- cylinderCapcityValue (feature)\u003cbr/\u003e- enginePowerValue (feature)\u003cbr/\u003e- mileageValue (feature)\u003cbr/\u003e- accident (filter)\u003cbr/\u003e- age (feature)\u003cbr/\u003e- sellingPrice (label/feature)\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552286_-1341792630",
+      "id": "20171029-125647_1176583291",
+      "dateCreated": "2019-03-30 14:35:52.286",
+      "dateStarted": "2019-04-06 13:53:18.830",
+      "dateFinished": "2019-04-06 13:53:18.841",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 0: Loading Modules\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.286",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 0: Loading Modules\u003c/h2\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552286_-601293567",
+      "id": "20171029-193612_320959736",
+      "dateCreated": "2019-03-30 14:35:52.286",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col, udf\nfrom pyspark.sql.types import *\nfrom databricks_test_helper import Test\nfrom pyspark.ml.feature import StringIndexer, VectorAssembler\nfrom pyspark.ml.classification import LogisticRegression\nfrom pyspark.ml.regression import LinearRegression\nfrom pyspark.ml.evaluation import MulticlassClassificationEvaluator, RegressionEvaluator",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-06 13:53:23.372",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mImportError\u001b[0m                               Traceback (most recent call last)\n\u001b[0;32m\u003cipython-input-6-718d0a88d2ab\u003e\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0mpyspark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msql\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfunctions\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mcol\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mudf\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0mpyspark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msql\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtypes\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0;34m*\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----\u003e 3\u001b[0;31m \u001b[0;32mfrom\u001b[0m \u001b[0mdatabricks_test_helper\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mTest\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      4\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0mpyspark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mml\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfeature\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mStringIndexer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mVectorAssembler\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0mpyspark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mml\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mclassification\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mLogisticRegression\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;31mImportError\u001b[0m: No module named \u0027databricks_test_helper\u0027"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552286_1210513651",
+      "id": "20171029-193638_1137130325",
+      "dateCreated": "2019-03-30 14:35:52.286",
+      "dateStarted": "2019-04-06 13:53:23.453",
+      "dateFinished": "2019-04-06 13:53:23.582",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 1: Putting the base file into HDFS\n\nFirst task is to put the cars file into HDFS. Unfortunaltly, Zeppelin does not have a native HDFS interface, so to complete this first part, we need to use command line via PuTTY. Copy the commands you have run in the %md cell below.\n\n- make a new directory into HDFS called **/data/assignment**\n- add the file \"/home/bigdata/assignment/data/input/second_hand_cars.csv\" to HDFS in the directory created above",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 15:52:13.010",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true,
+        "fontSize": 9.0
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 1: Putting the base file into HDFS\u003c/h2\u003e\n\u003cp\u003eFirst task is to put the cars file into HDFS. Unfortunaltly, Zeppelin does not have a native HDFS interface, so to complete this first part, we need to use command line via PuTTY. Copy the commands you have run in the %md cell below.\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003emake a new directory into HDFS called \u003cstrong\u003e/data/assignment\u003c/strong\u003e\u003c/li\u003e\n  \u003cli\u003eadd the file \u0026ldquo;/home/bigdata/assignment/data/input/second_hand_cars.csv\u0026rdquo; to HDFS in the directory created above\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552287_-2127768071",
+      "id": "20171029-172647_992744864",
+      "dateCreated": "2019-03-30 14:35:52.287",
+      "dateStarted": "2019-03-30 15:52:13.019",
+      "dateFinished": "2019-03-30 15:52:16.257",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n#### HDFS commands:",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.287",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch4\u003eHDFS commands:\u003c/h4\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552287_-663958818",
+      "id": "20171029-174250_1214746305",
+      "dateCreated": "2019-03-30 14:35:52.287",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 2: Reading the file in Spark from HDFS\n\nBefore you are able to do some useful calculations, the dataset needs to be loaded into Spark. Read in the **second_hand_cars.csv** file you have put into HDFS in Part 1. The resulting dataframe should be called **raw_data**.\n\n\u003e Note 1: Put hdfs://localhost:9000 infront of the location of the file in HDFS\n\u003e Note 2: If you were not able to put the local file into HDFS, or not able to read the file from HDFS, you can read in the local file (\"/home/bigdata/assignment/data/input/second_hand_cars.csv\") directly.\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.287",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 2: Reading the file in Spark from HDFS\u003c/h2\u003e\n\u003cp\u003eBefore you are able to do some useful calculations, the dataset needs to be loaded into Spark. Read in the \u003cstrong\u003esecond_hand_cars.csv\u003c/strong\u003e file you have put into HDFS in Part 1. The resulting dataframe should be called \u003cstrong\u003eraw_data\u003c/strong\u003e.\u003c/p\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote 1: Put \u003ca href\u003d\"hdfs://localhost:9000\"\u003ehdfs://localhost:9000\u003c/a\u003e infront of the location of the file in HDFS\u003cbr/\u003eNote 2: If you were not able to put the local file into HDFS, or not able to read the file from HDFS, you can read in the local file (\u0026ldquo;/home/bigdata/assignment/data/input/second_hand_cars.csv\u0026rdquo;) directly.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552287_-1446144665",
+      "id": "20171029-180229_1491715068",
+      "dateCreated": "2019-03-30 14:35:52.287",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# read in data\nraw_data \u003d \u003cFILL IN\u003e\nraw_data.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.287",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552287_454944973",
+      "id": "20171029-180404_443768353",
+      "dateCreated": "2019-03-30 14:35:52.287",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 3: Doing transformations and basic actions in Spark\n\nFirst, the car dealer is interested in some basic statistics of body styles and age groups. In this part some preprocessing is done, followed by the calculation of the desciptive statistics.\n\n- Cast string columns to float\n- Remove damaged cars \u0026 very old cars\n- Stats for bodyStyleName\n- Stats for age groups\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.288",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 3: Doing transformations and basic actions in Spark\u003c/h2\u003e\n\u003cp\u003eFirst, the car dealer is interested in some basic statistics of body styles and age groups. In this part some preprocessing is done, followed by the calculation of the desciptive statistics.\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003eCast string columns to float\u003c/li\u003e\n  \u003cli\u003eRemove damaged cars \u0026amp; very old cars\u003c/li\u003e\n  \u003cli\u003eStats for bodyStyleName\u003c/li\u003e\n  \u003cli\u003eStats for age groups\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552287_-295115141",
+      "id": "20171029-193853_819424861",
+      "dateCreated": "2019-03-30 14:35:52.287",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (3a) Cast string columns to float\nCast the 6 last columns (cylinderCapacityValue - sellingPrice) to float. Do not forget to also include the real string columns in your dataframe.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.288",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(3a) Cast string columns to float\u003c/h3\u003e\n\u003cp\u003eCast the 6 last columns (cylinderCapacityValue - sellingPrice) to float. Do not forget to also include the real string columns in your dataframe.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552288_918334685",
+      "id": "20171029-212410_1341566364",
+      "dateCreated": "2019-03-30 14:35:52.288",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Cast numerical columns from string to float\nraw_data \u003d \u003cFILL IN\u003e\nraw_data",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.288",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552288_-1280028365",
+      "id": "20171029-190627_633320966",
+      "dateCreated": "2019-03-30 14:35:52.288",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# TEST\nTest.assertEquals(raw_data.count(), 27412, \u0027The dataframe does not have the correct number of rows.\u0027)\nTest.assertEquals(raw_data.columns, [\u0027brandName\u0027, \u0027modelName\u0027, \u0027bodyStyleName\u0027, \u0027cylinderCapacityValue\u0027, \u0027enginePowerValue\u0027, \u0027mileageValue\u0027, \u0027accident\u0027, \u0027age\u0027, \u0027sellingPrice\u0027], \"The columns are not correct.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.288",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552288_1074403570",
+      "id": "20171029-212715_1443590600",
+      "dateCreated": "2019-03-30 14:35:52.288",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (3b) Remove damaged cars \u0026 very old cars\n\nIn this part the cars that are damaged (accident \u003d 1) need to be removed.\nAdditionally cars need to be between 0 and 95 years of age.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.288",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(3b) Remove damaged cars \u0026amp; very old cars\u003c/h3\u003e\n\u003cp\u003eIn this part the cars that are damaged (accident \u003d 1) need to be removed.\u003cbr/\u003eAdditionally cars need to be between 0 and 95 years of age.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552288_1083809987",
+      "id": "20171030-084251_1520910318",
+      "dateCreated": "2019-03-30 14:35:52.288",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nfiltered_data \u003d \u003cFILL IN\u003e\nfiltered_data.count()",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.288",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552288_-1933196433",
+      "id": "20171030-084302_264694410",
+      "dateCreated": "2019-03-30 14:35:52.288",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# TEST\nTest.assertEquals(filtered_data.count(), 27386, \u0027The filtered_data dataframe does not have the correct number of rows.\u0027)",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.289",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552289_-1260720023",
+      "id": "20171030-084351_865275208",
+      "dateCreated": "2019-03-30 14:35:52.289",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003e Note: If you were not able to create the filtered_data dataframe, you can read in the filtered_data file in /home/bigdata/assignment/data/input.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.289",
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/text",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote: If you were not able to create the filtered_data dataframe, you can read in the filtered_data file in /home/bigdata/assignment/data/input.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552289_1537175569",
+      "id": "20171106-201101_202654610",
+      "dateCreated": "2019-03-30 14:35:52.289",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (3c) Stats for bodyStyleName\n\nStarting from this part we can gather some useful results. Let us start with computing the descriptive statistics for **body style**.\n\n**Count** the number of cars per **bodyStyleName** and the **average sellingPrice** per **bodyStyleName**. Make sure the resulting dataframes are ordered in _descending_ order by count and average sellingPrice.\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.289",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(3c) Stats for bodyStyleName\u003c/h3\u003e\n\u003cp\u003eStarting from this part we can gather some useful results. Let us start with computing the descriptive statistics for \u003cstrong\u003ebody style\u003c/strong\u003e.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eCount\u003c/strong\u003e the number of cars per \u003cstrong\u003ebodyStyleName\u003c/strong\u003e and the \u003cstrong\u003eaverage sellingPrice\u003c/strong\u003e per \u003cstrong\u003ebodyStyleName\u003c/strong\u003e. Make sure the resulting dataframes are ordered in \u003cem\u003edescending\u003c/em\u003e order by count and average sellingPrice.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552289_-1525288703",
+      "id": "20171029-212538_1508835095",
+      "dateCreated": "2019-03-30 14:35:52.289",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# count the number of cars per bodyStyleName and the average sellingPrice per bodyStyleName\ncountBodyStyleCars \u003d \u003cFILL IN\u003e\npriceBodyStyleCars \u003d \u003cFILL IN\u003e\ncountBodyStyleCars.show()\npriceBodyStyleCars.show()",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.289",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552289_-1650446260",
+      "id": "20171029-193004_1869014331",
+      "dateCreated": "2019-03-30 14:35:52.289",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# TEST\nTest.assertEquals(countBodyStyleCars.count(), 10, \u0027The countBodyStyleCars dataframe does not have the correct number of rows.\u0027)\nTest.assertEquals(countBodyStyleCars.select(\"count\").first()[\"count\"], 9860, \"The values in count column of countBodyStyleCars are not correct.\")\n\nTest.assertEquals(priceBodyStyleCars.count(), 10, \u0027The priceBodyStyleCars dataframe does not have the correct number of rows.\u0027)\nTest.assertEquals(round(priceBodyStyleCars.select(\"avg(sellingPrice)\").first()[\"avg(sellingPrice)\"], 2), 51982.61, \"The values in avg(sellingPrice) column of priceBodyStyleCars are not correct.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.289",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552289_-101700661",
+      "id": "20171029-213159_1212360536",
+      "dateCreated": "2019-03-30 14:35:52.289",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (3d) Stats for age groups\n\nAfter calculating the statistics for body style, we can compute the same descriptives for **age group**.\n\nIn the first cell below you need to divide the **age** variable into 5 **age groups**.\n\nTo do this, create a Python function and load it into a udf. The Python function should create a string **age_group** column based on the **age** column with following values:\nage \u003c\u003d 3 years -\u003e \"very young\"\nage \u003e 3 years and age \u003c\u003d 7 -\u003e \"young\"\nage \u003e 7 years \u003c\u003d 12 -\u003e \"medium\"\nage \u003e 12 years \u003c\u003d 20 -\u003e \"old\"\nage \u003e 20 -\u003e \"oldtimer\"\n\nIn the second cell you are going to calculate the **count** and average **sellingPrice** per **age_group**. Make sure the resulting dataframes are ordered in _descending_ order by count and average sellingPrice respectively.\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.290",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(3d) Stats for age groups\u003c/h3\u003e\n\u003cp\u003eAfter calculating the statistics for body style, we can compute the same descriptives for \u003cstrong\u003eage group\u003c/strong\u003e.\u003c/p\u003e\n\u003cp\u003eIn the first cell below you need to divide the \u003cstrong\u003eage\u003c/strong\u003e variable into 5 \u003cstrong\u003eage groups\u003c/strong\u003e.\u003c/p\u003e\n\u003cp\u003eTo do this, create a Python function and load it into a udf. The Python function should create a string \u003cstrong\u003eage_group\u003c/strong\u003e column based on the \u003cstrong\u003eage\u003c/strong\u003e column with following values:\u003cbr/\u003eage \u0026lt;\u003d 3 years -\u0026gt; \u0026ldquo;very young\u0026rdquo;\u003cbr/\u003eage \u0026gt; 3 years and age \u0026lt;\u003d 7 -\u0026gt; \u0026ldquo;young\u0026rdquo;\u003cbr/\u003eage \u0026gt; 7 years \u0026lt;\u003d 12 -\u0026gt; \u0026ldquo;medium\u0026rdquo;\u003cbr/\u003eage \u0026gt; 12 years \u0026lt;\u003d 20 -\u0026gt; \u0026ldquo;old\u0026rdquo;\u003cbr/\u003eage \u0026gt; 20 -\u0026gt; \u0026ldquo;oldtimer\u0026rdquo;\u003c/p\u003e\n\u003cp\u003eIn the second cell you are going to calculate the \u003cstrong\u003ecount\u003c/strong\u003e and average \u003cstrong\u003esellingPrice\u003c/strong\u003e per \u003cstrong\u003eage_group\u003c/strong\u003e. Make sure the resulting dataframes are ordered in \u003cem\u003edescending\u003c/em\u003e order by count and average sellingPrice respectively.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552290_1078243602",
+      "id": "20171029-204255_2145846362",
+      "dateCreated": "2019-03-30 14:35:52.290",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ndef ageTransform(age):\n    \u003cFILL IN\u003e\n\nudfAgeTransform \u003d \u003cFILL IN\u003e\n\nfiltered_data \u003d \u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.290",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552290_747332708",
+      "id": "20171029-211242_363191729",
+      "dateCreated": "2019-03-30 14:35:52.290",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ncountAgeGroupCars \u003d \u003cFILL IN\u003e\ncountAgeGroupCars.show()\n\npriceAgeGroupCars \u003d \u003cFILL IN\u003e\npriceAgeGroupCars.show()",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.290",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552290_-1812234661",
+      "id": "20171029-214237_733133028",
+      "dateCreated": "2019-03-30 14:35:52.290",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# TEST\nTest.assertEquals(countAgeGroupCars.count(), 5, \u0027The countAgeGroupCars dataframe does not have the correct number of rows.\u0027)\nTest.assertEquals(countAgeGroupCars.select(\"count\").first()[\"count\"], 10606, \"The values in count column of countAgeGroupCars are not correct.\")\n\nTest.assertEquals(priceAgeGroupCars.count(), 5, \u0027The priceAgeGroupCars dataframe does not have the correct number of rows.\u0027)\nTest.assertEquals(round(priceAgeGroupCars.select(\"avg(sellingPrice)\").first()[\"avg(sellingPrice)\"], 2), 44065.90, \"The values in avg(sellingPrice) column of priceAgeGroupCars are not correct.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.291",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552291_1560614169",
+      "id": "20171029-215326_845985810",
+      "dateCreated": "2019-03-30 14:35:52.291",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Part 4: Calculating ML models in Spark\n\nIn this part we are going to answer the two machine learning based question:\n- What are the most important features that lead to a higher or lower price?\n- What are the features that distinguish between body styles?\n\nTo answer these questions, two types of models are going to be calculated; a linear regression and a logistic regression (not seen in class). You need to perform the following steps:\n- Transform bodyStyleName to index\n- Split data\n- Prepare data for linear regression\n- Initialize a linear regression model\n- Make predictions\n- Evaluate the linear regression model\n- Prepare data for logistic regression\n- Initialize a logistic regression model\n- Make predictions\n- Evaluate the logistic regression model\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.291",
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 4: Calculating ML models in Spark\u003c/h2\u003e\n\u003cp\u003eIn this part we are going to answer the two machine learning based question:\u003cbr/\u003e- What are the most important features that lead to a higher or lower price\u003cbr/\u003e- What are the features that distinguish between body styles\u003c/p\u003e\n\u003cp\u003eTo answer these questions, two types of models are going to be calculated; a linear regression and a logistic regression (not seen in class). You need to perform the following steps:\u003cbr/\u003e- Transform bodyStyleName to index\u003cbr/\u003e- Split data\u003cbr/\u003e- Prepare data for linear regression\u003cbr/\u003e- Initialize a linear regression model\u003cbr/\u003e- Make predictions\u003cbr/\u003e- Evaluate the linear regression model\u003cbr/\u003e- Prepare data for logistic regression\u003cbr/\u003e- Initialize a logistic regression model\u003cbr/\u003e- Make predictions\u003cbr/\u003e- Evaluate the logistic regression model\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552291_1018868433",
+      "id": "20171029-221132_1224904451",
+      "dateCreated": "2019-03-30 14:35:52.291",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4a) Transform bodyStyleName to index\ntransform **bodyStyleName** to **bodyStyleIndex** using the `StingIndexer()` method on the **filtered_data** dataframe.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.291",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4a) Transform bodyStyleName to index\u003c/h3\u003e\n\u003cp\u003etransform \u003cstrong\u003ebodyStyleName\u003c/strong\u003e to \u003cstrong\u003ebodyStyleIndex\u003c/strong\u003e using the \u003ccode\u003eStingIndexer()\u003c/code\u003e method on the \u003cstrong\u003efiltered_data\u003c/strong\u003e dataframe.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552291_690053161",
+      "id": "20171029-230637_1243346978",
+      "dateCreated": "2019-03-30 14:35:52.291",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\u003cFILL IN\u003e\n\nindexed_data \u003d \u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.291",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552291_344799743",
+      "id": "20171029-230740_41103202",
+      "dateCreated": "2019-03-30 14:35:52.291",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# TEST\nTest.assertEquals(indexed_data.count(), 27386, \u0027The indexed_data dataframe does not have the correct number of rows.\u0027)\nTest.assertEquals(len(indexed_data.columns), 11, \"The indexed_data dataframe does not have the right number of columns.\")\nTest.assertEquals(indexed_data.columns[-1], \"bodyStyleIndex\", \"The final column of the indexed_data dataframe should be \u0027bodyStyleIndex\u0027.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.292",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552292_-198700999",
+      "id": "20171030-085722_1636408343",
+      "dateCreated": "2019-03-30 14:35:52.292",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4b) Split data\n\nIn the labs in class, split data was done after preparing the data. Here the split step is shifted forward, because we only need to perform this step once, eventough two models are calculated.\n\nSplit the **indexed_data** dataframe into a **train_data**, **val_data**, and **test_data** with the follow split **[0.7, 0.2, 0.1]** and seed \u003d **42**.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.292",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4b) Split data\u003c/h3\u003e\n\u003cp\u003eIn the labs in class, split data was done after preparing the data. Here the split step is shifted forward, because we only need to perform this step once, eventough two models are calculated.\u003c/p\u003e\n\u003cp\u003eSplit the \u003cstrong\u003eindexed_data\u003c/strong\u003e dataframe into a \u003cstrong\u003etrain_data\u003c/strong\u003e, \u003cstrong\u003eval_data\u003c/strong\u003e, and \u003cstrong\u003etest_data\u003c/strong\u003e with the follow split \u003cstrong\u003e[0.7, 0.2, 0.1]\u003c/strong\u003e and seed \u003d \u003cstrong\u003e42\u003c/strong\u003e.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552292_-568706092",
+      "id": "20171029-221604_1932967983",
+      "dateCreated": "2019-03-30 14:35:52.292",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.292",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552292_-813703533",
+      "id": "20171029-222117_230396357",
+      "dateCreated": "2019-03-30 14:35:52.292",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# TEST\nTest.assertEquals(train_data.count(), 19185, \u0027The train_data dataframe does not have the correct number of rows.\u0027)\nTest.assertEquals(val_data.count(), 5460, \u0027The val_data dataframe does not have the correct number of rows.\u0027)\nTest.assertEquals(test_data.count(), 2741, \u0027The test_data dataframe does not have the correct number of rows.\u0027)",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.292",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552292_599961395",
+      "id": "20171029-222220_1431642611",
+      "dateCreated": "2019-03-30 14:35:52.292",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4c) Prepare data for linear regression\nIn this part you need to prepare the **train_data**, **val_data**, and **test_data** by setting a **featureCol**.\n\nIn the linear regression you need to predict the **sellingPrice** based on the features bodyStyleName, cylinderCapacityValue, enginePowerValue, mileageValue, and age. You need to combine **bodyStyleIndex**, cylinderCapacityValue, enginePowerValue, mileageValue, and age into one featureCol called **features**. This needs to be done for the train_data, val_data, and test_data dataframes.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.292",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4c) Prepare data for linear regression\u003c/h3\u003e\n\u003cp\u003eIn this part you need to prepare the \u003cstrong\u003etrain_data\u003c/strong\u003e, \u003cstrong\u003eval_data\u003c/strong\u003e, and \u003cstrong\u003etest_data\u003c/strong\u003e by setting a \u003cstrong\u003efeatureCol\u003c/strong\u003e.\u003c/p\u003e\n\u003cp\u003eIn the linear regression you need to predict the \u003cstrong\u003esellingPrice\u003c/strong\u003e based on the features bodyStyleName, cylinderCapacityValue, enginePowerValue, mileageValue, and age. You need to combine \u003cstrong\u003ebodyStyleIndex\u003c/strong\u003e, cylinderCapacityValue, enginePowerValue, mileageValue, and age into one featureCol called \u003cstrong\u003efeatures\u003c/strong\u003e. This needs to be done for the train_data, val_data, and test_data dataframes.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552292_1274379766",
+      "id": "20171029-222441_12328688",
+      "dateCreated": "2019-03-30 14:35:52.292",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ntrain_data_featured \u003d \u003cFILL IN\u003e\n\nval_data_featured \u003d \u003cFILL IN\u003e\n\ntest_data_featured \u003d \u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.293",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552292_546760862",
+      "id": "20171029-222820_1494943918",
+      "dateCreated": "2019-03-30 14:35:52.293",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# TEST\nTest.assertEquals(train_data_featured.columns[-1], \"features\", \"The final column of the train_data_featured dataframe should be \u0027features\u0027.\")\nTest.assertEquals(val_data_featured.columns[-1], \"features\", \"The final column of the val_data_featured dataframe should be \u0027features\u0027.\")\nTest.assertEquals(test_data_featured.columns[-1], \"features\", \"The final column of the test_dat_featured dataframe should be \u0027features\u0027.\")\n\nTest.assertEquals(len(train_data_featured.select(\"features\").first()[\"features\"]), 5, \"The feature colomn in the train_data_featured dataframe should be a vector of 5 columns.\")\nTest.assertEquals(len(val_data_featured.select(\"features\").first()[\"features\"]), 5, \"The feature colomn in the val_data_featured dataframe should be a vector of 5 columns.\")\nTest.assertEquals(len(test_data_featured.select(\"features\").first()[\"features\"]), 5, \"The feature colomn in the test_data_featured dataframe should be a vector of 5 columns.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.293",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552293_176772185",
+      "id": "20171030-090330_825978180",
+      "dateCreated": "2019-03-30 14:35:52.293",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4d) Initialize a linear regression model\n\nInitialize a **LinearRegression** with labelCol \u003d **sellingPrice** and featuresCol \u003d **features**. Afterwards, **fit** the model on the **train_data_featured** dataframe.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.293",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4d) Initialize a linear regression model\u003c/h3\u003e\n\u003cp\u003eInitialize a \u003cstrong\u003eLinearRegression\u003c/strong\u003e with labelCol \u003d \u003cstrong\u003esellingPrice\u003c/strong\u003e and featuresCol \u003d \u003cstrong\u003efeatures\u003c/strong\u003e. Afterwards, \u003cstrong\u003efit\u003c/strong\u003e the model on the \u003cstrong\u003etrain_data_featured\u003c/strong\u003e dataframe.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552293_-675530479",
+      "id": "20171030-090901_1711193824",
+      "dateCreated": "2019-03-30 14:35:52.293",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\u003cFILL IN\u003e\n\nmodel \u003d \u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.294",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552293_1250763394",
+      "id": "20171029-230335_1740517425",
+      "dateCreated": "2019-03-30 14:35:52.293",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n#TEST\nTest.assertEquals(str(model).split(\"_\")[0], \u0027LinearRegression\u0027, \"The model should be a LinearRegression object.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.294",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552294_-1121780234",
+      "id": "20171030-091148_858191293",
+      "dateCreated": "2019-03-30 14:35:52.294",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4e) Make predictions\n\nMake predictions for the **train_data_featured**, **val_data_featured**, and **test_data_featured** dataframes.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.294",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4e) Make predictions\u003c/h3\u003e\n\u003cp\u003eMake predictions for the \u003cstrong\u003etrain_data_featured\u003c/strong\u003e, \u003cstrong\u003eval_data_featured\u003c/strong\u003e, and \u003cstrong\u003etest_data_featured\u003c/strong\u003e dataframes.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552294_2126274524",
+      "id": "20171030-091410_1863341565",
+      "dateCreated": "2019-03-30 14:35:52.294",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ntrain_predictions \u003d \u003cFILL IN\u003e\nval_predictions \u003d \u003cFILL IN\u003e\ntest_predictions \u003d \u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.294",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552294_809784549",
+      "id": "20171029-231544_1698015478",
+      "dateCreated": "2019-03-30 14:35:52.294",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# TEST\nTest.assertEquals(train_predictions.columns[-1], \"prediction\", \"The final column of the train_predictions dataframe should be \u0027prediction\u0027.\")\nTest.assertEquals(val_predictions.columns[-1], \"prediction\", \"The final column of the val_predictions dataframe should be \u0027prediction\u0027.\")\nTest.assertEquals(test_predictions.columns[-1], \"prediction\", \"The final column of the test_predictions dataframe should be \u0027features\u0027.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.295",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552295_-55266048",
+      "id": "20171030-091541_1019754387",
+      "dateCreated": "2019-03-30 14:35:52.295",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4f) Evaluate the linear regression\nIn the first cell, you need to evaluate the linear regression model by using the **RegressionEvaluator**. Calculate the **r2** and **mae** for the **train_data_featured**, **val_data_featured**, and **test_data_featured** dataframes.\n\nIn the second cell, you should give the **coefficients** and **intercept** of the linear regression **model**.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.295",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4f) Evaluate the linear regression\u003c/h3\u003e\n\u003cp\u003eIn the first cell, you need to evaluate the linear regression model by using the \u003cstrong\u003eRegressionEvaluator\u003c/strong\u003e. Calculate the \u003cstrong\u003er2\u003c/strong\u003e and \u003cstrong\u003emae\u003c/strong\u003e for the \u003cstrong\u003etrain_data_featured\u003c/strong\u003e, \u003cstrong\u003eval_data_featured\u003c/strong\u003e, and \u003cstrong\u003etest_data_featured\u003c/strong\u003e dataframes.\u003c/p\u003e\n\u003cp\u003eIn the second cell, you should give the \u003cstrong\u003ecoefficients\u003c/strong\u003e and \u003cstrong\u003eintercept\u003c/strong\u003e of the linear regression \u003cstrong\u003emodel\u003c/strong\u003e.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552295_177860838",
+      "id": "20171030-091725_352978389",
+      "dateCreated": "2019-03-30 14:35:52.295",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\n\u003cFILL IN\u003e\n\ntrain_r2 \u003d \u003cFILL IN\u003e\ntrain_mae \u003d \u003cFILL IN\u003e\n\nval_r2 \u003d \u003cFILL IN\u003e\nval_mae \u003d \u003cFILL IN\u003e\n\ntest_r2 \u003d \u003cFILL IN\u003e\ntest_mae \u003d \u003cFILL IN\u003e\n\nprint(\"Train R2 \u003d %g \" % (train_r2))\nprint(\"Validation R2 \u003d %g \" % (val_r2))\nprint(\"Test R2 \u003d %g \" % (test_r2))\nprint(\"-----------------\")\nprint(\"Train MAE \u003d %g \" % (train_mae))\nprint(\"Validation MAE \u003d %g \" % (val_mae))\nprint(\"Test MAE \u003d %g \" % (test_mae))",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.295",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552295_879743704",
+      "id": "20171029-232815_1751863699",
+      "dateCreated": "2019-03-30 14:35:52.295",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Print the coefficients and intercept for linear regression\n\ncoefficients \u003d \u003cFILL IN\u003e\nintercept \u003d \u003cFILL IN\u003e\n\nprint(\"Coefficients: %s\" % str(coefficients))\nprint(\"Intercept: %s\" % str(intercept))",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.296",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552296_171067939",
+      "id": "20171029-232943_765751139",
+      "dateCreated": "2019-03-30 14:35:52.296",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n#TEST\nTest.assertEquals(round(train_r2, 2), 0.49, \"The train R2 should be around 0.43.\")\nTest.assertEquals(round(val_r2, 2), 0.52, \"The validation R2 should be around 0.56.\")\nTest.assertEquals(round(test_r2, 2), -0.67, \"The test R2 should be around 0.56.\")\n\nTest.assertEquals(round(train_mae, 0), 7025, \"The train mae should be around 6904.\")\nTest.assertEquals(round(val_mae, 0), 6705, \"The validation mae should be around 6352.\")\nTest.assertEquals(round(test_mae, 0), 7186, \"The test mae should be around 6743.\")\n\nTest.assertEquals([round(x, 2) for x in coefficients], [434.50,-1.62,312.06,-0.13,455.08], \"The coefficients of the linear regression are not correct.\")\nTest.assertEquals(round(intercept, 2), -2488.60, \"The intercept of the linear regression is not correct.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.296",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552296_-182452567",
+      "id": "20171030-092358_1624563392",
+      "dateCreated": "2019-03-30 14:35:52.296",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4g) Prepare data for logistic regression\nIn this part you need to prepare the **train_data**, **val_data**, and **test_data** by setting a **featureCol**.\n\nIn the logistic regression you need to predict the **bodyStyleIndex** based on the features cylinderCapacityValue, enginePowerValue, mileageValue, age, and sellingPrice. You need to combine cylinderCapacityValue, enginePowerValue, mileageValue, age, and sellingPrice into one featureCol called **features**. This needs to be done for the train_data, val_data, and test_data dataframes.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.296",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4g) Prepare data for logistic regression\u003c/h3\u003e\n\u003cp\u003eIn this part you need to prepare the \u003cstrong\u003etrain_data\u003c/strong\u003e, \u003cstrong\u003eval_data\u003c/strong\u003e, and \u003cstrong\u003etest_data\u003c/strong\u003e by setting a \u003cstrong\u003efeatureCol\u003c/strong\u003e.\u003c/p\u003e\n\u003cp\u003eIn the logistic regression you need to predict the \u003cstrong\u003ebodyStyleIndex\u003c/strong\u003e based on the features cylinderCapacityValue, enginePowerValue, mileageValue, age, and sellingPrice. You need to combine cylinderCapacityValue, enginePowerValue, mileageValue, age, and sellingPrice into one featureCol called \u003cstrong\u003efeatures\u003c/strong\u003e. This needs to be done for the train_data, val_data, and test_data dataframes.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552296_-192644767",
+      "id": "20171030-093951_581055312",
+      "dateCreated": "2019-03-30 14:35:52.296",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ntrain_data_logReg \u003d \u003cFILL IN\u003e\n\nval_data_logReg \u003d \u003cFILL IN\u003e\n\ntest_data_logReg \u003d \u003cFILL IN\u003e\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.296",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552296_-235670816",
+      "id": "20171029-233014_2067132423",
+      "dateCreated": "2019-03-30 14:35:52.296",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# Test\nTest.assertEquals(train_data_logReg.columns[-1], \"features\", \"The final column of the train_data_logReg dataframe should be \u0027features\u0027.\")\nTest.assertEquals(val_data_logReg.columns[-1], \"features\", \"The final column of the val_data_logReg dataframe should be \u0027features\u0027.\")\nTest.assertEquals(test_data_logReg.columns[-1], \"features\", \"The final column of the test__data_logReg dataframe should be \u0027features\u0027.\")\n\nTest.assertEquals(len(train_data_featured.select(\"features\").first()[\"features\"]), 5, \"The feature colomn in the train_data_logReg dataframe should be a vector of 5 columns.\")\nTest.assertEquals(len(val_data_featured.select(\"features\").first()[\"features\"]), 5, \"The feature colomn in the val_data_logReg dataframe should be a vector of 5 columns.\")\nTest.assertEquals(len(test_data_featured.select(\"features\").first()[\"features\"]), 5, \"The feature colomn in the val_data_logReg dataframe should be a vector of 5 columns.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.296",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552296_579266445",
+      "id": "20171030-094403_761184660",
+      "dateCreated": "2019-03-30 14:35:52.296",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4h) Initialize a logistic regression model\n\nInitialize a **LogisticRegression** with labelCol \u003d **bodyIndex** and featuresCol \u003d **features**. Afterwards, **fit** the model on the **train_data_logReg** dataframe.\n\n\u003e Note: The logistic regression model is not yet seen in class, but the logic to create a logReg is similar to the logic of all other ML models. For some more information, [click here](https://spark.apache.org/docs/latest/ml-classification-regression.html#multinomial-logistic-regression)",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.297",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4h) Initialize a logistic regression model\u003c/h3\u003e\n\u003cp\u003eInitialize a \u003cstrong\u003eLogisticRegression\u003c/strong\u003e with labelCol \u003d \u003cstrong\u003ebodyIndex\u003c/strong\u003e and featuresCol \u003d \u003cstrong\u003efeatures\u003c/strong\u003e. Afterwards, \u003cstrong\u003efit\u003c/strong\u003e the model on the \u003cstrong\u003etrain_data_logReg\u003c/strong\u003e dataframe.\u003c/p\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote: The logistic regression model is not yet seen in class, but the logic to create a logReg is similar to the logic of all other ML models. For some more information, \u003ca href\u003d\"https://spark.apache.org/docs/latest/ml-classification-regression.html#multinomial-logistic-regression\"\u003eclick here\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552297_1255071195",
+      "id": "20171030-094732_1077999122",
+      "dateCreated": "2019-03-30 14:35:52.297",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\u003cFILL IN\u003e\n\nmodelLogReg \u003d \u003cFILL IN\u003e",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.297",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552297_-2135869970",
+      "id": "20171029-233257_1490519065",
+      "dateCreated": "2019-03-30 14:35:52.297",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nTest.assertEquals(str(modelLogReg).split(\"_\")[0], \u0027LogisticRegression\u0027, \"The model should be a LogisticRegression object.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.297",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552297_692430799",
+      "id": "20171030-104252_2065509224",
+      "dateCreated": "2019-03-30 14:35:52.297",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4i) Make predictions\n\nMake predictions for the **train_data_logReg**, **val_data_logReg**, and **test_data_logReg** dataframes.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.297",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4i) Make predictions\u003c/h3\u003e\n\u003cp\u003eMake predictions for the \u003cstrong\u003etrain_data_logReg\u003c/strong\u003e, \u003cstrong\u003eval_data_logReg\u003c/strong\u003e, and \u003cstrong\u003etest_data_logReg\u003c/strong\u003e dataframes.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552297_-1462313652",
+      "id": "20171030-095130_553400274",
+      "dateCreated": "2019-03-30 14:35:52.297",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ntrain_data_logReg_pred \u003d \u003cFILL IN\u003e\nval_data_logReg_pred \u003d \u003cFILL IN\u003e\ntest_data_logReg_pred \u003d \u003cFILL IN\u003e\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.297",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552297_-967273759",
+      "id": "20171029-233354_882709864",
+      "dateCreated": "2019-03-30 14:35:52.297",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n# TEST\nTest.assertEquals(train_data_logReg_pred.columns[-1], \"prediction\", \"The final column of the train_data_logReg_pred dataframe should be \u0027prediction\u0027.\")\nTest.assertEquals(val_data_logReg_pred.columns[-1], \"prediction\", \"The final column of the val_data_logReg_pred dataframe should be \u0027prediction\u0027.\")\nTest.assertEquals(test_data_logReg_pred.columns[-1], \"prediction\", \"The final column of the test_data_logReg_pred dataframe should be \u0027features\u0027.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.298",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552298_928578091",
+      "id": "20171030-095256_91113564",
+      "dateCreated": "2019-03-30 14:35:52.298",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (4j) Evaluate the logistic regression\nIn the first cell, you need to evaluate the logistic regression model by using the **MulticlassClassificationEvaluator**. Calculate the **accuracy** for the **train_data_logReg_pred**, **val_data_logReg_pred**, and **test_data_logReg_pred** dataframes.\n\nIn the second cell, you should give the **coefficients** and **intercept** of the logistic regression.\n\n\u003e Note the the logistic regression is unseen in class, but you can get inspiration for the evaluation process by looking at the procedure for decision trees and linear regressions.",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.298",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(4j) Evaluate the logistic regression\u003c/h3\u003e\n\u003cp\u003eIn the first cell, you need to evaluate the logistic regression model by using the \u003cstrong\u003eMulticlassClassificationEvaluator\u003c/strong\u003e. Calculate the \u003cstrong\u003eaccuracy\u003c/strong\u003e for the \u003cstrong\u003etrain_data_logReg_pred\u003c/strong\u003e, \u003cstrong\u003eval_data_logReg_pred\u003c/strong\u003e, and \u003cstrong\u003etest_data_logReg_pred\u003c/strong\u003e dataframes.\u003c/p\u003e\n\u003cp\u003eIn the second cell, you should give the \u003cstrong\u003ecoefficients\u003c/strong\u003e and \u003cstrong\u003eintercept\u003c/strong\u003e of the logistic regression.\u003c/p\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote the the logistic regression is unseen in class, but you can get inspiration for the evaluation process by looking at the procedure for decision trees and linear regressions.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552298_-2063428566",
+      "id": "20171030-095349_1007199209",
+      "dateCreated": "2019-03-30 14:35:52.298",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\u003cFILL IN\u003e\n\ntrain_accuracy \u003d \u003cFILL IN\u003e\nval_accuracy \u003d \u003cFILL IN\u003e\ntest_accuracy \u003d \u003cFILL IN\u003e\n\nprint(\"Train accuracy \u003d %g \" % (train_accuracy))\nprint(\"Validation accuracy \u003d %g \" % (val_accuracy))\nprint(\"Test accuracy \u003d %g \" % (test_accuracy))",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.298",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552298_-1499790376",
+      "id": "20171029-233929_636420699",
+      "dateCreated": "2019-03-30 14:35:52.298",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ncoeff \u003d \u003cFILL IN\u003e\ninterc \u003d \u003cFILL IN\u003e\n\nprint(\"Coefficients: \\n\" + str(coeff))\nprint(\"Intercept: \" + str(interc))\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.298",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552298_-1389393214",
+      "id": "20171029-233530_1863795606",
+      "dateCreated": "2019-03-30 14:35:52.298",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n#TEST\nTest.assertEquals(round(train_accuracy, 2), 0.40, \"The train accuracy should be around 0.40.\")\nTest.assertEquals(round(val_accuracy, 2), 0.39, \"The validation accuracy should be around 0.39.\")\nTest.assertEquals(round(test_accuracy, 2), 0.40, \"The test accuracy should be around 0.40.\")\n\nTest.assertEquals(str(type(coeff)), \"\u003cclass \u0027pyspark.ml.linalg.DenseMatrix\u0027\u003e\", \"The coefficient matrix should be of type \u0027pyspark.ml.linalg.DenseMatrix\u0027.\")\nTest.assertEquals([round(x, 2) for x in interc], [3.26, 1.43, 0.12, 2.34, 4.35, -1.20, -2.48, 0.23, -4.14, -3.91], \"The intercept vector of the linear regression is not correct.\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.298",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552298_2085935716",
+      "id": "20171030-095941_1019566743",
+      "dateCreated": "2019-03-30 14:35:52.298",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n## Part 5: Theoretical questions\nIn this final part some theoretical questions are asked. There are no detail questions, but your answers will give an indication whether or not you understand the core concepts of big data tools.\n\nBelow we will have a seperate cell for each question. You can give your answer in the same cell below the word **Answer:**.\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.299",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 5: Theoretical questions\u003c/h2\u003e\n\u003cp\u003eIn this final part some theoretical questions are asked. There are no detail questions, but your answers will give an indication whether or not you understand the core concepts of big data tools.\u003c/p\u003e\n\u003cp\u003eBelow we will have a seperate cell for each question. You can give your answer in the same cell below the word \u003cstrong\u003eAnswer:\u003c/strong\u003e.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552299_-321039133",
+      "id": "20171029-233846_474543455",
+      "dateCreated": "2019-03-30 14:35:52.299",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (5a) Assuming we are working with realy large files on a large cluster of nodes, why is it benficial to use HDFS instead of working directly on the local file?\n\n#### Answer:",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.299",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(5a) Assuming we are working with realy large files on a large cluster of nodes, why is it benficial to use HDFS instead of working directly on the local file?\u003c/h3\u003e\n\u003ch4\u003eAnswer:\u003c/h4\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552299_315794103",
+      "id": "20171030-081040_60439560",
+      "dateCreated": "2019-03-30 14:35:52.299",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (5b) Why should I choose to work with the Spark framework instead of the MapReduce framework?\n\n\n#### Answer:",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.299",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(5b) Why should I choose to work with the Spark framework instead of the MapReduce framework?\u003c/h3\u003e\n\u003ch4\u003eAnswer:\u003c/h4\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552299_932919645",
+      "id": "20171030-081101_1652798071",
+      "dateCreated": "2019-03-30 14:35:52.299",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### (5c) I am a PhD student with good math skills. Currently I am working hard on developping a new algorithms. Which tool(s) should I use? Could you give me an answer together with an overview of pros and cons of different ML frameworks?\n\n#### Answer:",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.299",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003e(5c) I am a PhD student with good math skills. Currently I am working hard on developping a new algorithms. Which tool(s) should I use? Could you give me an answer together with an overview of pros and cons of different ML frameworks?\u003c/h3\u003e\n\u003ch4\u003eAnswer:\u003c/h4\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552299_-1007531395",
+      "id": "20171030-081351_1045875615",
+      "dateCreated": "2019-03-30 14:35:52.299",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-03-30 14:35:52.300",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1553956552299_-645924563",
+      "id": "20171030-081645_200638874",
+      "dateCreated": "2019-03-30 14:35:52.299",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Assignment/Individual Assignment",
+  "id": "2E6WUEC95",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

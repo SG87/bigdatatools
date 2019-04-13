@@ -1,0 +1,174 @@
+#######################################
+### 2: ElasticSearch Lab - Mapping  ###
+#######################################
+
+## Mapping ##
+#############
+
+# Dynamic mapping
+GET /product/default/_mapping
+
+# Meta Fields (5 of 10 fields)
+
+# Data types
+
+# Add mapping for new field in existing index (type)
+PUT /product/default/_mapping
+{
+  "properties": {
+    "discount": {
+      "type": "double"
+    }
+  }
+}
+
+GET /product/default/_mapping
+
+# Change mapping
+## Error:
+PUT /product/default/_mapping
+{
+  "properties": {
+    "discount": {
+      "type": "integer"
+    }
+  }
+}
+
+DELETE /product
+
+PUT /product
+{
+  "mappings": {
+    "default": {
+      "dynamic": false,
+      "properties": {
+        "in_stock": {
+          "type": "integer"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "price": {
+          "type": "integer"
+        },
+        "sold": {
+          "type": "long"
+        }
+      }
+    }
+  }
+}
+
+# Mapping parameters
+## https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-params.html
+
+# Adding multi-fields
+PUT /product/default/_mapping
+{
+  "properties": {
+    "description": {
+      "type": "text"
+    },
+    "name": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "tags": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}
+
+GET /product/default/_mapping
+
+# Create date format
+PUT /product/default/_mapping
+{
+  "properties": {
+    "created": {
+      "type": "date",
+      "format": "year"
+    }
+  }
+}
+
+PUT /product/default/_mapping
+{
+  "properties": {
+    "created": {
+      "type": "date",
+      "format": "strict_year"
+    }
+  }
+}
+
+PUT /product/default/_mapping
+{
+  "properties": {
+    "created": {
+      "type": "date",
+      "format": "yyyy/MM/dd HH:mm:ss||yyyy/MM/dd"
+    }
+  }
+}
+
+GET /_cat/indices?v
+GET /product/default/_mapping
+
+# Picking up new field without dynamic mapping
+POST /product/default/2000
+{
+  "description": "Test",
+  "discount": 20
+}
+
+
+PUT /product/default/_mapping
+{
+  "properties": {
+    "discount": {
+      "type": "integer"
+    }
+  }
+}
+
+GET /product/default/_search
+{
+  "query": {
+    "match": {
+      "description": "Test"
+    }
+  }
+}
+
+GET /product/default/_search
+{
+  "query": {
+    "term": {
+      "discount": 20
+    }
+  }
+}
+
+POST /product/_update_by_query?conflicts=proceed
+
+GET /product/default/_search
+{
+  "query": {
+    "term": {
+      "discount": 20
+    }
+  }
+}
+
+DELETE /product/default/2000

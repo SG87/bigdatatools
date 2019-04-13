@@ -1,0 +1,185 @@
+####################################################
+### 4: ElasticSearch Lab - Term-level searching  ###
+####################################################
+
+### Term-level queries ###
+##########################
+# Searching for a term
+GET /product/default/_search
+{
+  "query": {
+    "term": {
+      "is_active": true
+    }
+  }
+}
+
+GET /product/default/_search
+{
+  "query": {
+    "term": {
+      "is_active": {
+        "value": true
+      }
+    }
+  }
+}
+# Score are all equal
+
+# Search multiple terms
+GET /product/default/_search
+{
+  "query": {
+    "terms": {
+      "tags.keyword": [ "Soup", "Cake" ]
+    }
+  }
+}
+
+# Retrieve on ID's
+GET /product/default/_search
+{
+  "query": {
+    "ids": {
+      "values": [ 1, 2, 3 ]
+    }
+  }
+}
+
+# Searching with range
+GET /product/default/_search
+{
+  "query": {
+    "range": {
+      "in_stock": {
+        "gte": 1,
+        "lte": 5
+      }
+    }
+  }
+}
+
+# Searching date ranges
+GET /product/default/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "2010/01/01",
+        "lte": "2010/12/31"
+      }
+    }
+  }
+}
+
+# Searching date ranges with random formats
+GET /product/default/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "01-01-2010",
+        "lte": "31-12-2010",
+        "format": "dd-MM-yyyy"
+      }
+    }
+  }
+}
+
+# Relative dates
+# (subtract 1 year from specified date)
+GET /product/default/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "2010/01/01||-1y"
+      }
+    }
+  }
+}
+
+# (subtract 1 year + 1 day from specified date)
+GET /product/default/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "2010/01/01||-1y-100d"
+      }
+    }
+  }
+}
+
+# Date Math: https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#date-math
+
+GET /product/default/_search
+{
+  "query": {
+    "range": {
+      "created": {
+        "gte": "now-1y"
+      }
+    }
+  }
+}
+
+# Non-null values
+GET /product/default/_search
+{
+  "query": {
+    "exists": {
+      "field": "tags"
+    }
+  }
+}
+
+# Searching on prefixes
+GET /product/default/_search
+{
+  "query": {
+    "prefix": {
+      "tags.keyword": "Vege"
+    }
+  }
+}
+
+# Searching with wildcards`#
+# * = all possible characters / ? = 1 character
+# make processing slow
+GET /product/default/_search
+{
+  "query": {
+    "wildcard": {
+      "tags.keyword": "Veg*ble"
+    }
+  }
+}
+
+GET /product/default/_search
+{
+  "query": {
+    "wildcard": {
+      "tags.keyword": "Veg?ble"
+    }
+  }
+}
+GET /product/default/_search
+{
+  "query": {
+    "wildcard": {
+      "tags.keyword": "Veget?ble"
+    }
+  }
+}
+
+# Regular expressions
+GET /product/default/_search
+{
+  "query": {
+    "regexp": {
+      "tags.keyword": "Veg[a-zA-Z]+ble"
+    }
+  }
+}
+
