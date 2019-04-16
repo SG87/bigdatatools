@@ -5,7 +5,7 @@
 ### Boolean queries ###
 #######################
 
-# Adding query clauses to the must key
+# Adding query clauses to the must key
 GET /recipe/default/_search
 {
   "query": {
@@ -28,7 +28,7 @@ GET /recipe/default/_search
   }
 }
 
-# Moving the range query to the filter key
+# Moving the range query to the filter key
 GET /recipe/default/_search
 {
   "query": {
@@ -53,7 +53,7 @@ GET /recipe/default/_search
   }
 }
 
-# Adding a query clause to the must_not key
+# Adding a query clause to the must_not key
 GET /recipe/default/_search
 {
   "query": {

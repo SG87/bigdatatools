@@ -24,6 +24,6 @@ RUN jupyter notebook --generate-config \
 
 ENV PYSPARK_DRIVER_PYTHON=jupyter
 ENV PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port=8888 --ip=0.0.0.0'
-
+#
 WORKDIR $SPARK_HOME
-CMD ["bin/pyspark"]
+CMD ["bin/pyspark", "--packages org.elasticsearch:elasticsearch-spark-20_2.11:6.5.4"]

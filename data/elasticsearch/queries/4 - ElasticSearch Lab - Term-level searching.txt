@@ -19,7 +19,7 @@ GET /product/default/_search
   "query": {
     "term": {
       "is_active": {
-        "value": true
+        "value": false
       }
     }
   }
@@ -99,7 +99,7 @@ GET /product/default/_search
   }
 }
 
-# (subtract 1 year + 1 day from specified date)
+# (subtract 1 year + 100 day from specified date)
 GET /product/default/_search
 {
   "query": {
@@ -112,13 +112,12 @@ GET /product/default/_search
 }
 
 # Date Math: https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#date-math
-
 GET /product/default/_search
 {
   "query": {
     "range": {
       "created": {
-        "gte": "now-1y"
+        "gte": "now-2y"
       }
     }
   }

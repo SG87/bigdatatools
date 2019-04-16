@@ -2,6 +2,11 @@
 ### 3: ElasticSearch Lab - Intro searching  ###
 ###############################################
 
+### Recreate the product index
+# curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/product/default/_bulk?pretty' --data-binary "@/data/products-bulk.json"
+
+GET /product/default/_count
+
 ### Searching ###
 #################
 
@@ -15,16 +20,6 @@ GET /product/default/_search
 
 # Understand relevance score
 GET /product/default/_search?explain
-{
-  "query": {
-    "term": {
-      "name": "lobster"
-    }
-  }
-}
-
-# Debugging
-GET /product/default/1/_explain
 {
   "query": {
     "term": {
@@ -69,7 +64,7 @@ GET /product/default/_search
 {
   "query": {
     "match": {
-      "name": "Lobster"
+      "name": "lobster"
     }
   }
 }

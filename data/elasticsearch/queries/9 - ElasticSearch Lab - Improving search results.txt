@@ -1,6 +1,6 @@
-########################################################
-### 89: ElasticSearch Lab - Improving search results ###
-########################################################
+#######################################################
+### 9: ElasticSearch Lab - Improving search results ###
+#######################################################
 
 ### Improving search results ###
 ################################
@@ -278,7 +278,7 @@ PUT /synonyms
       "filter": {
         "synonym_test": {
           "type": "synonym",
-          "synonyms_path": "analysis/synonyms.txt"
+          "synonyms_path": "synonyms.txt"
         }
       },
       "analyzer": {
@@ -304,11 +304,11 @@ PUT /synonyms
   }
 }
 
-## Synonyms file (config/analysis/synonyms.txt)
+## Synonyms file (config/synonyms.txt)
 POST /synonyms/_analyze
 {
   "analyzer": "my_analyzer",
-  "text": "Elasticsearch"
+  "text": "awesome"
 }
 
 

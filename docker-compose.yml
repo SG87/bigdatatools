@@ -121,7 +121,7 @@ services:
       - 5601:5601
     volumes:
       - ./data/elasticsearch:/home/elasticsearch/elasticsearch/data
-      - ./data/elasticsearch/input:/data
+      #- ./data/elasticsearch/input:/data
     links:
       - portainer
 

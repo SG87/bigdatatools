@@ -8,8 +8,6 @@
 # Dynamic mapping
 GET /product/default/_mapping
 
-# Meta Fields (5 of 10 fields)
-
 # Data types
 
 # Add mapping for new field in existing index (type)
@@ -91,7 +89,7 @@ PUT /product/default/_mapping
 
 GET /product/default/_mapping
 
-# Create date format
+# Create date format - Choose pne of the follwing. Only one possible
 PUT /product/default/_mapping
 {
   "properties": {
@@ -150,17 +148,6 @@ GET /product/default/_search
     }
   }
 }
-
-GET /product/default/_search
-{
-  "query": {
-    "term": {
-      "discount": 20
-    }
-  }
-}
-
-POST /product/_update_by_query?conflicts=proceed
 
 GET /product/default/_search
 {

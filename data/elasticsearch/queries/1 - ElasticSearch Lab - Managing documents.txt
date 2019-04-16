@@ -1,9 +1,17 @@
-#########################
-### ElasticSearch Lab ###
-#########################
+#################################################
+### 1. ElasticSearch Lab - Managing documents ###
+#################################################
 
 ## Managing Documents ##
 ########################
+
+# Adjust a setting to prevent a specific error for our environment
+PUT /_cluster/settings
+{
+  "persistent" : {
+        "cluster.routing.allocation.disk.threshold_enabled" : false
+    }
+}
 
 # List indexes
 GET /_cat/indices?v
@@ -88,8 +96,6 @@ POST /product/default/1/_update
 
 GET /product/default/1
 
-DELETE /product/default/1
-
 # Deleting documents
 DELETE /product/default/1
 
@@ -140,9 +146,11 @@ GET /product/default/100
 GET /product/default/101
 
 # Importing  data in bulk
-#POST /product/default/_bulk?pretty -binary-data @/data/products-bulk.json
-# curl -XPOST "http://localhost:9200/product/default/_bulk?pretty -binary-data @/data/products-bulk.json"
-
+# POST /product/default/_bulk?pretty -binary-data @/data/products-bulk.json
+# cURL statements in slides
+# curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/product/default/_bulk?pretty' --data-binary "@/data/products-bulk.json"
+# curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/recipe/default/_bulk?pretty' --data-binary "@/data/recipes-bulk.json"
+# curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/order/default/_bulk?pretty' --data-binary "@/data/orders-bulk.json"
 
 ### Fields: created, description, discount, in_stock, is_active, name, price, sold, tags
 

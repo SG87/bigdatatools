@@ -45,6 +45,14 @@ GET /recipe/default/_search
 ## Returning all of an object's keys
 GET /recipe/default/_search
 {
+  "_source": "ingredients",
+  "query": {
+    "match": { "title": "pasta" }
+  }
+}
+
+GET /recipe/default/_search
+{
   "_source": "ingredients.*",
   "query": {
     "match": { "title": "pasta" }
@@ -55,7 +63,7 @@ GET /recipe/default/_search
 
 GET /recipe/default/_search
 {
-  "_source": [ "ingredients.*", "servings" ],
+  "_source": [ "ingredients", "servings" ],
   "query": {
     "match": { "title": "pasta" }
   }
@@ -65,7 +73,7 @@ GET /recipe/default/_search
 GET /recipe/default/_search
 {
   "_source": {
-    "includes": "ingredients.*",
+    "includes": "ingredients",
     "excludes": "ingredients.name"
   },
   "query": {

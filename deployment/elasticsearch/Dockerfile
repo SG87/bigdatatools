@@ -23,5 +23,7 @@ RUN wget -q -O - https://artifacts.elastic.co/downloads/elasticsearch/elasticsea
  && ln -s $(which npm) kibana/node/bin/npm
 
 CMD sh elasticsearch/bin/elasticsearch -E http.host=0.0.0.0 --quiet & kibana/bin/kibana --host 0.0.0.0 -Q
+COPY ./synonyms.txt elasticsearch/config/
+
 
 EXPOSE 9200 5601
