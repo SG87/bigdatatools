@@ -1,4 +1,5 @@
-version: '2' 
+version: '2'
+
 services:
   portainer:
     image: portainer/portainer
@@ -60,9 +61,6 @@ services:
   spark-worker:
     image: bde2020/spark-worker:2.1.0-hadoop2.8-hive-java8
     container_name: spark-worker
-    depends_on:
-      - spark-master
-      - portainer
     environment:
       - SPARK_MASTER=spark://spark-master:7077
       - SPARK_HOME=/spark
@@ -72,6 +70,9 @@ services:
       - ./deployment/hadoop/hadoop.env
     volumes:
       - ./data/spark:/data
+    links:
+      - spark-master
+      - portainer
 
   hue:
     image: bde2020/hdfs-filebrowser:3.11
@@ -80,6 +81,8 @@ services:
       - 8088:8088
     environment:
       - NAMENODE_HOST=namenode
+    links:
+      - datanode
 
   zeppelin:
     image: apache/zeppelin:0.8.1

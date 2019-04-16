@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n# Decission Tree Classifier\n\n.\u003ccenter\u003e![ML Logo](http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png)\u003c/center\u003e\n\n\nThis lab covers a common supervised learning pipeline, using the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris) from the _UCI Machine Learning Repository_. Our goal is to train a Decission Tree model to predict the flower species. \n\nMore information about Decision Tree Classifier can be found on  for example the [Scikit-learn page](http://scikit-learn.org/stable/modules/tree.html). In the end, the decision classifier will have a similar structure as the shown in the image below.\n\n. \u003ccenter\u003e ![Iris Decision Tree](http://scikit-learn.org/stable/_images/iris.svg) \u003c/center\u003e\n\n## This lab will cover:\n\n* Part 0: Load modules\n* Part 1: Read and check the initial dataset\n* Intermezzo: Nice visualization with SQL\n* Part 2: Prepare data structure\n* Part 3: Split data\n* Part 4: Create a decision tree model\n* Part 5: Make predictions and evaluate the decision tree model\n\n\n\u003e Note that, for reference, you can look up the details of the relevant Spark methods in [Spark\u0027s DataFrame Python API](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame)",
+      "text": "%md\n# Decission Tree Classifier\n\n.\u003ccenter\u003e![ML Logo](http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png)\u003c/center\u003e\n\n\nThis lab covers a common supervised learning pipeline, using the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris) from the _UCI Machine Learning Repository_. Our goal is to train a Decission Tree model to predict the flower species. \n\nMore information about Decision Tree Classifier can be found on  for example the [Scikit-learn page](http://scikit-learn.org/stable/modules/tree.html). In the end, the decision classifier will have a similar structure as the shown in the image below.\n\n. \u003ccenter\u003e ![Iris Decision Tree](https://pythonmachinelearning.pro/wp-content/uploads/2017/11/Decision-Tree-Iris-Dataset.png) \u003c/center\u003e\n\n## This lab will cover:\n\n* Part 0: Load modules\n* Part 1: Read and check the initial dataset\n* Intermezzo: Nice visualization with SQL\n* Part 2: Prepare data structure\n* Part 3: Split data\n* Part 4: Create a decision tree model\n* Part 5: Make predictions and evaluate the decision tree model\n\n\n\u003e Note that, for reference, you can look up the details of the relevant Spark methods in [Spark\u0027s DataFrame Python API](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:34:41.324",
+      "dateUpdated": "2019-04-15 19:22:20.558",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -26,7 +26,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eDecission Tree Classifier\u003c/h1\u003e\n\u003cp\u003e.\u003ccenter\u003e\u003cimg src\u003d\"http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png\" alt\u003d\"ML Logo\" /\u003e\u003c/center\u003e\u003c/p\u003e\n\u003cp\u003eThis lab covers a common supervised learning pipeline, using the \u003ca href\u003d\"https://archive.ics.uci.edu/ml/datasets/iris\"\u003eIris dataset\u003c/a\u003e from the \u003cem\u003eUCI Machine Learning Repository\u003c/em\u003e. Our goal is to train a Decission Tree model to predict the flower species. \u003c/p\u003e\n\u003cp\u003eMore information about Decision Tree Classifier can be found on for example the \u003ca href\u003d\"http://scikit-learn.org/stable/modules/tree.html\"\u003eScikit-learn page\u003c/a\u003e. In the end, the decision classifier will have a similar structure as the shown in the image below.\u003c/p\u003e\n\u003cp\u003e. \u003ccenter\u003e \u003cimg src\u003d\"http://scikit-learn.org/stable/_images/iris.svg\" alt\u003d\"Iris Decision Tree\" /\u003e \u003c/center\u003e\u003c/p\u003e\n\u003ch2\u003eThis lab will cover:\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003ePart 0: Load modules\u003c/li\u003e\n  \u003cli\u003ePart 1: Read and check the initial dataset\u003c/li\u003e\n  \u003cli\u003eIntermezzo: Nice visualization with SQL\u003c/li\u003e\n  \u003cli\u003ePart 2: Prepare data structure\u003c/li\u003e\n  \u003cli\u003ePart 3: Split data\u003c/li\u003e\n  \u003cli\u003ePart 4: Create a decision tree model\u003c/li\u003e\n  \u003cli\u003ePart 5: Make predictions and evaluate the decision tree model\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote that, for reference, you can look up the details of the relevant Spark methods in \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame\"\u003eSpark\u0026rsquo;s DataFrame Python API\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eDecission Tree Classifier\u003c/h1\u003e\n\u003cp\u003e.\u003ccenter\u003e\u003cimg src\u003d\"http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png\" alt\u003d\"ML Logo\" /\u003e\u003c/center\u003e\u003c/p\u003e\n\u003cp\u003eThis lab covers a common supervised learning pipeline, using the \u003ca href\u003d\"https://archive.ics.uci.edu/ml/datasets/iris\"\u003eIris dataset\u003c/a\u003e from the \u003cem\u003eUCI Machine Learning Repository\u003c/em\u003e. Our goal is to train a Decission Tree model to predict the flower species. \u003c/p\u003e\n\u003cp\u003eMore information about Decision Tree Classifier can be found on for example the \u003ca href\u003d\"http://scikit-learn.org/stable/modules/tree.html\"\u003eScikit-learn page\u003c/a\u003e. In the end, the decision classifier will have a similar structure as the shown in the image below.\u003c/p\u003e\n\u003cp\u003e. \u003ccenter\u003e \u003cimg src\u003d\"https://pythonmachinelearning.pro/wp-content/uploads/2017/11/Decision-Tree-Iris-Dataset.png\" alt\u003d\"Iris Decision Tree\" /\u003e \u003c/center\u003e\u003c/p\u003e\n\u003ch2\u003eThis lab will cover:\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003ePart 0: Load modules\u003c/li\u003e\n  \u003cli\u003ePart 1: Read and check the initial dataset\u003c/li\u003e\n  \u003cli\u003eIntermezzo: Nice visualization with SQL\u003c/li\u003e\n  \u003cli\u003ePart 2: Prepare data structure\u003c/li\u003e\n  \u003cli\u003ePart 3: Split data\u003c/li\u003e\n  \u003cli\u003ePart 4: Create a decision tree model\u003c/li\u003e\n  \u003cli\u003ePart 5: Make predictions and evaluate the decision tree model\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote that, for reference, you can look up the details of the relevant Spark methods in \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame\"\u003eSpark\u0026rsquo;s DataFrame Python API\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -34,15 +34,15 @@
       "jobName": "paragraph_1553956516558_-373736076",
       "id": "20171002-133231_119894138",
       "dateCreated": "2019-03-30 14:35:16.558",
-      "dateStarted": "2019-04-09 15:34:41.522",
-      "dateFinished": "2019-04-09 15:34:43.657",
+      "dateStarted": "2019-04-15 19:22:20.558",
+      "dateFinished": "2019-04-15 19:22:20.585",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 0: Load Modules\n\nPersonally, I prefer to load all the modules we need in a notebook before starting",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:34:43.751",
+      "dateUpdated": "2019-04-15 19:17:53.988",
       "config": {
         "tableHide": true,
         "editorSetting": {
@@ -73,15 +73,15 @@
       "jobName": "paragraph_1553956516558_872279427",
       "id": "20171028-204547_829622182",
       "dateCreated": "2019-03-30 14:35:16.558",
-      "dateStarted": "2019-04-09 15:34:43.984",
-      "dateFinished": "2019-04-09 15:34:43.998",
+      "dateStarted": "2019-04-15 19:17:54.282",
+      "dateFinished": "2019-04-15 19:17:54.292",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nimport os.path\nfrom pyspark.ml.feature import StringIndexer, VectorIndexer, VectorAssembler\nfrom pyspark.ml.classification import DecisionTreeClassifier\nfrom pyspark.ml.evaluation import MulticlassClassificationEvaluator\nfrom pyspark.sql.functions import col",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:34:51.916",
+      "dateUpdated": "2019-04-15 19:17:54.371",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -107,15 +107,15 @@
       "jobName": "paragraph_1553956516559_-1977897148",
       "id": "20171028-205136_1886193056",
       "dateCreated": "2019-03-30 14:35:16.559",
-      "dateStarted": "2019-04-09 15:34:52.105",
-      "dateFinished": "2019-04-09 15:35:02.261",
+      "dateStarted": "2019-04-15 19:17:54.582",
+      "dateFinished": "2019-04-15 19:18:12.756",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 1: Read and check the initial dataset\n\n### (1a) Load and check the data\n\nThe raw data is currently stored in csv file.  We will start by reading this raw data in as a DataFrame. In the same cell, the numeric columns (sepal_length, sepal_width, petal_length, and petal_witdth) are transformed from string to float.\n\nIn the second cell, the DataFrame [`count()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.count) is used to check how many data points we have.  Then we use the `show()` method to see whether DataFrame is correctly created.",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:02.336",
+      "dateUpdated": "2019-04-15 19:18:12.775",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -146,15 +146,15 @@
       "jobName": "paragraph_1553956516559_-638663298",
       "id": "20171028-213719_990326359",
       "dateCreated": "2019-03-30 14:35:16.559",
-      "dateStarted": "2019-04-09 15:35:02.433",
-      "dateFinished": "2019-04-09 15:35:02.470",
+      "dateStarted": "2019-04-15 19:18:12.946",
+      "dateFinished": "2019-04-15 19:18:12.963",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Read in Data\n\nfile_name \u003d \u0027/data/iris.csv\u0027\n\nraw_data_df \u003d sqlContext.read.option(\"header\", True).csv(file_name)\n\nraw_data_df \u003d raw_data_df.select(col(\"species\"), *(col(c).cast(\"float\").alias(c) for c in raw_data_df.columns[0:-1]))",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:22.261",
+      "dateUpdated": "2019-04-15 19:18:13.046",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -181,7 +181,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d0"
+            "http://172.18.0.3:4040/jobs/job?id\u003d0"
           ],
           "interpreterSettingId": "spark"
         }
@@ -190,15 +190,15 @@
       "jobName": "paragraph_1553956516559_693132804",
       "id": "20171028-205249_1826262919",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-04-09 15:35:02.622",
-      "dateFinished": "2019-04-09 15:35:06.134",
+      "dateStarted": "2019-04-15 19:18:13.181",
+      "dateFinished": "2019-04-15 19:18:17.124",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nnum_points \u003d raw_data_df.count()\nprint num_points\nsample_points \u003d raw_data_df.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:06.145",
+      "dateUpdated": "2019-04-15 19:18:17.197",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -229,8 +229,8 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d1",
-            "http://172.20.0.3:4040/jobs/job?id\u003d2"
+            "http://172.18.0.3:4040/jobs/job?id\u003d1",
+            "http://172.18.0.3:4040/jobs/job?id\u003d2"
           ],
           "interpreterSettingId": "spark"
         }
@@ -239,15 +239,15 @@
       "jobName": "paragraph_1553956516560_822462105",
       "id": "20171028-205427_1442324244",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-04-09 15:35:06.304",
-      "dateFinished": "2019-04-09 15:35:07.605",
+      "dateStarted": "2019-04-15 19:18:17.294",
+      "dateFinished": "2019-04-15 19:18:18.556",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### (1b) Descriptive statistics\n\nBefore starting to create a decision tree, the data need to be checked and cleaned. The [`describe()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.describe) together with the `show()` method are used to visualize the results.\n\n\u003e As this tutorial foucsses mainly on an introduction to machine learning wiht Spark dataframes, no data cleansing and transformation is done. These topics will be covered in other courses.\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:26.944",
+      "dateUpdated": "2019-04-15 19:18:18.602",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -278,15 +278,15 @@
       "jobName": "paragraph_1553956516560_-1697849405",
       "id": "20171028-214022_1041473355",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-04-09 15:35:26.941",
-      "dateFinished": "2019-04-09 15:35:26.953",
+      "dateStarted": "2019-04-15 19:18:18.726",
+      "dateFinished": "2019-04-15 19:18:18.743",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nraw_data_df.describe().show()",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:07.842",
+      "dateUpdated": "2019-04-15 19:18:18.825",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -320,7 +320,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d3"
+            "http://172.18.0.3:4040/jobs/job?id\u003d3"
           ],
           "interpreterSettingId": "spark"
         }
@@ -329,15 +329,15 @@
       "jobName": "paragraph_1553956516560_-702957580",
       "id": "20171028-214058_397404640",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-04-09 15:35:07.940",
-      "dateFinished": "2019-04-09 15:35:09.152",
+      "dateStarted": "2019-04-15 19:18:18.892",
+      "dateFinished": "2019-04-15 19:18:20.367",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Intermezzo: Nice visualization with SQL\n\nA spark session contains amongst others a SparkContext and a SQLContext. It is possible to transform a dataframe to an _TempTable_ in the SQLContex by using the [`registerTempTable()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.registerTempTable). When a dataframe it transformed to a TempTable some additional actions can be executed:\n\n* Using almost all SQL query functionalities (vs. limited SQL capabilities with  `select()\u0027 in dataframes)\n* Zeppelin contains a nice SQL API (**%sql**) that allows you to write queries as if you where in a full-blown SQL environment. Additionally visualization of query results within Zeppelin is superb, which makes it an optimal tool for data exploration and visualization.\n\n\u003e Techinically, the `registerTempTable()` method saves the dataframe as a HIVE table stored in memory.",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:33.786",
+      "dateUpdated": "2019-04-15 19:18:20.400",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -368,15 +368,15 @@
       "jobName": "paragraph_1553956516561_1101849793",
       "id": "20171028-231213_1667131502",
       "dateCreated": "2019-03-30 14:35:16.561",
-      "dateStarted": "2019-04-09 15:35:33.783",
-      "dateFinished": "2019-04-09 15:35:33.803",
+      "dateStarted": "2019-04-15 19:18:20.548",
+      "dateFinished": "2019-04-15 19:18:20.584",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Save dataframe as a TempTable\nraw_data_df.registerTempTable(\"raw_data\")",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:09.439",
+      "dateUpdated": "2019-04-15 19:18:20.646",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -399,15 +399,15 @@
       "jobName": "paragraph_1553956516561_-2016649384",
       "id": "20171028-225947_1197043878",
       "dateCreated": "2019-03-30 14:35:16.561",
-      "dateStarted": "2019-04-09 15:35:09.494",
-      "dateFinished": "2019-04-09 15:35:09.585",
+      "dateStarted": "2019-04-15 19:18:20.728",
+      "dateFinished": "2019-04-15 19:18:20.823",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect species, avg(petal_width)\nfrom raw_data\ngroup by species",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:39:09.398",
+      "dateUpdated": "2019-04-15 19:18:33.404",
       "config": {
         "colWidth": 6.0,
         "editorMode": "ace/mode/sql",
@@ -475,11 +475,11 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d4",
-            "http://172.20.0.3:4040/jobs/job?id\u003d5",
-            "http://172.20.0.3:4040/jobs/job?id\u003d6",
-            "http://172.20.0.3:4040/jobs/job?id\u003d7",
-            "http://172.20.0.3:4040/jobs/job?id\u003d8"
+            "http://172.18.0.3:4040/jobs/job?id\u003d4",
+            "http://172.18.0.3:4040/jobs/job?id\u003d5",
+            "http://172.18.0.3:4040/jobs/job?id\u003d6",
+            "http://172.18.0.3:4040/jobs/job?id\u003d7",
+            "http://172.18.0.3:4040/jobs/job?id\u003d8"
           ],
           "interpreterSettingId": "spark"
         }
@@ -488,15 +488,15 @@
       "jobName": "paragraph_1553956516561_777986406",
       "id": "20171028-230434_1558099602",
       "dateCreated": "2019-03-30 14:35:16.561",
-      "dateStarted": "2019-04-09 15:35:09.709",
-      "dateFinished": "2019-04-09 15:35:11.600",
+      "dateStarted": "2019-04-15 19:18:20.932",
+      "dateFinished": "2019-04-15 19:18:23.130",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect  petal_length, petal_width, sepal_width, petal_width, species\nfrom raw_data\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:11.625",
+      "dateUpdated": "2019-04-15 19:18:23.147",
       "config": {
         "colWidth": 6.0,
         "editorMode": "ace/mode/sql",
@@ -554,7 +554,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d9"
+            "http://172.18.0.3:4040/jobs/job?id\u003d9"
           ],
           "interpreterSettingId": "spark"
         }
@@ -563,15 +563,15 @@
       "jobName": "paragraph_1553956516562_1425279083",
       "id": "20171028-230532_1530379443",
       "dateCreated": "2019-03-30 14:35:16.562",
-      "dateStarted": "2019-04-09 15:35:11.695",
-      "dateFinished": "2019-04-09 15:35:11.867",
+      "dateStarted": "2019-04-15 19:18:23.244",
+      "dateFinished": "2019-04-15 19:18:23.512",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 2: Prepare data structure\n\nA Spark ML Decision Tree (and most other ML models) require two input columns an **labelCol** and **featuresCol**. In this specific case, the labelColl is the species column. In Part 1 is shown that _species_ is a string variable so no mean and stddev can be calculated. More importantly, the decision tree classifier in Spark does not allow string variables as dependent variable. Therefore we are going to transform the _species_ variable from string to float.\nNext to that, there are multiple columns containing independent variables (sepal_length, sepal_with, petal_length, petal_width). These variables need to be combined into a featureCol that contains a vector (\u003dlist). In this Part, two things are done:\n\n* Transforming the _species_ columns from string to numeric\n* Combining the independent variables in one feature column",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:11.895",
+      "dateUpdated": "2019-04-15 19:18:23.544",
       "config": {
         "tableHide": true,
         "editorSetting": {
@@ -602,15 +602,15 @@
       "jobName": "paragraph_1553956516562_113990241",
       "id": "20171028-215104_1409181389",
       "dateCreated": "2019-03-30 14:35:16.562",
-      "dateStarted": "2019-04-09 15:35:12.053",
-      "dateFinished": "2019-04-09 15:35:12.098",
+      "dateStarted": "2019-04-15 19:18:23.695",
+      "dateFinished": "2019-04-15 19:18:23.776",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### (2a) Transforming the species columns from string to numeric\n\nIn this part the [`stringIndexer()` method](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.feature.StringIndexer) is used, as first pyspark ML API method. the `stringIndexer()` is specifically design to transform string variables to a numerical index (variable).\n\nIn the machine learning API of Spark a lot of methods use the `fit()` and `transform()` function. The reasoning is always similar: `fit()` models data and `transform()` applies the fitted model to data. In the `stringIndexer()` context this means that fit will detect which distinct string values are present in the data (column) and maps them to a float. `transform()` will apply this model or mapping on data. This data can be both data on which we fitted the model or new data which is not yet seen by the model. This procedure is often used to train and afterwards validate a model.",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:12.129",
+      "dateUpdated": "2019-04-15 19:18:23.869",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -641,15 +641,15 @@
       "jobName": "paragraph_1553956516563_-1682239969",
       "id": "20171028-215823_455156514",
       "dateCreated": "2019-03-30 14:35:16.563",
-      "dateStarted": "2019-04-09 15:35:12.382",
-      "dateFinished": "2019-04-09 15:35:12.428",
+      "dateStarted": "2019-04-15 19:18:23.960",
+      "dateFinished": "2019-04-15 19:18:23.995",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Fit on whole dataset to include all labels in index.\nlabelIndexer \u003d StringIndexer(inputCol\u003d\"species\", outputCol\u003d\"label\").fit(raw_data_df)\n\n# Apply labelIndexer \u003d mapping or model\nlabeled_data_df \u003d labelIndexer.transform(raw_data_df)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:12.446",
+      "dateUpdated": "2019-04-15 19:18:24.060",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -678,7 +678,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d10"
+            "http://172.18.0.3:4040/jobs/job?id\u003d10"
           ],
           "interpreterSettingId": "spark"
         }
@@ -687,15 +687,15 @@
       "jobName": "paragraph_1553956516563_2024986580",
       "id": "20171028-223155_2042779534",
       "dateCreated": "2019-03-30 14:35:16.563",
-      "dateStarted": "2019-04-09 15:35:12.633",
-      "dateFinished": "2019-04-09 15:35:13.443",
+      "dateStarted": "2019-04-15 19:18:24.133",
+      "dateFinished": "2019-04-15 19:18:24.861",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Show the results of the index transformation\nlabeled_data_df.show(5)\nlabeled_data_df.describe().show()\nlabeled_data_df.groupBy(\"species\", \"label\").count().show()",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:13.520",
+      "dateUpdated": "2019-04-15 19:18:24.939",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -727,13 +727,13 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d11",
-            "http://172.20.0.3:4040/jobs/job?id\u003d12",
-            "http://172.20.0.3:4040/jobs/job?id\u003d13",
-            "http://172.20.0.3:4040/jobs/job?id\u003d14",
-            "http://172.20.0.3:4040/jobs/job?id\u003d15",
-            "http://172.20.0.3:4040/jobs/job?id\u003d16",
-            "http://172.20.0.3:4040/jobs/job?id\u003d17"
+            "http://172.18.0.3:4040/jobs/job?id\u003d11",
+            "http://172.18.0.3:4040/jobs/job?id\u003d12",
+            "http://172.18.0.3:4040/jobs/job?id\u003d13",
+            "http://172.18.0.3:4040/jobs/job?id\u003d14",
+            "http://172.18.0.3:4040/jobs/job?id\u003d15",
+            "http://172.18.0.3:4040/jobs/job?id\u003d16",
+            "http://172.18.0.3:4040/jobs/job?id\u003d17"
           ],
           "interpreterSettingId": "spark"
         }
@@ -742,15 +742,15 @@
       "jobName": "paragraph_1553956516563_-824105689",
       "id": "20171028-220131_246138058",
       "dateCreated": "2019-03-30 14:35:16.563",
-      "dateStarted": "2019-04-09 15:35:13.606",
-      "dateFinished": "2019-04-09 15:35:16.294",
+      "dateStarted": "2019-04-15 19:18:25.018",
+      "dateFinished": "2019-04-15 19:18:27.303",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### (2b) Combining the independent variables in one feature column\n\nTo combine multiple columns into one featuresCol containing a vector, the [`VectorAssembler()` method](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.feature.VectorAssembler) is used. This method is specifically created to combine multiple columns into a vector. As here no model or mapping needs to be done, because we only do a combination action, only the `transform()` method exists, while the `fit()` method is obsolete.\n\n\n\n\n\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:16.305",
+      "dateUpdated": "2019-04-15 19:18:27.326",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -781,15 +781,15 @@
       "jobName": "paragraph_1553956516564_-1478777839",
       "id": "20171028-224056_109020565",
       "dateCreated": "2019-03-30 14:35:16.564",
-      "dateStarted": "2019-04-09 15:35:16.436",
-      "dateFinished": "2019-04-09 15:35:16.465",
+      "dateStarted": "2019-04-15 19:18:27.404",
+      "dateFinished": "2019-04-15 19:18:27.432",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nparsed_data_df \u003d (VectorAssembler(inputCols\u003dlabeled_data_df.columns[1:-1], outputCol\u003d\"features\")\n                    .transform(labeled_data_df))\n\nparsed_data_df.sample(False, 0.03333, seed\u003d0).show(truncate\u003dFalse)\n\nparsed_data_df \u003d parsed_data_df.select(\"label\", \"features\")\nparsed_data_df.show(5, truncate\u003dFalse)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:16.534",
+      "dateUpdated": "2019-04-15 19:18:27.504",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -820,8 +820,8 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d18",
-            "http://172.20.0.3:4040/jobs/job?id\u003d19"
+            "http://172.18.0.3:4040/jobs/job?id\u003d18",
+            "http://172.18.0.3:4040/jobs/job?id\u003d19"
           ],
           "interpreterSettingId": "spark"
         }
@@ -830,15 +830,15 @@
       "jobName": "paragraph_1553956516564_-2136902774",
       "id": "20171028-220204_1244153646",
       "dateCreated": "2019-03-30 14:35:16.564",
-      "dateStarted": "2019-04-09 15:35:16.595",
-      "dateFinished": "2019-04-09 15:35:17.358",
+      "dateStarted": "2019-04-15 19:18:27.559",
+      "dateFinished": "2019-04-15 19:18:28.045",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 3: Split data\n\nIn Machine learning, the original dataset is split into three distinct subsample to allow a training, validation, and testing procedure. The biggest sample of the dataset (60%-80%) is taken as training data, while the remaining sample is split into a validation and test sample. The latter two sample are used to evaluated the trained (\u003d fitted) model on unseen data. This procedure prevents overfitting and ensures robustness of the model.\n\nThis Part takes a [`randomSplit()`](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.randomSplit) with weights (80%, 10%, 10%) to split the data into train-, validation-, and test sample.",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:17.400",
+      "dateUpdated": "2019-04-15 19:18:28.061",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -869,15 +869,15 @@
       "jobName": "paragraph_1553956516564_-1298032903",
       "id": "20171028-224325_1591194910",
       "dateCreated": "2019-03-30 14:35:16.564",
-      "dateStarted": "2019-04-09 15:35:17.540",
-      "dateFinished": "2019-04-09 15:35:17.596",
+      "dateStarted": "2019-04-15 19:18:28.256",
+      "dateFinished": "2019-04-15 19:18:28.300",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nweights \u003d [.8, .1, .1]\nseed \u003d 42\nparsed_train_data_df, parsed_val_data_df, parsed_test_data_df \u003d parsed_data_df.randomSplit(weights, seed\u003dseed)\n\n# caching\nparsed_train_data_df.cache()\nparsed_val_data_df.cache()\nparsed_test_data_df.cache()\n\n# Checking is split is done correctly\nn_train \u003d parsed_train_data_df.count()\nn_val \u003d parsed_val_data_df.count()\nn_test \u003d parsed_test_data_df.count()\n\nprint n_train, n_val, n_test, n_train + n_val + n_test\nprint parsed_data_df.count()\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:17.639",
+      "dateUpdated": "2019-04-15 19:18:28.322",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -909,10 +909,10 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d20",
-            "http://172.20.0.3:4040/jobs/job?id\u003d21",
-            "http://172.20.0.3:4040/jobs/job?id\u003d22",
-            "http://172.20.0.3:4040/jobs/job?id\u003d23"
+            "http://172.18.0.3:4040/jobs/job?id\u003d20",
+            "http://172.18.0.3:4040/jobs/job?id\u003d21",
+            "http://172.18.0.3:4040/jobs/job?id\u003d22",
+            "http://172.18.0.3:4040/jobs/job?id\u003d23"
           ],
           "interpreterSettingId": "spark"
         }
@@ -921,15 +921,15 @@
       "jobName": "paragraph_1553956516564_-2046242012",
       "id": "20171028-225143_607359770",
       "dateCreated": "2019-03-30 14:35:16.565",
-      "dateStarted": "2019-04-09 15:35:17.761",
-      "dateFinished": "2019-04-09 15:35:18.914",
+      "dateStarted": "2019-04-15 19:18:28.505",
+      "dateFinished": "2019-04-15 19:18:29.760",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 4: Create a decision tree model\n\nA decision tree needs to be fitted on the training data. As a first step, the decision tree needs to be configured and initialized. To do this the [`DecisionTreeClassifier()`  method](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.classification.DecisionTreeClassifier) needs to be called. In this case we limt ourself to setting the _labelCol_ and _featuresCol_ arguments. The detailed configuration of a decision tree goes beyond the scope of this course, but all details and configuration options can be found [here](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.classification.DecisionTreeClassifier). \n\nWhen the `DecisionTreeClassifier()` is initialized, the tree is fitted (modeled) on the training dataframe, parsed_train_data_df in this case.\n\n\u003e The `DecisionTreeClassifier()` is just one of the many classification models in spark ML. A complete overview can be found [here](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#module-pyspark.ml.classification). ",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:18.966",
+      "dateUpdated": "2019-04-15 19:18:29.778",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -960,15 +960,15 @@
       "jobName": "paragraph_1553956516565_-1334265317",
       "id": "20171028-225621_415064816",
       "dateCreated": "2019-03-30 14:35:16.565",
-      "dateStarted": "2019-04-09 15:35:19.125",
-      "dateFinished": "2019-04-09 15:35:19.174",
+      "dateStarted": "2019-04-15 19:18:30.026",
+      "dateFinished": "2019-04-15 19:18:30.097",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n\n# Initialize the DecisionTree model\ndt \u003d DecisionTreeClassifier(labelCol\u003d\"label\", featuresCol\u003d\"features\")\n\n# Train model.\nmodel \u003d dt.fit(parsed_train_data_df)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:19.200",
+      "dateUpdated": "2019-04-15 19:18:30.098",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -994,14 +994,14 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d24",
-            "http://172.20.0.3:4040/jobs/job?id\u003d25",
-            "http://172.20.0.3:4040/jobs/job?id\u003d26",
-            "http://172.20.0.3:4040/jobs/job?id\u003d27",
-            "http://172.20.0.3:4040/jobs/job?id\u003d28",
-            "http://172.20.0.3:4040/jobs/job?id\u003d29",
-            "http://172.20.0.3:4040/jobs/job?id\u003d30",
-            "http://172.20.0.3:4040/jobs/job?id\u003d31"
+            "http://172.18.0.3:4040/jobs/job?id\u003d24",
+            "http://172.18.0.3:4040/jobs/job?id\u003d25",
+            "http://172.18.0.3:4040/jobs/job?id\u003d26",
+            "http://172.18.0.3:4040/jobs/job?id\u003d27",
+            "http://172.18.0.3:4040/jobs/job?id\u003d28",
+            "http://172.18.0.3:4040/jobs/job?id\u003d29",
+            "http://172.18.0.3:4040/jobs/job?id\u003d30",
+            "http://172.18.0.3:4040/jobs/job?id\u003d31"
           ],
           "interpreterSettingId": "spark"
         }
@@ -1010,15 +1010,15 @@
       "jobName": "paragraph_1553956516565_955044741",
       "id": "20171028-225156_1962219966",
       "dateCreated": "2019-03-30 14:35:16.565",
-      "dateStarted": "2019-04-09 15:35:19.315",
-      "dateFinished": "2019-04-09 15:35:20.343",
+      "dateStarted": "2019-04-15 19:18:30.228",
+      "dateFinished": "2019-04-15 19:18:31.267",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 5: Make predictions and evaluate the decision tree model\n\nAfter fitting the model on the training data the model needs to be applied on the validation and test dataframes. It is done with the `transform()` method and will results in predictions. In this case there is also a prediction made for the train dataframe. The reasons for making these predictions is twofold:\n\n* Evaluating the model\n* Using predictions in the remainder of the data science pipeline",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:20.412",
+      "dateUpdated": "2019-04-15 19:18:31.326",
       "config": {
         "tableHide": true,
         "editorSetting": {
@@ -1049,15 +1049,15 @@
       "jobName": "paragraph_1553956516566_1370738190",
       "id": "20171028-225641_1315678238",
       "dateCreated": "2019-03-30 14:35:16.566",
-      "dateStarted": "2019-04-09 15:35:20.533",
-      "dateFinished": "2019-04-09 15:35:20.567",
+      "dateStarted": "2019-04-15 19:18:31.447",
+      "dateFinished": "2019-04-15 19:18:31.506",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Make predictions.\ntrain_predictions \u003d model.transform(parsed_train_data_df)\nval_predictions \u003d model.transform(parsed_val_data_df)\ntest_predictions \u003d model.transform(parsed_test_data_df)\n\n#Show predictions\ntest_predictions.select(\"prediction\", \"label\", \"features\").show()",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:20.614",
+      "dateUpdated": "2019-04-15 19:18:31.531",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -1088,7 +1088,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d32"
+            "http://172.18.0.3:4040/jobs/job?id\u003d32"
           ],
           "interpreterSettingId": "spark"
         }
@@ -1097,15 +1097,15 @@
       "jobName": "paragraph_1553956516566_-857055827",
       "id": "20171028-225412_1099070164",
       "dateCreated": "2019-03-30 14:35:16.566",
-      "dateStarted": "2019-04-09 15:35:20.764",
-      "dateFinished": "2019-04-09 15:35:21.083",
+      "dateStarted": "2019-04-15 19:18:31.715",
+      "dateFinished": "2019-04-15 19:18:32.203",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\nThe final step in the modelling proces is evaluating the model. How this evaluation step looks like, depends on the modeltype. Here we have _Multiclass Classification Model_, so evaluation is done using the [`MulticlassClassificationEvaluator()`\nmethod](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.MulticlassClassificationEvaluator) from the pyspark.ml.evaluation module which we imported in Part 0. \n\nA first step is configuring and initializing the `MulticlassClassificationEvaluator()`. In this case we limt ourself to setting the _labelCol_, _predictionCol_, and _metricName_ arguments. The detailed configuration of the evaluation of a Multiclass Classification Model goes beyond the scope of this course, but all details and configuration options can be found [here](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.MulticlassClassificationEvaluator).\n\nIn the case of evaluation, there is no `fit()` or `transform()` method that needs to be called, but an **`evaluate()`** method. This method computes the desired metric defined in the `MulticlassClassificationEvaluator()`, accuracy in this case, on the specified dataframe. In this lab, accuracy evaluation is done for the train, validation, and test dataframe.\n\n\u003e Note if another model type is trained, another evaluator needs to be used. More details out the different evaluators can be found [here](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#module-pyspark.ml.evaluation).",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:53.454",
+      "dateUpdated": "2019-04-15 19:18:32.293",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -1136,15 +1136,15 @@
       "jobName": "paragraph_1553956516566_1418405052",
       "id": "20171029-093927_523304868",
       "dateCreated": "2019-03-30 14:35:16.566",
-      "dateStarted": "2019-04-09 15:35:53.454",
-      "dateFinished": "2019-04-09 15:35:53.473",
+      "dateStarted": "2019-04-15 19:18:32.342",
+      "dateFinished": "2019-04-15 19:18:32.364",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Evaluate\n# Select (prediction, true label) and compute test error\nevaluator \u003d MulticlassClassificationEvaluator(labelCol\u003d\"label\", predictionCol\u003d\"prediction\", metricName\u003d\"accuracy\")\n\ntrain_accuracy \u003d evaluator.evaluate(train_predictions)\nval_accuracy \u003d evaluator.evaluate(val_predictions)\ntest_accuracy \u003d evaluator.evaluate(test_predictions)\n\nprint(\"Train accuracy \u003d %g \" % (train_accuracy))\nprint(\"Validation accuracy \u003d %g \" % (val_accuracy))\nprint(\"Test accuracy \u003d %g \" % (test_accuracy))\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-09 15:35:21.353",
+      "dateUpdated": "2019-04-15 19:18:32.441",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -1175,12 +1175,12 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d33",
-            "http://172.20.0.3:4040/jobs/job?id\u003d34",
-            "http://172.20.0.3:4040/jobs/job?id\u003d35",
-            "http://172.20.0.3:4040/jobs/job?id\u003d36",
-            "http://172.20.0.3:4040/jobs/job?id\u003d37",
-            "http://172.20.0.3:4040/jobs/job?id\u003d38"
+            "http://172.18.0.3:4040/jobs/job?id\u003d33",
+            "http://172.18.0.3:4040/jobs/job?id\u003d34",
+            "http://172.18.0.3:4040/jobs/job?id\u003d35",
+            "http://172.18.0.3:4040/jobs/job?id\u003d36",
+            "http://172.18.0.3:4040/jobs/job?id\u003d37",
+            "http://172.18.0.3:4040/jobs/job?id\u003d38"
           ],
           "interpreterSettingId": "spark"
         }
@@ -1189,8 +1189,8 @@
       "jobName": "paragraph_1553956516567_-392610063",
       "id": "20171028-225432_1139492683",
       "dateCreated": "2019-03-30 14:35:16.567",
-      "dateStarted": "2019-04-09 15:35:21.469",
-      "dateFinished": "2019-04-09 15:35:22.042",
+      "dateStarted": "2019-04-15 19:18:32.572",
+      "dateFinished": "2019-04-15 19:18:33.280",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     }
