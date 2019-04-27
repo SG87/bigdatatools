@@ -195,9 +195,43 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%pyspark\nfrom pyspark.sql.functions import col, udf\nfrom pyspark.sql.types import *\nfrom databricks_test_helper import Test\nfrom pyspark.ml.feature import StringIndexer, VectorAssembler\nfrom pyspark.ml.classification import LogisticRegression\nfrom pyspark.ml.regression import LinearRegression\nfrom pyspark.ml.evaluation import MulticlassClassificationEvaluator, RegressionEvaluator",
+      "text": "%pyspark\nsc.addPyFile(\"/modules/test_helper.py\")",
       "user": "anonymous",
-      "dateUpdated": "2019-04-06 13:53:23.372",
+      "dateUpdated": "2019-04-27 08:12:51.100",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1556351752486_-672552777",
+      "id": "20190427-075552_656924977",
+      "dateCreated": "2019-04-27 07:55:52.486",
+      "dateStarted": "2019-04-27 08:12:51.219",
+      "dateFinished": "2019-04-27 08:12:51.311",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col, udf\nfrom pyspark.sql.types import *\nfrom test_helper import Test\nfrom pyspark.ml.feature import StringIndexer, VectorAssembler\nfrom pyspark.ml.classification import LogisticRegression\nfrom pyspark.ml.regression import LinearRegression\nfrom pyspark.ml.evaluation import MulticlassClassificationEvaluator, RegressionEvaluator",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-27 08:12:54.523",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -218,27 +252,22 @@
         "forms": {}
       },
       "results": {
-        "code": "ERROR",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mImportError\u001b[0m                               Traceback (most recent call last)\n\u001b[0;32m\u003cipython-input-6-718d0a88d2ab\u003e\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0mpyspark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msql\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfunctions\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mcol\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mudf\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0mpyspark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msql\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtypes\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0;34m*\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----\u003e 3\u001b[0;31m \u001b[0;32mfrom\u001b[0m \u001b[0mdatabricks_test_helper\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mTest\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      4\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0mpyspark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mml\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfeature\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mStringIndexer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mVectorAssembler\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0mpyspark\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mml\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mclassification\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mLogisticRegression\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;31mImportError\u001b[0m: No module named \u0027databricks_test_helper\u0027"
-          }
-        ]
+        "code": "SUCCESS",
+        "msg": []
       },
       "apps": [],
       "jobName": "paragraph_1553956552286_1210513651",
       "id": "20171029-193638_1137130325",
       "dateCreated": "2019-03-30 14:35:52.286",
-      "dateStarted": "2019-04-06 13:53:23.453",
-      "dateFinished": "2019-04-06 13:53:23.582",
-      "status": "ERROR",
+      "dateStarted": "2019-04-27 08:12:54.645",
+      "dateFinished": "2019-04-27 08:12:54.810",
+      "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n## Part 1: Putting the base file into HDFS\n\nFirst task is to put the cars file into HDFS. Unfortunaltly, Zeppelin does not have a native HDFS interface, so to complete this first part, we need to use command line via PuTTY. Copy the commands you have run in the %md cell below.\n\n- make a new directory into HDFS called **/data/assignment**\n- add the file \"/home/bigdata/assignment/data/input/second_hand_cars.csv\" to HDFS in the directory created above",
+      "text": "%md\n## Part 1: Putting the base file into HDFS\n\nFirst task is to put the cars file into HDFS. Unfortunaltly, Zeppelin does not have a native HDFS interface, so to complete this first part, we need to start the HDFS containers and browse to portainer. \n\nHere you can enter the correct HDFS node and add a the file to HDFS.\n\nCopy the commands you have run in the %md cell below.\n\n- make a new directory into HDFS called **/data/assignment**\n- add the file \"/data/assignment/second_hand_cars.csv\" to HDFS in the directory created above",
       "user": "anonymous",
-      "dateUpdated": "2019-03-30 15:52:13.010",
+      "dateUpdated": "2019-04-27 08:18:55.555",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -262,7 +291,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 1: Putting the base file into HDFS\u003c/h2\u003e\n\u003cp\u003eFirst task is to put the cars file into HDFS. Unfortunaltly, Zeppelin does not have a native HDFS interface, so to complete this first part, we need to use command line via PuTTY. Copy the commands you have run in the %md cell below.\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003emake a new directory into HDFS called \u003cstrong\u003e/data/assignment\u003c/strong\u003e\u003c/li\u003e\n  \u003cli\u003eadd the file \u0026ldquo;/home/bigdata/assignment/data/input/second_hand_cars.csv\u0026rdquo; to HDFS in the directory created above\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 1: Putting the base file into HDFS\u003c/h2\u003e\n\u003cp\u003eFirst task is to put the cars file into HDFS. Unfortunaltly, Zeppelin does not have a native HDFS interface, so to complete this first part, we need to start the HDFS containers and browse to portainer. \u003c/p\u003e\n\u003cp\u003eHere you can enter the correct HDFS node and add a the file to HDFS.\u003c/p\u003e\n\u003cp\u003eCopy the commands you have run in the %md cell below.\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003emake a new directory into HDFS called \u003cstrong\u003e/data/assignment\u003c/strong\u003e\u003c/li\u003e\n  \u003cli\u003eadd the file \u0026ldquo;/data/assignment/second_hand_cars.csv\u0026rdquo; to HDFS in the directory created above\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -270,8 +299,8 @@
       "jobName": "paragraph_1553956552287_-2127768071",
       "id": "20171029-172647_992744864",
       "dateCreated": "2019-03-30 14:35:52.287",
-      "dateStarted": "2019-03-30 15:52:13.019",
-      "dateFinished": "2019-03-30 15:52:16.257",
+      "dateStarted": "2019-04-27 08:18:55.555",
+      "dateFinished": "2019-04-27 08:18:55.583",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -313,9 +342,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n## Part 2: Reading the file in Spark from HDFS\n\nBefore you are able to do some useful calculations, the dataset needs to be loaded into Spark. Read in the **second_hand_cars.csv** file you have put into HDFS in Part 1. The resulting dataframe should be called **raw_data**.\n\n\u003e Note 1: Put hdfs://localhost:9000 infront of the location of the file in HDFS\n\u003e Note 2: If you were not able to put the local file into HDFS, or not able to read the file from HDFS, you can read in the local file (\"/home/bigdata/assignment/data/input/second_hand_cars.csv\") directly.\n",
+      "text": "%md\n## Part 2: Reading the file in Spark from HDFS\n\nBefore you are able to do some useful calculations, the dataset needs to be loaded into Spark. Read in the **second_hand_cars.csv** file in **/data/assignment**. The resulting dataframe should be called **raw_data**.",
       "user": "anonymous",
-      "dateUpdated": "2019-03-30 14:35:52.287",
+      "dateUpdated": "2019-04-27 08:18:51.835",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -326,7 +355,8 @@
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
         "results": {},
-        "enabled": true
+        "enabled": true,
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -337,7 +367,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 2: Reading the file in Spark from HDFS\u003c/h2\u003e\n\u003cp\u003eBefore you are able to do some useful calculations, the dataset needs to be loaded into Spark. Read in the \u003cstrong\u003esecond_hand_cars.csv\u003c/strong\u003e file you have put into HDFS in Part 1. The resulting dataframe should be called \u003cstrong\u003eraw_data\u003c/strong\u003e.\u003c/p\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote 1: Put \u003ca href\u003d\"hdfs://localhost:9000\"\u003ehdfs://localhost:9000\u003c/a\u003e infront of the location of the file in HDFS\u003cbr/\u003eNote 2: If you were not able to put the local file into HDFS, or not able to read the file from HDFS, you can read in the local file (\u0026ldquo;/home/bigdata/assignment/data/input/second_hand_cars.csv\u0026rdquo;) directly.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePart 2: Reading the file in Spark from HDFS\u003c/h2\u003e\n\u003cp\u003eBefore you are able to do some useful calculations, the dataset needs to be loaded into Spark. Read in the \u003cstrong\u003esecond_hand_cars.csv\u003c/strong\u003e file in \u003cstrong\u003e/data/assignment\u003c/strong\u003e. The resulting dataframe should be called \u003cstrong\u003eraw_data\u003c/strong\u003e.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -345,8 +375,9 @@
       "jobName": "paragraph_1553956552287_-1446144665",
       "id": "20171029-180229_1491715068",
       "dateCreated": "2019-03-30 14:35:52.287",
-      "status": "READY",
-      "errorMessage": "",
+      "dateStarted": "2019-04-27 08:18:51.843",
+      "dateFinished": "2019-04-27 08:18:54.396",
+      "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
@@ -456,9 +487,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%pyspark\n# Cast numerical columns from string to float\nraw_data \u003d \u003cFILL IN\u003e\nraw_data",
+      "text": "%pyspark\n# Cast numerical columns from string to float\nraw_data \u003d \u003cFILL IN\u003e\nraw_data.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2019-03-30 14:35:52.288",
+      "dateUpdated": "2019-04-27 08:31:45.836",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -468,7 +499,8 @@
         "editorMode": "ace/mode/python",
         "editorHide": false,
         "results": {},
-        "enabled": true
+        "enabled": true,
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -2156,10 +2188,7 @@
   "id": "2E6WUEC95",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {
-    "md:shared_process": [],
-    "spark:shared_process": []
-  },
+  "angularObjects": {},
   "config": {
     "isZeppelinNotebookCronEnable": false
   },

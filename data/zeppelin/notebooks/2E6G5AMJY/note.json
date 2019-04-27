@@ -1,6 +1,47 @@
 {
   "paragraphs": [
     {
+      "text": "%md\n# Unfortunately does this notebook not work. I will try to get it up and running ASAP",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-23 17:09:37.067",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eUnfortunately does this notebook not work. I will try to get it up and running ASAP\u003c/h1\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556039351819_565212271",
+      "id": "20190423-170911_1876928812",
+      "dateCreated": "2019-04-23 17:09:11.819",
+      "dateStarted": "2019-04-23 17:09:37.068",
+      "dateFinished": "2019-04-23 17:09:37.085",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
       "text": "%md\n\n.\u003ccenter\u003e![ML Logo](http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png)\n\n![Streaming Logo](https://gcn.com/articles/2014/01/07/~/media/GIG/GCN/Redesign/Articles/2014/January/datastream.png) \u003c/center\u003e\n\n# Spark Streaming\n\n\nThis lab you need to fill in the gaps youself. We are going to do a really basic sentiment analysis on tweets about Donald trump. The steps taken here are roughly the same compared to the steps in the first streaming lab. The difference  is that now we listen to a different topic and include an extra sentiment analysis fuction.\n\n## This lab will cover:\n\n* Part 0: Load modules\n* Part 1: Define helper lists and functions\n* Part 2: Specifying arguments and parameters\n* Part 3: Initialize the StreamingContext()\n* Part 4: Initializing of the stream and creation of the  execution plan\n* Part 5: Create a Kafka producer\n* Part 6: Start the stream\n\n\n\u003e Note that, for reference, you can look up the details of the relevant Spark Streamin methods in [Spark\u0027s Streaming API](https://spark.apache.org/docs/latest/streaming-programming-guide.html)\n",
       "user": "anonymous",
       "dateUpdated": "2019-04-09 15:44:08.445",
@@ -259,21 +300,6 @@
             "data": "2006\n4783\n"
           }
         ]
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.20.0.3:4040/jobs/job?id\u003d83",
-            "http://172.20.0.3:4040/jobs/job?id\u003d84",
-            "http://172.20.0.3:4040/jobs/job?id\u003d85",
-            "http://172.20.0.3:4040/jobs/job?id\u003d86"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1553946001919_-1359364581",

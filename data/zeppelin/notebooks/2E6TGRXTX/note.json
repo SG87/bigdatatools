@@ -1,6 +1,47 @@
 {
   "paragraphs": [
     {
+      "text": "%md\n# Unfortunately does this notebook not work. I will try to get it up and running ASAP.",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-23 17:08:48.565",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eUnfortunately does this notebook not work. I will try to get it up and running ASAP.\u003c/h1\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556039283422_915894907",
+      "id": "20190423-170803_2113714612",
+      "dateCreated": "2019-04-23 17:08:03.422",
+      "dateStarted": "2019-04-23 17:08:48.566",
+      "dateFinished": "2019-04-23 17:08:50.165",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
       "text": "%md\n\n.\u003ccenter\u003e![ML Logo](http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png)\n\n![Streaming Logo](https://gcn.com/articles/2014/01/07/~/media/GIG/GCN/Redesign/Articles/2014/January/datastream.png) \u003c/center\u003e\n\n# Spark Streaming\n\n\nThis lab covers a basic introduction to Spark Streaming. It show the fundamental concepts of Spark Streaming transformations and the connection with Kafka. This will be done by connecting the Spark Streaming app to the **IESEG_MBD** topic and doing some basic transformations and actions on the data stream.\n\n## This lab will cover:\n\n* Part 0: Load modules\n* Part 1: Define helper functions\n* Part 2: Specifying arguments and parameters\n* Part 3: Define helper table\n* Part 4: Initialize the StreamingContext()\n* Part 5: Initializing of the stream and creation of the  execution plan\n* Part 6: Start the stream\n* Part 7: Stop the stream\n\n\n\u003e Note that, for reference, you can look up the details of the relevant Spark Streaming methods in [Spark\u0027s Streaming API](https://spark.apache.org/docs/latest/streaming-programming-guide.html)",
       "user": "anonymous",
       "dateUpdated": "2019-04-13 08:27:06.556",
@@ -79,9 +120,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%dep z.load(\"/conf/spark-streaming-kafka-0-8_2.11-2.2.1.jar\")",
+      "text": "%dep \nz.load(\"/conf/elasticsearch-spark-20_2.11-6.5.4.jar\")\nz.load(\"/conf/spark-streaming-kafka-0-8_2.11-2.2.1.jar\")\nz.load(\"/conf/spark-streaming-kafka-0-10_2.11-2.2.1.jar\")\nz.load(\"/conf/spark-sql-kafka-0-10_2.11-2.2.1.jar\")",
       "user": "anonymous",
-      "dateUpdated": "2019-04-13 08:27:11.700",
+      "dateUpdated": "2019-04-23 16:34:18.544",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -104,7 +145,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "res0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@48901e5\n"
+            "data": "res1: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@2e52cf16\n"
           }
         ]
       },
@@ -112,15 +153,15 @@
       "jobName": "paragraph_1554648154824_1984088425",
       "id": "20190407-144234_695605242",
       "dateCreated": "2019-04-07 14:42:34.825",
-      "dateStarted": "2019-04-13 08:27:12.052",
-      "dateFinished": "2019-04-13 08:27:22.988",
+      "dateStarted": "2019-04-23 16:34:18.610",
+      "dateFinished": "2019-04-23 16:34:18.794",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nimport sys\nimport json\n\nfrom pyspark import SparkContext\nfrom pyspark.streaming import StreamingContext\nfrom pyspark.streaming.kafka import KafkaUtils\nfrom pyspark.sql.types import *\nfrom pyspark.sql.functions import col",
       "user": "anonymous",
-      "dateUpdated": "2019-04-13 08:27:23.078",
+      "dateUpdated": "2019-04-23 16:34:21.879",
       "config": {
         "editorSetting": {
           "language": "python",
@@ -147,8 +188,8 @@
       "jobName": "paragraph_1553956502129_90034229",
       "id": "20171030-183117_1217424452",
       "dateCreated": "2019-03-30 14:35:02.129",
-      "dateStarted": "2019-04-13 08:27:23.399",
-      "dateFinished": "2019-04-13 08:27:37.755",
+      "dateStarted": "2019-04-23 16:34:21.950",
+      "dateFinished": "2019-04-23 16:34:32.650",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -194,7 +235,7 @@
     {
       "text": "%pyspark\ndef selectFields(tweet, fields):    \n\t\"\"\" Function that translates a tweet to a list of selected values:    \n\targs:        \n\t    tweet \u003d a tweet (string containing json structure)        \n\t    fiels \u003d list of tuples, where each tuple contains two strings (string, string). The tuples contains (\"field_name\", \"field_type\"). If we need a nested field_name, use \".\" to separate parent and child (remark: here we can have at most 5 nested levels.)    \n\treturn:        \n\t    list of values of the selected field_name keys    \n\t\"\"\"            \n\tl \u003d list()    \n\tfor field in fields:        \n\t\ttry:            \n\t\t\tif \".\" in field[0]:                \n\t\t\t\tf \u003d field[0].split(\".\")\n\t\t\t\tif len(f) \u003d\u003d 2:                    \n\t\t\t\t\td \u003d tweet[f[0]][f[1]]                \n\t\t\t\telif len(f) \u003d\u003d 3:                    \n\t\t\t\t\td \u003d tweet[f[0]][f[1]][f[2]]                \n\t\t\t\telif len(f) \u003d\u003d 4:                    \n\t\t\t\t\td \u003d tweet[f[0]][f[1]][f[2]][f[3]]               \n\t\t\t\telif len(f) \u003d\u003d 5:                    \n\t\t\t\t\td \u003d tweet[f[0]][f[1]][f[2]][f[3]][f[4]]           \n\t\t\telse:                \n\t\t\t\td \u003d tweet[field[0]]        \n\t\texcept:            \n\t\t\td \u003d None        \n\t\tl.append(d)    \n\treturn l\n\n    \n    \ndef makeSchema(fields):\n    \"\"\" Function that creates a schema based on a list of fields:\n    args:\n        fiels \u003d list of tuples, where each tuple contains two strings (string, string). The tuples contains (\"field_name\", \"field_type\")\n    return:\n        StructType object containing the schema to transfer RDD to DF using toDF() function\n    \"\"\"\n    schema\u003dlist()\n    for field in fields:\n        if field[1] \u003d\u003d \"int\":\n            s \u003d StructField(field[0], IntegerType(), True)\n        if field[1] \u003d\u003d \"long\":\n            s \u003d StructField(field[0], LongType(), True)\n        elif field[1] \u003d\u003d \"date\":\n            s \u003d StructField(field[0], DateType(), True)\n        elif field[1] \u003d\u003d \"str\":\n            s \u003d StructField(field[0], StringType(), True)\n        elif field[1] \u003d\u003d \"float\":\n            s \u003d StructField(field[0], FloatType(), True)\n        schema.append(s)\n    return StructType(schema)\n    \n    \ndef DFActions(rdd):\n    \"\"\" Function that defines the transactions and actions to perform on the DStream Dataframe:\n    args:\n        rdd \u003d the last RDD before tranforming to DataFrame\n    \"\"\"\n    DF \u003d rdd.toDF(schema).filter(col(\"id\").isNotNull())\n    DF \u003d DF.join(languagesDF, \"lang\", \"left\")\n    DF.show(5)\n    print(\"Number of tweet last \" + str(seconds_to_run) + \" seconds: \" + str(DF.count()))\n    \n    ",
       "user": "anonymous",
-      "dateUpdated": "2019-04-13 08:27:38.024",
+      "dateUpdated": "2019-04-23 16:34:39.719",
       "config": {
         "editorSetting": {
           "language": "python",
@@ -221,8 +262,8 @@
       "jobName": "paragraph_1553956502130_1347194912",
       "id": "20171030-205833_757769488",
       "dateCreated": "2019-03-30 14:35:02.130",
-      "dateStarted": "2019-04-13 08:27:38.134",
-      "dateFinished": "2019-04-13 08:27:38.241",
+      "dateStarted": "2019-04-23 16:34:39.789",
+      "dateFinished": "2019-04-23 16:34:39.906",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -268,7 +309,7 @@
     {
       "text": "%pyspark\nfields \u003d [(\"id\", \"long\"), (\"created_at\", \"str\"), (\"text\", \"str\"), (\"user.id\", \"long\"), (\"user.name\", \"str\"), (\"user.location\", \"str\"), (\"user.followers_count\", \"int\"), (\"user.friends_count\", \"int\"), (\"entities.hashtags\", \"str\"), (\"entities.user_mentions\", \"str\"), (\"lang\", \"str\"), (\"timestamp_ms\", \"str\")]\n\n#Topic to listen to \ntopic \u003d \"trump\"\n\n#Interval\nseconds_to_run \u003d 10\n\n# Location of Zookeeper\nzkQuorum \u003d \"zookeeper:2181\"",
       "user": "anonymous",
-      "dateUpdated": "2019-04-13 08:27:38.489",
+      "dateUpdated": "2019-04-23 16:34:42.227",
       "config": {
         "editorSetting": {
           "language": "python",
@@ -295,8 +336,8 @@
       "jobName": "paragraph_1553956502131_-1758035865",
       "id": "20171030-203558_547634945",
       "dateCreated": "2019-03-30 14:35:02.131",
-      "dateStarted": "2019-04-13 08:27:38.558",
-      "dateFinished": "2019-04-13 08:27:38.631",
+      "dateStarted": "2019-04-23 16:34:42.294",
+      "dateFinished": "2019-04-23 16:34:42.368",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -342,7 +383,7 @@
     {
       "text": "%pyspark\nlang_list \u003d  [(\"en\", \"English\"), (\"hi\", \"Hindi\"), (\"fr\", \"French\"), (\"de\", \"German\"), (\"nl\", \"Dutch\"), (\"ar\", \"arabic\"), (\"ja\", \"Japanese\"), (\"ru\", \"Russian\"), (\"es\", \"Spanish\"), (\"zh\", \"Chinese\")]\n\nlanguagesDF \u003d spark.createDataFrame(lang_list, [\"lang\", \"language\"]).cache()\nlanguagesDF.show()",
       "user": "anonymous",
-      "dateUpdated": "2019-04-13 08:27:38.838",
+      "dateUpdated": "2019-04-23 16:34:44.478",
       "config": {
         "editorSetting": {
           "language": "python",
@@ -377,7 +418,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.21.0.6:4040/jobs/job?id\u003d0"
+            "http://172.22.0.4:4040/jobs/job?id\u003d0"
           ],
           "interpreterSettingId": "spark"
         }
@@ -386,8 +427,8 @@
       "jobName": "paragraph_1553956502132_6894310",
       "id": "20171101-185423_1429285576",
       "dateCreated": "2019-03-30 14:35:02.132",
-      "dateStarted": "2019-04-13 08:27:38.905",
-      "dateFinished": "2019-04-13 08:27:44.592",
+      "dateStarted": "2019-04-23 16:34:44.540",
+      "dateFinished": "2019-04-23 16:34:47.743",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -433,7 +474,7 @@
     {
       "text": "%pyspark\nssc \u003d StreamingContext(sc, seconds_to_run)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-13 08:27:44.826",
+      "dateUpdated": "2019-04-23 16:34:51.488",
       "config": {
         "editorSetting": {
           "language": "python",
@@ -460,8 +501,8 @@
       "jobName": "paragraph_1553956502132_476131453",
       "id": "20171030-183328_1088012018",
       "dateCreated": "2019-03-30 14:35:02.132",
-      "dateStarted": "2019-04-13 08:27:44.905",
-      "dateFinished": "2019-04-13 08:27:45.074",
+      "dateStarted": "2019-04-23 16:34:51.543",
+      "dateFinished": "2019-04-23 16:34:51.604",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -507,7 +548,7 @@
     {
       "text": "%pyspark\n# initialization of the Stream\nprint(zkQuorum)\ntweets \u003d KafkaUtils.createStream(ssc, zkQuorum, \"spark-streaming-consumer\", {topic: 1})\n\n# string to directory\ntweet \u003d tweets.map(lambda a: json.loads(a[1]))\n\n# select the necessary fields\ntweet_selected \u003d tweet.map(lambda c: selectFields(c, fields))\n\n# define schema\nschema \u003d makeSchema(fields)\n\n# transform to DF and perform the DFActions\ntweet_selected.foreachRDD(toDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-13 08:27:45.291",
+      "dateUpdated": "2019-04-23 17:07:54.133",
       "config": {
         "editorSetting": {
           "language": "python",
@@ -531,7 +572,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "ERROR:root:Exception while sending command.\nTraceback (most recent call last):\n  File \"/zeppelin/interpreter/spark/pyspark/py4j-0.10.4-src.zip/py4j/java_gateway.py\", line 883, in send_command\n    response \u003d connection.send_command(command)\n  File \"/zeppelin/interpreter/spark/pyspark/py4j-0.10.4-src.zip/py4j/java_gateway.py\", line 1040, in send_command\n    \"Error while receiving\", e, proto.ERROR_ON_RECEIVE)\nPy4JNetworkError: Error while receiving\nzookeeper:2181\n\u001b[0;31m\u001b[0m\n\u001b[0;31mPy4JError\u001b[0mTraceback (most recent call last)\n\u001b[0;32m\u003cipython-input-14-0f58a98ca102\u003e\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;31m# initialization of the Stream\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0;32mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mzkQuorum\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----\u003e 3\u001b[0;31m \u001b[0mtweets\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mKafkaUtils\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcreateStream\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mssc\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mzkQuorum\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m\"spark-streaming-consumer\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m{\u001b[0m\u001b[0mtopic\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0;36m1\u001b[0m\u001b[0;34m}\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      4\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;31m# string to directory\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/zeppelin/interpreter/spark/pyspark/pyspark.zip/pyspark/streaming/kafka.py\u001b[0m in \u001b[0;36mcreateStream\u001b[0;34m(ssc, zkQuorum, groupId, topics, kafkaParams, storageLevel, keyDecoder, valueDecoder)\u001b[0m\n\u001b[1;32m     68\u001b[0m         \u001b[0mjlevel\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mssc\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_sc\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_getJavaStorageLevel\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mstorageLevel\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     69\u001b[0m         \u001b[0mhelper\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mKafkaUtils\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_get_helper\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mssc\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_sc\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---\u003e 70\u001b[0;31m         \u001b[0mjstream\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mhelper\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcreateStream\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mssc\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_jssc\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mkafkaParams\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtopics\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mjlevel\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     71\u001b[0m         \u001b[0mser\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mPairDeserializer\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mNoOpSerializer\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mNoOpSerializer\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     72\u001b[0m         \u001b[0mstream\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mDStream\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mjstream\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mssc\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mser\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/zeppelin/interpreter/spark/pyspark/py4j-0.10.4-src.zip/py4j/java_gateway.py\u001b[0m in \u001b[0;36m__call__\u001b[0;34m(self, *args)\u001b[0m\n\u001b[1;32m   1131\u001b[0m         \u001b[0manswer\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgateway_client\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msend_command\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcommand\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1132\u001b[0m         return_value \u003d get_return_value(\n\u001b[0;32m-\u003e 1133\u001b[0;31m             answer, self.gateway_client, self.target_id, self.name)\n\u001b[0m\u001b[1;32m   1134\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1135\u001b[0m         \u001b[0;32mfor\u001b[0m \u001b[0mtemp_arg\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mtemp_args\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/zeppelin/interpreter/spark/pyspark/pyspark.zip/pyspark/sql/utils.py\u001b[0m in \u001b[0;36mdeco\u001b[0;34m(*a, **kw)\u001b[0m\n\u001b[1;32m     61\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mdeco\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     62\u001b[0m         \u001b[0;32mtry\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---\u003e 63\u001b[0;31m             \u001b[0;32mreturn\u001b[0m \u001b[0mf\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     64\u001b[0m         \u001b[0;32mexcept\u001b[0m \u001b[0mpy4j\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mprotocol\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mPy4JJavaError\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     65\u001b[0m             \u001b[0ms\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mjava_exception\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtoString\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/zeppelin/interpreter/spark/pyspark/py4j-0.10.4-src.zip/py4j/protocol.py\u001b[0m in \u001b[0;36mget_return_value\u001b[0;34m(answer, gateway_client, target_id, name)\u001b[0m\n\u001b[1;32m    325\u001b[0m             raise Py4JError(\n\u001b[1;32m    326\u001b[0m                 \u001b[0;34m\"An error occurred while calling {0}{1}{2}\"\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 327\u001b[0;31m                 format(target_id, \".\", name))\n\u001b[0m\u001b[1;32m    328\u001b[0m     \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    329\u001b[0m         \u001b[0mtype\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0manswer\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;31mPy4JError\u001b[0m: An error occurred while calling o69.createStream"
+            "data": "ERROR:root:Exception while sending command.\nTraceback (most recent call last):\n  File \"/zeppelin/interpreter/spark/pyspark/py4j-0.10.4-src.zip/py4j/java_gateway.py\", line 883, in send_command\n    response \u003d connection.send_command(command)\n  File \"/zeppelin/interpreter/spark/pyspark/py4j-0.10.4-src.zip/py4j/java_gateway.py\", line 1040, in send_command\n    \"Error while receiving\", e, proto.ERROR_ON_RECEIVE)\nPy4JNetworkError: Error while receiving\n\u001b[0;31m\u001b[0m\n\u001b[0;31mPy4JError\u001b[0mTraceback (most recent call last)\n\u001b[0;32m\u003cipython-input-58-acd601b1f403\u003e\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;31m# initialization of the Stream\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----\u003e 3\u001b[0;31m \u001b[0mtweets\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mKafkaUtils\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcreateStream\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mssc\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mzkQuorum\u001b[0m\u001b[0;34m\u003d\u001b[0m\u001b[0;34m\"localhost:2181\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mgroupId\u001b[0m\u001b[0;34m\u003d\u001b[0m\u001b[0;34m\"\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtopics\u001b[0m\u001b[0;34m\u003d\u001b[0m\u001b[0;34m{\u001b[0m\u001b[0;34m\"trump\"\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0;36m1\u001b[0m\u001b[0;34m}\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      4\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;31m#tweets \u003d KafkaUtils.createDirectStream(ssc, topics \u003d [\"trump\"], kafkaParams \u003d {\"metadata.broker.list\": \"zookeeper:2181\"})\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/zeppelin/interpreter/spark/pyspark/pyspark.zip/pyspark/streaming/kafka.py\u001b[0m in \u001b[0;36mcreateStream\u001b[0;34m(ssc, zkQuorum, groupId, topics, kafkaParams, storageLevel, keyDecoder, valueDecoder)\u001b[0m\n\u001b[1;32m     68\u001b[0m         \u001b[0mjlevel\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mssc\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_sc\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_getJavaStorageLevel\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mstorageLevel\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     69\u001b[0m         \u001b[0mhelper\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mKafkaUtils\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_get_helper\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mssc\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_sc\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---\u003e 70\u001b[0;31m         \u001b[0mjstream\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mhelper\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcreateStream\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mssc\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_jssc\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mkafkaParams\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtopics\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mjlevel\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     71\u001b[0m         \u001b[0mser\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mPairDeserializer\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mNoOpSerializer\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mNoOpSerializer\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     72\u001b[0m         \u001b[0mstream\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mDStream\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mjstream\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mssc\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mser\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/zeppelin/interpreter/spark/pyspark/py4j-0.10.4-src.zip/py4j/java_gateway.py\u001b[0m in \u001b[0;36m__call__\u001b[0;34m(self, *args)\u001b[0m\n\u001b[1;32m   1131\u001b[0m         \u001b[0manswer\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgateway_client\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msend_command\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcommand\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1132\u001b[0m         return_value \u003d get_return_value(\n\u001b[0;32m-\u003e 1133\u001b[0;31m             answer, self.gateway_client, self.target_id, self.name)\n\u001b[0m\u001b[1;32m   1134\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1135\u001b[0m         \u001b[0;32mfor\u001b[0m \u001b[0mtemp_arg\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mtemp_args\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/zeppelin/interpreter/spark/pyspark/pyspark.zip/pyspark/sql/utils.py\u001b[0m in \u001b[0;36mdeco\u001b[0;34m(*a, **kw)\u001b[0m\n\u001b[1;32m     61\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mdeco\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     62\u001b[0m         \u001b[0;32mtry\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---\u003e 63\u001b[0;31m             \u001b[0;32mreturn\u001b[0m \u001b[0mf\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     64\u001b[0m         \u001b[0;32mexcept\u001b[0m \u001b[0mpy4j\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mprotocol\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mPy4JJavaError\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     65\u001b[0m             \u001b[0ms\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mjava_exception\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtoString\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/zeppelin/interpreter/spark/pyspark/py4j-0.10.4-src.zip/py4j/protocol.py\u001b[0m in \u001b[0;36mget_return_value\u001b[0;34m(answer, gateway_client, target_id, name)\u001b[0m\n\u001b[1;32m    325\u001b[0m             raise Py4JError(\n\u001b[1;32m    326\u001b[0m                 \u001b[0;34m\"An error occurred while calling {0}{1}{2}\"\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 327\u001b[0;31m                 format(target_id, \".\", name))\n\u001b[0m\u001b[1;32m    328\u001b[0m     \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    329\u001b[0m         \u001b[0mtype\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0manswer\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;31mPy4JError\u001b[0m: An error occurred while calling o119.createStream"
           }
         ]
       },
@@ -539,9 +580,48 @@
       "jobName": "paragraph_1553956502133_39760545",
       "id": "20171030-183514_638708508",
       "dateCreated": "2019-03-30 14:35:02.133",
-      "dateStarted": "2019-04-13 08:27:45.373",
-      "dateFinished": "2019-04-13 08:27:45.614",
+      "dateStarted": "2019-04-23 17:07:14.253",
+      "dateFinished": "2019-04-23 17:07:14.387",
       "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n help(KafkaUtils.createStream)",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-23 16:39:10.084",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Help on function createStream in module pyspark.streaming.kafka:\n\ncreateStream(ssc, zkQuorum, groupId, topics, kafkaParams\u003dNone, storageLevel\u003dStorageLevel(True, True, False, False, 2), keyDecoder\u003d\u003cfunction utf8_decoder\u003e, valueDecoder\u003d\u003cfunction utf8_decoder\u003e)\n    Create an input stream that pulls messages from a Kafka Broker.\n    \n    :param ssc:  StreamingContext object\n    :param zkQuorum:  Zookeeper quorum (hostname:port,hostname:port,..).\n    :param groupId:  The group id for this consumer.\n    :param topics:  Dict of (topic_name -\u003e numPartitions) to consume.\n                    Each partition is consumed in its own thread.\n    :param kafkaParams: Additional params for Kafka\n    :param storageLevel:  RDD storage level.\n    :param keyDecoder:  A function used to decode key (default is utf8_decoder)\n    :param valueDecoder:  A function used to decode value (default is utf8_decoder)\n    :return: A DStream object\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556037532482_1818088918",
+      "id": "20190423-163852_1707061580",
+      "dateCreated": "2019-04-23 16:38:52.482",
+      "dateStarted": "2019-04-23 16:39:10.139",
+      "dateFinished": "2019-04-23 16:39:10.190",
+      "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {

@@ -3,18 +3,19 @@
     {
       "text": "%md\r. \u003ccenter\u003e ![ML Logo](http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png) \u003c/center\u003e\r# Linear Regression Lab\r\rThis lab covers a common supervised learning pipeline, using a subset of the [Million Song Dataset](http://labrosa.ee.columbia.edu/millionsong/) from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/YearPredictionMSD). Our goal is to train a linear regression model to predict the release year of a song given a set of audio features. A linear regression looks as follows:\r. \u003ccenter\u003e![Linear Regression](http://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png) \u003c/center\u003e\r\rThe ML proces for linear regression is similar to the proces of the decision tree we saw in the class lab. \r\r## This Lab will cover:\r* Part 0: Load modules\r* Part 1: Read and check the initial dataset\r* Intermezzo: Nice visualization with SQL\r* Part 2: Prepare data structure\r* Part 3: Split data\r* Part 4: Create a linear regresson model\r* Part 5: Make predictions and evaluate the linear regression model\r",
       "user": "anonymous",
-      "dateUpdated": "2019-03-30 14:35:27.159",
+      "dateUpdated": "2019-04-27 08:27:48.083",
       "config": {
-        "tableHide": false,
+        "tableHide": true,
         "editorSetting": {
           "language": "markdown",
           "editOnDblClick": true
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
-        "editorHide": true,
+        "editorHide": false,
         "results": {},
-        "enabled": true
+        "enabled": true,
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -1176,7 +1177,9 @@
   "id": "2E6SUHN5X",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {},
+  "angularObjects": {
+    "spark:shared_process": []
+  },
   "config": {
     "isZeppelinNotebookCronEnable": false
   },
