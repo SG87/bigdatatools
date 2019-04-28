@@ -78,7 +78,7 @@ To start Hue:
 
 HDFS (and Portainer) will be started in the background. The Hue interface will run on *IP*:8088. Notice that after login it is possible that you receive an error page. It is recommended to browse directly to *IP*:8088/home
 
-### Spark:
+### Spark
 [Spark](https://spark.apache.org/) is marketing itself as a *Lightning-fast unified analytics engine* and allows to perform ETL, machine learning in batch an as streams. 
 
 Spark is a distributed tool and therefore a *master* and *worker* can be distinguished. To start the spark cluster (with one master and one worker):
@@ -98,7 +98,7 @@ The UI of Spark is located at *IP*:4040. Remark that this endpoint will only be 
 See above
 
 
-### Notebooks:
+### Notebooks
 Notebooks are tools that allow you to easily explore and work with data using analytics tools in your browser. In this environment Zeppelin and Jupyter are included.
 
 Notice that both notebooks run today in stand-alone mode.
