@@ -42,16 +42,16 @@
     {
       "text": "%md\n## Part 0: Load Modules\n\nPersonally, I prefer to load all the modules we need in a notebook before starting",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:17:53.988",
+      "dateUpdated": "2019-04-30 17:41:23.102",
       "config": {
-        "tableHide": true,
+        "tableHide": false,
         "editorSetting": {
           "language": "markdown",
           "editOnDblClick": true
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
-        "editorHide": false,
+        "editorHide": true,
         "results": {},
         "enabled": true,
         "fontSize": 9.0
@@ -73,20 +73,22 @@
       "jobName": "paragraph_1553956516558_872279427",
       "id": "20171028-204547_829622182",
       "dateCreated": "2019-03-30 14:35:16.558",
-      "dateStarted": "2019-04-15 19:17:54.282",
-      "dateFinished": "2019-04-15 19:17:54.292",
+      "dateStarted": "2019-04-30 17:41:23.106",
+      "dateFinished": "2019-04-30 17:41:25.159",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nimport os.path\nfrom pyspark.ml.feature import StringIndexer, VectorIndexer, VectorAssembler\nfrom pyspark.ml.classification import DecisionTreeClassifier\nfrom pyspark.ml.evaluation import MulticlassClassificationEvaluator\nfrom pyspark.sql.functions import col",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:17:54.371",
+      "dateUpdated": "2019-05-01 16:08:43.748",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "python",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -107,8 +109,8 @@
       "jobName": "paragraph_1553956516559_-1977897148",
       "id": "20171028-205136_1886193056",
       "dateCreated": "2019-03-30 14:35:16.559",
-      "dateStarted": "2019-04-15 19:17:54.582",
-      "dateFinished": "2019-04-15 19:18:12.756",
+      "dateStarted": "2019-05-01 16:08:44.061",
+      "dateFinished": "2019-05-01 16:08:57.761",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -154,7 +156,7 @@
     {
       "text": "%pyspark\n# Read in Data\n\nfile_name \u003d \u0027/data/iris.csv\u0027\n\nraw_data_df \u003d sqlContext.read.option(\"header\", True).csv(file_name)\n\nraw_data_df \u003d raw_data_df.select(col(\"species\"), *(col(c).cast(\"float\").alias(c) for c in raw_data_df.columns[0:-1]))",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:13.046",
+      "dateUpdated": "2019-05-01 16:08:48.677",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -162,7 +164,9 @@
         "enabled": true,
         "editorSetting": {
           "language": "python",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -181,7 +185,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d0"
+            "http://172.19.0.3:4040/jobs/job?id\u003d0"
           ],
           "interpreterSettingId": "spark"
         }
@@ -190,22 +194,25 @@
       "jobName": "paragraph_1553956516559_693132804",
       "id": "20171028-205249_1826262919",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-04-15 19:18:13.181",
-      "dateFinished": "2019-04-15 19:18:17.124",
+      "dateStarted": "2019-05-01 16:08:48.918",
+      "dateFinished": "2019-05-01 16:09:00.752",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nnum_points \u003d raw_data_df.count()\nprint num_points\nsample_points \u003d raw_data_df.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:17.197",
+      "dateUpdated": "2019-05-01 16:08:50.958",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
         "results": {},
         "enabled": true,
         "editorSetting": {
-          "language": "python"
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -229,8 +236,8 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d1",
-            "http://172.18.0.3:4040/jobs/job?id\u003d2"
+            "http://172.19.0.3:4040/jobs/job?id\u003d1",
+            "http://172.19.0.3:4040/jobs/job?id\u003d2"
           ],
           "interpreterSettingId": "spark"
         }
@@ -239,8 +246,8 @@
       "jobName": "paragraph_1553956516560_822462105",
       "id": "20171028-205427_1442324244",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-04-15 19:18:17.294",
-      "dateFinished": "2019-04-15 19:18:18.556",
+      "dateStarted": "2019-05-01 16:08:58.425",
+      "dateFinished": "2019-05-01 16:09:01.545",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -286,12 +293,14 @@
     {
       "text": "%pyspark\nraw_data_df.describe().show()",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:18.825",
+      "dateUpdated": "2019-05-01 16:09:08.655",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "python",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -320,7 +329,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d3"
+            "http://172.19.0.3:4040/jobs/job?id\u003d4"
           ],
           "interpreterSettingId": "spark"
         }
@@ -329,8 +338,8 @@
       "jobName": "paragraph_1553956516560_-702957580",
       "id": "20171028-214058_397404640",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-04-15 19:18:18.892",
-      "dateFinished": "2019-04-15 19:18:20.367",
+      "dateStarted": "2019-05-01 16:09:08.736",
+      "dateFinished": "2019-05-01 16:09:09.279",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -376,14 +385,17 @@
     {
       "text": "%pyspark\n# Save dataframe as a TempTable\nraw_data_df.registerTempTable(\"raw_data\")",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:20.646",
+      "dateUpdated": "2019-05-01 16:09:11.625",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
         "results": {},
         "enabled": true,
         "editorSetting": {
-          "language": "python"
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -399,26 +411,58 @@
       "jobName": "paragraph_1553956516561_-2016649384",
       "id": "20171028-225947_1197043878",
       "dateCreated": "2019-03-30 14:35:16.561",
-      "dateStarted": "2019-04-15 19:18:20.728",
-      "dateFinished": "2019-04-15 19:18:20.823",
+      "dateStarted": "2019-05-01 16:09:11.693",
+      "dateFinished": "2019-05-01 16:09:11.760",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%sql\nselect species, avg(petal_width)\nfrom raw_data\ngroup by species",
+      "text": "%sql\nselect species, avg(petal_width) as avg_petal_width\nfrom raw_data\ngroup by species",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:33.404",
+      "dateUpdated": "2019-05-01 16:05:56.337",
       "config": {
         "colWidth": 6.0,
         "editorMode": "ace/mode/sql",
         "results": {
           "0": {
             "graph": {
-              "mode": "multiBarChart",
+              "mode": "pieChart",
               "height": 300.0,
               "optionOpen": false,
               "setting": {
                 "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default",
+                  "stacked": false
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "species": "string",
+                      "avg_petal_width": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "pieChart": {},
+                "lineChart": {
                   "rotate": {
                     "degree": "-45"
                   },
@@ -436,7 +480,7 @@
               "groups": [],
               "values": [
                 {
-                  "name": "avg(petal_width)",
+                  "name": "avg_petal_width",
                   "index": 1.0,
                   "aggr": "sum"
                 }
@@ -447,7 +491,10 @@
         },
         "enabled": true,
         "editorSetting": {
-          "language": "sql"
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -460,7 +507,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "species\tavg(petal_width)\nvirginica\t2.0259999775886537\nversicolor\t1.3259999918937684\nsetosa\t0.24400000482797624\n"
+            "data": "species\tavg_petal_width\nvirginica\t2.026\nversicolor\t1.3259999999999998\nsetosa\t0.2439999999999999\n"
           },
           {
             "type": "TEXT",
@@ -468,35 +515,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d4",
-            "http://172.18.0.3:4040/jobs/job?id\u003d5",
-            "http://172.18.0.3:4040/jobs/job?id\u003d6",
-            "http://172.18.0.3:4040/jobs/job?id\u003d7",
-            "http://172.18.0.3:4040/jobs/job?id\u003d8"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1553956516561_777986406",
       "id": "20171028-230434_1558099602",
       "dateCreated": "2019-03-30 14:35:16.561",
-      "dateStarted": "2019-04-15 19:18:20.932",
-      "dateFinished": "2019-04-15 19:18:23.130",
+      "dateStarted": "2019-05-01 16:05:42.614",
+      "dateFinished": "2019-05-01 16:05:43.485",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect  petal_length, petal_width, sepal_width, petal_width, species\nfrom raw_data\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:23.147",
+      "dateUpdated": "2019-05-01 16:04:04.168",
       "config": {
         "colWidth": 6.0,
         "editorMode": "ace/mode/sql",
@@ -526,7 +557,10 @@
         },
         "enabled": true,
         "editorSetting": {
-          "language": "sql"
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -547,40 +581,28 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d9"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1553956516562_1425279083",
       "id": "20171028-230532_1530379443",
       "dateCreated": "2019-03-30 14:35:16.562",
-      "dateStarted": "2019-04-15 19:18:23.244",
-      "dateFinished": "2019-04-15 19:18:23.512",
+      "dateStarted": "2019-05-01 16:04:04.242",
+      "dateFinished": "2019-05-01 16:04:04.432",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 2: Prepare data structure\n\nA Spark ML Decision Tree (and most other ML models) require two input columns an **labelCol** and **featuresCol**. In this specific case, the labelColl is the species column. In Part 1 is shown that _species_ is a string variable so no mean and stddev can be calculated. More importantly, the decision tree classifier in Spark does not allow string variables as dependent variable. Therefore we are going to transform the _species_ variable from string to float.\nNext to that, there are multiple columns containing independent variables (sepal_length, sepal_with, petal_length, petal_width). These variables need to be combined into a featureCol that contains a vector (\u003dlist). In this Part, two things are done:\n\n* Transforming the _species_ columns from string to numeric\n* Combining the independent variables in one feature column",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:23.544",
+      "dateUpdated": "2019-04-30 17:44:37.157",
       "config": {
-        "tableHide": true,
+        "tableHide": false,
         "editorSetting": {
           "language": "markdown",
           "editOnDblClick": true
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
-        "editorHide": false,
+        "editorHide": true,
         "results": {},
         "enabled": true,
         "fontSize": 9.0
@@ -602,8 +624,8 @@
       "jobName": "paragraph_1553956516562_113990241",
       "id": "20171028-215104_1409181389",
       "dateCreated": "2019-03-30 14:35:16.562",
-      "dateStarted": "2019-04-15 19:18:23.695",
-      "dateFinished": "2019-04-15 19:18:23.776",
+      "dateStarted": "2019-04-30 17:44:37.162",
+      "dateFinished": "2019-04-30 17:44:37.210",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -649,12 +671,14 @@
     {
       "text": "%pyspark\n# Fit on whole dataset to include all labels in index.\nlabelIndexer \u003d StringIndexer(inputCol\u003d\"species\", outputCol\u003d\"label\").fit(raw_data_df)\n\n# Apply labelIndexer \u003d mapping or model\nlabeled_data_df \u003d labelIndexer.transform(raw_data_df)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:24.060",
+      "dateUpdated": "2019-05-01 16:09:14.908",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "python",
-          "editOnDblClick": true
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -678,7 +702,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d10"
+            "http://172.19.0.3:4040/jobs/job?id\u003d5"
           ],
           "interpreterSettingId": "spark"
         }
@@ -687,15 +711,15 @@
       "jobName": "paragraph_1553956516563_2024986580",
       "id": "20171028-223155_2042779534",
       "dateCreated": "2019-03-30 14:35:16.563",
-      "dateStarted": "2019-04-15 19:18:24.133",
-      "dateFinished": "2019-04-15 19:18:24.861",
+      "dateStarted": "2019-05-01 16:09:14.984",
+      "dateFinished": "2019-05-01 16:09:15.527",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Show the results of the index transformation\nlabeled_data_df.show(5)\nlabeled_data_df.describe().show()\nlabeled_data_df.groupBy(\"species\", \"label\").count().show()",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:24.939",
+      "dateUpdated": "2019-05-01 16:09:17.134",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -703,7 +727,9 @@
         "enabled": true,
         "editorSetting": {
           "language": "python",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -727,13 +753,13 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d11",
-            "http://172.18.0.3:4040/jobs/job?id\u003d12",
-            "http://172.18.0.3:4040/jobs/job?id\u003d13",
-            "http://172.18.0.3:4040/jobs/job?id\u003d14",
-            "http://172.18.0.3:4040/jobs/job?id\u003d15",
-            "http://172.18.0.3:4040/jobs/job?id\u003d16",
-            "http://172.18.0.3:4040/jobs/job?id\u003d17"
+            "http://172.19.0.3:4040/jobs/job?id\u003d6",
+            "http://172.19.0.3:4040/jobs/job?id\u003d7",
+            "http://172.19.0.3:4040/jobs/job?id\u003d8",
+            "http://172.19.0.3:4040/jobs/job?id\u003d9",
+            "http://172.19.0.3:4040/jobs/job?id\u003d10",
+            "http://172.19.0.3:4040/jobs/job?id\u003d11",
+            "http://172.19.0.3:4040/jobs/job?id\u003d12"
           ],
           "interpreterSettingId": "spark"
         }
@@ -742,8 +768,8 @@
       "jobName": "paragraph_1553956516563_-824105689",
       "id": "20171028-220131_246138058",
       "dateCreated": "2019-03-30 14:35:16.563",
-      "dateStarted": "2019-04-15 19:18:25.018",
-      "dateFinished": "2019-04-15 19:18:27.303",
+      "dateStarted": "2019-05-01 16:09:17.192",
+      "dateFinished": "2019-05-01 16:09:20.151",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -789,14 +815,17 @@
     {
       "text": "%pyspark\nparsed_data_df \u003d (VectorAssembler(inputCols\u003dlabeled_data_df.columns[1:-1], outputCol\u003d\"features\")\n                    .transform(labeled_data_df))\n\nparsed_data_df.sample(False, 0.03333, seed\u003d0).show(truncate\u003dFalse)\n\nparsed_data_df \u003d parsed_data_df.select(\"label\", \"features\")\nparsed_data_df.show(5, truncate\u003dFalse)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:27.504",
+      "dateUpdated": "2019-05-01 16:09:21.449",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
         "results": {},
         "enabled": true,
         "editorSetting": {
-          "language": "python"
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -820,8 +849,8 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d18",
-            "http://172.18.0.3:4040/jobs/job?id\u003d19"
+            "http://172.19.0.3:4040/jobs/job?id\u003d13",
+            "http://172.19.0.3:4040/jobs/job?id\u003d14"
           ],
           "interpreterSettingId": "spark"
         }
@@ -830,8 +859,8 @@
       "jobName": "paragraph_1553956516564_-2136902774",
       "id": "20171028-220204_1244153646",
       "dateCreated": "2019-03-30 14:35:16.564",
-      "dateStarted": "2019-04-15 19:18:27.559",
-      "dateFinished": "2019-04-15 19:18:28.045",
+      "dateStarted": "2019-05-01 16:09:21.512",
+      "dateFinished": "2019-05-01 16:09:21.974",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -877,7 +906,7 @@
     {
       "text": "%pyspark\nweights \u003d [.8, .1, .1]\nseed \u003d 42\nparsed_train_data_df, parsed_val_data_df, parsed_test_data_df \u003d parsed_data_df.randomSplit(weights, seed\u003dseed)\n\n# caching\nparsed_train_data_df.cache()\nparsed_val_data_df.cache()\nparsed_test_data_df.cache()\n\n# Checking is split is done correctly\nn_train \u003d parsed_train_data_df.count()\nn_val \u003d parsed_val_data_df.count()\nn_test \u003d parsed_test_data_df.count()\n\nprint n_train, n_val, n_test, n_train + n_val + n_test\nprint parsed_data_df.count()\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:28.322",
+      "dateUpdated": "2019-05-01 16:09:28.777",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -885,7 +914,9 @@
         "enabled": true,
         "editorSetting": {
           "language": "python",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -909,10 +940,10 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d20",
-            "http://172.18.0.3:4040/jobs/job?id\u003d21",
-            "http://172.18.0.3:4040/jobs/job?id\u003d22",
-            "http://172.18.0.3:4040/jobs/job?id\u003d23"
+            "http://172.19.0.3:4040/jobs/job?id\u003d15",
+            "http://172.19.0.3:4040/jobs/job?id\u003d16",
+            "http://172.19.0.3:4040/jobs/job?id\u003d17",
+            "http://172.19.0.3:4040/jobs/job?id\u003d18"
           ],
           "interpreterSettingId": "spark"
         }
@@ -921,8 +952,8 @@
       "jobName": "paragraph_1553956516564_-2046242012",
       "id": "20171028-225143_607359770",
       "dateCreated": "2019-03-30 14:35:16.565",
-      "dateStarted": "2019-04-15 19:18:28.505",
-      "dateFinished": "2019-04-15 19:18:29.760",
+      "dateStarted": "2019-05-01 16:09:28.850",
+      "dateFinished": "2019-05-01 16:09:29.816",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -968,14 +999,17 @@
     {
       "text": "%pyspark\n\n# Initialize the DecisionTree model\ndt \u003d DecisionTreeClassifier(labelCol\u003d\"label\", featuresCol\u003d\"features\")\n\n# Train model.\nmodel \u003d dt.fit(parsed_train_data_df)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:30.098",
+      "dateUpdated": "2019-05-01 16:09:47.222",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
         "results": {},
         "enabled": true,
         "editorSetting": {
-          "language": "python"
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -994,14 +1028,14 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d24",
-            "http://172.18.0.3:4040/jobs/job?id\u003d25",
-            "http://172.18.0.3:4040/jobs/job?id\u003d26",
-            "http://172.18.0.3:4040/jobs/job?id\u003d27",
-            "http://172.18.0.3:4040/jobs/job?id\u003d28",
-            "http://172.18.0.3:4040/jobs/job?id\u003d29",
-            "http://172.18.0.3:4040/jobs/job?id\u003d30",
-            "http://172.18.0.3:4040/jobs/job?id\u003d31"
+            "http://172.19.0.3:4040/jobs/job?id\u003d19",
+            "http://172.19.0.3:4040/jobs/job?id\u003d20",
+            "http://172.19.0.3:4040/jobs/job?id\u003d21",
+            "http://172.19.0.3:4040/jobs/job?id\u003d22",
+            "http://172.19.0.3:4040/jobs/job?id\u003d23",
+            "http://172.19.0.3:4040/jobs/job?id\u003d24",
+            "http://172.19.0.3:4040/jobs/job?id\u003d25",
+            "http://172.19.0.3:4040/jobs/job?id\u003d26"
           ],
           "interpreterSettingId": "spark"
         }
@@ -1010,24 +1044,25 @@
       "jobName": "paragraph_1553956516565_955044741",
       "id": "20171028-225156_1962219966",
       "dateCreated": "2019-03-30 14:35:16.565",
-      "dateStarted": "2019-04-15 19:18:30.228",
-      "dateFinished": "2019-04-15 19:18:31.267",
+      "dateStarted": "2019-05-01 16:09:47.285",
+      "dateFinished": "2019-05-01 16:09:48.175",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 5: Make predictions and evaluate the decision tree model\n\nAfter fitting the model on the training data the model needs to be applied on the validation and test dataframes. It is done with the `transform()` method and will results in predictions. In this case there is also a prediction made for the train dataframe. The reasons for making these predictions is twofold:\n\n* Evaluating the model\n* Using predictions in the remainder of the data science pipeline",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:31.326",
+      "dateUpdated": "2019-05-01 16:09:50.178",
       "config": {
-        "tableHide": true,
+        "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
-        "editorHide": false,
+        "editorHide": true,
         "results": {},
         "enabled": true,
         "fontSize": 9.0
@@ -1049,22 +1084,25 @@
       "jobName": "paragraph_1553956516566_1370738190",
       "id": "20171028-225641_1315678238",
       "dateCreated": "2019-03-30 14:35:16.566",
-      "dateStarted": "2019-04-15 19:18:31.447",
-      "dateFinished": "2019-04-15 19:18:31.506",
+      "dateStarted": "2019-05-01 16:09:50.181",
+      "dateFinished": "2019-05-01 16:09:52.105",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Make predictions.\ntrain_predictions \u003d model.transform(parsed_train_data_df)\nval_predictions \u003d model.transform(parsed_val_data_df)\ntest_predictions \u003d model.transform(parsed_test_data_df)\n\n#Show predictions\ntest_predictions.select(\"prediction\", \"label\", \"features\").show()",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:31.531",
+      "dateUpdated": "2019-05-01 16:09:52.689",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
         "results": {},
         "enabled": true,
         "editorSetting": {
-          "language": "python"
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -1088,7 +1126,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d32"
+            "http://172.19.0.3:4040/jobs/job?id\u003d27"
           ],
           "interpreterSettingId": "spark"
         }
@@ -1097,8 +1135,8 @@
       "jobName": "paragraph_1553956516566_-857055827",
       "id": "20171028-225412_1099070164",
       "dateCreated": "2019-03-30 14:35:16.566",
-      "dateStarted": "2019-04-15 19:18:31.715",
-      "dateFinished": "2019-04-15 19:18:32.203",
+      "dateStarted": "2019-05-01 16:09:52.733",
+      "dateFinished": "2019-05-01 16:09:53.005",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -1144,14 +1182,17 @@
     {
       "text": "%pyspark\n# Evaluate\n# Select (prediction, true label) and compute test error\nevaluator \u003d MulticlassClassificationEvaluator(labelCol\u003d\"label\", predictionCol\u003d\"prediction\", metricName\u003d\"accuracy\")\n\ntrain_accuracy \u003d evaluator.evaluate(train_predictions)\nval_accuracy \u003d evaluator.evaluate(val_predictions)\ntest_accuracy \u003d evaluator.evaluate(test_predictions)\n\nprint(\"Train accuracy \u003d %g \" % (train_accuracy))\nprint(\"Validation accuracy \u003d %g \" % (val_accuracy))\nprint(\"Test accuracy \u003d %g \" % (test_accuracy))\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:32.441",
+      "dateUpdated": "2019-05-01 16:10:00.905",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
         "results": {},
         "enabled": true,
         "editorSetting": {
-          "language": "python"
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
         },
         "fontSize": 9.0
       },
@@ -1175,12 +1216,12 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.18.0.3:4040/jobs/job?id\u003d33",
-            "http://172.18.0.3:4040/jobs/job?id\u003d34",
-            "http://172.18.0.3:4040/jobs/job?id\u003d35",
-            "http://172.18.0.3:4040/jobs/job?id\u003d36",
-            "http://172.18.0.3:4040/jobs/job?id\u003d37",
-            "http://172.18.0.3:4040/jobs/job?id\u003d38"
+            "http://172.19.0.3:4040/jobs/job?id\u003d28",
+            "http://172.19.0.3:4040/jobs/job?id\u003d29",
+            "http://172.19.0.3:4040/jobs/job?id\u003d30",
+            "http://172.19.0.3:4040/jobs/job?id\u003d31",
+            "http://172.19.0.3:4040/jobs/job?id\u003d32",
+            "http://172.19.0.3:4040/jobs/job?id\u003d33"
           ],
           "interpreterSettingId": "spark"
         }
@@ -1189,9 +1230,25 @@
       "jobName": "paragraph_1553956516567_-392610063",
       "id": "20171028-225432_1139492683",
       "dateCreated": "2019-03-30 14:35:16.567",
-      "dateStarted": "2019-04-15 19:18:32.572",
-      "dateFinished": "2019-04-15 19:18:33.280",
+      "dateStarted": "2019-05-01 16:10:00.955",
+      "dateFinished": "2019-05-01 16:10:01.670",
       "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-04-30 17:46:56.734",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1556646416733_-750708772",
+      "id": "20190430-174656_453234259",
+      "dateCreated": "2019-04-30 17:46:56.733",
+      "status": "READY",
       "progressUpdateIntervalMs": 500
     }
   ],
