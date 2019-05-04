@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "3e2d8e2d-8209-4eeb-92ad-d23e9fc172e2",
+		"name": "IESEG - Big Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ML in production",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://0.0.0.0:5000/predictFlower?sepalLength=5&sepalWidth=4&petalLength=1&petalWidth=0.5",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "5000",
+					"path": [
+						"predictFlower"
+					],
+					"query": [
+						{
+							"key": "sepalLength",
+							"value": "5"
+						},
+						{
+							"key": "sepalWidth",
+							"value": "4"
+						},
+						{
+							"key": "petalLength",
+							"value": "1"
+						},
+						{
+							"key": "petalWidth",
+							"value": "0.5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,225 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Spark ML in an API\nAfter creating a model, the model needs to be accessible. A good way to make a model accessible is by using a REST API. \nIn this example we are going to build a **Flask API** that is going to predict the flower species together with its probability based on the *sepal length, sepal width, petal length and petal width*.",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 18:50:15.756",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eSpark ML in an API\u003c/h1\u003e\n\u003cp\u003eAfter creating a model, the model needs to be accessible. A good way to make a model accessible is by using a REST API.\u003cbr/\u003eIn this example we are going to build a \u003cstrong\u003eFlask API\u003c/strong\u003e that is going to predict the flower species together with its probability based on the \u003cem\u003esepal length, sepal width, petal length and petal width\u003c/em\u003e.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556995638859_669932857",
+      "id": "20190504-184718_177105990",
+      "dateCreated": "2019-05-04 18:47:18.859",
+      "dateStarted": "2019-05-04 18:50:15.756",
+      "dateFinished": "2019-05-04 18:50:15.791",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nFlask is not yet installed in the Zeppelin Docker environment. Install it using *pip*.",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 18:51:03.814",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eFlask is not yet installed in the Zeppelin Docker environment. Install it using \u003cem\u003epip\u003c/em\u003e.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556995823276_-1008069587",
+      "id": "20190504-185023_1657831589",
+      "dateCreated": "2019-05-04 18:50:23.276",
+      "dateStarted": "2019-05-04 18:51:03.803",
+      "dateFinished": "2019-05-04 18:51:03.835",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\npip install flask",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 18:43:08.671",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Requirement already satisfied (use --upgrade to upgrade): flask in /opt/conda/lib/python2.7/site-packages\nRequirement already satisfied (use --upgrade to upgrade): Jinja2\u003e\u003d2.10 in /opt/conda/lib/python2.7/site-packages (from flask)\nRequirement already satisfied (use --upgrade to upgrade): itsdangerous\u003e\u003d0.24 in /opt/conda/lib/python2.7/site-packages (from flask)\nRequirement already satisfied (use --upgrade to upgrade): Werkzeug\u003e\u003d0.14 in /opt/conda/lib/python2.7/site-packages (from flask)\nRequirement already satisfied (use --upgrade to upgrade): click\u003e\u003d5.1 in /opt/conda/lib/python2.7/site-packages (from flask)\nRequirement already satisfied (use --upgrade to upgrade): MarkupSafe\u003e\u003d0.23 in /opt/conda/lib/python2.7/site-packages (from Jinja2\u003e\u003d2.10-\u003eflask)\nYou are using pip version 8.1.2, however version 19.1 is available.\nYou should consider upgrading via the \u0027pip install --upgrade pip\u0027 command.\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556992542211_-183747115",
+      "id": "20190504-175542_382635864",
+      "dateCreated": "2019-05-04 17:55:42.211",
+      "dateStarted": "2019-05-04 18:43:08.740",
+      "dateFinished": "2019-05-04 18:43:11.066",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nIn the cell below, a Flask app is created. The API is exposing an */predictFlower* GET endpoint.\n\nSteps executed once when the Flask app is started:\n- Importing modules\n- Initializing a Flask app\n- Loading the Spark ML model (Decision Tree)\n\nSteps executed in real-time when calling the endpoint:\n- Reading in the parameters\n* Creating a Spark DataFrame\n* Creating a \"features\" vector using the VectorAssembler\n* Scoring the Spark ML model\n* Transforming the result to a dictionary\n* Returning the results as a JSON object",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 18:56:55.088",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eIn the cell below, a Flask app is created. The API is exposing an \u003cem\u003e/predictFlower\u003c/em\u003e GET endpoint.\u003c/p\u003e\n\u003cp\u003eSteps executed once when the Flask app is started:\u003cbr/\u003e- Importing modules\u003cbr/\u003e- Initializing a Flask app\u003cbr/\u003e- Loading the Spark ML model (Decision Tree)\u003c/p\u003e\n\u003cp\u003eSteps executed in real-time when calling the endpoint:\u003cbr/\u003e- Reading in the parameters\u003cbr/\u003e* Creating a Spark DataFrame\u003cbr/\u003e* Creating a \u0026ldquo;features\u0026rdquo; vector using the VectorAssembler\u003cbr/\u003e* Scoring the Spark ML model\u003cbr/\u003e* Transforming the result to a dictionary\u003cbr/\u003e* Returning the results as a JSON object\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556995869189_-1022252107",
+      "id": "20190504-185109_1837853396",
+      "dateCreated": "2019-05-04 18:51:09.189",
+      "dateStarted": "2019-05-04 18:56:55.089",
+      "dateFinished": "2019-05-04 18:56:55.114",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nfrom flask import Flask, jsonify, request\nfrom pyspark.ml.classification import  DecisionTreeClassificationModel\nfrom pyspark.ml.feature import VectorAssembler\n\napp \u003d Flask(__name__)\n\nmodel \u003d DecisionTreeClassificationModel.load(\"/data/models/decisionTree\")\n\n@app.route(\u0027/predictFlower\u0027, methods\u003d[\"GET\"])\ndef predictFlower():\n    sepal_length \u003d float(request.args.get(\u0027sepalLength\u0027))\n    sepal_width \u003d float(request.args.get(\u0027sepalWidth\u0027))\n    petal_length \u003d float(request.args.get(\u0027petalLength\u0027))\n    petal_width \u003d float(request.args.get(\u0027petalWidth\u0027))\n    \n    df \u003d spark.createDataFrame([[sepal_length, sepal_width, petal_length, petal_width]], schema\u003d[\"sepal_length\", \"sepal_width\", \"petal_length\", \"petal_width\"])\n    df \u003d VectorAssembler(inputCols\u003ddf.columns, outputCol\u003d\"features\").transform(df)\n\n    res \u003d model.transform(df)\n    resCollected \u003d res.collect()[0]\n    prediction \u003d {\n        \"label\": resCollected[\"prediction\"],\n        \"probability\": list(resCollected[\"probability\"]),\n    }\n    \n    if prediction[\"label\"] \u003d\u003d 0.0: prediction[\"species\"] \u003d \"versicolor\"\n    elif prediction[\"label\"] \u003d\u003d 1.0: prediction[\"species\"] \u003d \"setosa\"\n    elif prediction[\"label\"] \u003d\u003d 2.0: prediction[\"species\"] \u003d \"virginica\"\n    else: prediction[\"species\"] \u003d None\n    \n    return jsonify(prediction)\n    \nif __name__ \u003d\u003d \u0027__main__\u0027:\n    app.run(host\u003d\u00270.0.0.0\u0027, threaded\u003dTrue)\n    \n    ",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 18:43:11.160",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1556992562499_1061268987",
+      "id": "20190504-175602_174456528",
+      "dateCreated": "2019-05-04 17:56:02.499",
+      "dateStarted": "2019-05-04 18:29:28.411",
+      "status": "ABORT",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 18:20:28.177",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1556994028177_270695594",
+      "id": "20190504-182028_1127987313",
+      "dateCreated": "2019-05-04 18:20:28.177",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Spark ML/6 - ML in production",
+  "id": "2EBK9YXUG",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "sh:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
