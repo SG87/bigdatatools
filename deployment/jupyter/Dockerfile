@@ -12,7 +12,7 @@ RUN apt-get install -y --no-install-recommends \
     wget \
     liblapack-dev \
     libopenblas-dev
-RUN  pip3 install numpy pandasql scipy jupyter tensorflow faker stopwords tweepy kafka torch torchvision stopwords
+RUN  pip3 install numpy pandasql scipy jupyter tensorflow faker stopwords tweepy kafka torch torchvision stopwords stop_words
 
 # Jupyter
 

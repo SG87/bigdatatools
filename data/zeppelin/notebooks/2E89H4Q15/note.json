@@ -1,14 +1,15 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n# Decission Tree Classifier\n\n.\u003ccenter\u003e![ML Logo](http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png)\u003c/center\u003e\n\n\nThis lab covers a common supervised learning pipeline, using the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris) from the _UCI Machine Learning Repository_. Our goal is to train a Decission Tree model to predict the flower species. \n\nMore information about Decision Tree Classifier can be found on  for example the [Scikit-learn page](http://scikit-learn.org/stable/modules/tree.html). In the end, the decision classifier will have a similar structure as the shown in the image below.\n\n. \u003ccenter\u003e ![Iris Decision Tree](https://pythonmachinelearning.pro/wp-content/uploads/2017/11/Decision-Tree-Iris-Dataset.png) \u003c/center\u003e\n\n## This lab will cover:\n\n* Part 0: Load modules\n* Part 1: Read and check the initial dataset\n* Intermezzo: Nice visualization with SQL\n* Part 2: Prepare data structure\n* Part 3: Split data\n* Part 4: Create a decision tree model\n* Part 5: Make predictions and evaluate the decision tree model\n\n\n\u003e Note that, for reference, you can look up the details of the relevant Spark methods in [Spark\u0027s DataFrame Python API](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame)",
+      "text": "%md\n# Decission Tree Classifier\n\n.\u003ccenter\u003e![ML Logo](http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png)\u003c/center\u003e\n\n\nThis lab covers a common supervised learning pipeline, using the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris) from the _UCI Machine Learning Repository_. Our goal is to train a Decission Tree model to predict the flower species. \n\nMore information about Decision Tree Classifier can be found on  for example the [Scikit-learn page](http://scikit-learn.org/stable/modules/tree.html). In the end, the decision classifier will have a similar structure as the shown in the image below.\n\n. \u003ccenter\u003e ![Iris Decision Tree](https://pythonmachinelearning.pro/wp-content/uploads/2017/11/Decision-Tree-Iris-Dataset.png) \u003c/center\u003e\n\n## This lab will cover:\n\n* Part 0: Load modules\n* Part 1: Read and check the initial dataset\n* Intermezzo: Nice visualization with SQL\n* Part 2: Prepare data structure\n* Part 3: Split data\n* Part 4: Create a decision tree model\n* Part 5: Make predictions and evaluate the decision tree model\n* Part 6: Save and load a the created model\n\n\n\u003e Note that, for reference, you can look up the details of the relevant Spark methods in [Spark\u0027s DataFrame Python API](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame)",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:22:20.558",
+      "dateUpdated": "2019-05-04 17:05:21.702",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
@@ -26,7 +27,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eDecission Tree Classifier\u003c/h1\u003e\n\u003cp\u003e.\u003ccenter\u003e\u003cimg src\u003d\"http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png\" alt\u003d\"ML Logo\" /\u003e\u003c/center\u003e\u003c/p\u003e\n\u003cp\u003eThis lab covers a common supervised learning pipeline, using the \u003ca href\u003d\"https://archive.ics.uci.edu/ml/datasets/iris\"\u003eIris dataset\u003c/a\u003e from the \u003cem\u003eUCI Machine Learning Repository\u003c/em\u003e. Our goal is to train a Decission Tree model to predict the flower species. \u003c/p\u003e\n\u003cp\u003eMore information about Decision Tree Classifier can be found on for example the \u003ca href\u003d\"http://scikit-learn.org/stable/modules/tree.html\"\u003eScikit-learn page\u003c/a\u003e. In the end, the decision classifier will have a similar structure as the shown in the image below.\u003c/p\u003e\n\u003cp\u003e. \u003ccenter\u003e \u003cimg src\u003d\"https://pythonmachinelearning.pro/wp-content/uploads/2017/11/Decision-Tree-Iris-Dataset.png\" alt\u003d\"Iris Decision Tree\" /\u003e \u003c/center\u003e\u003c/p\u003e\n\u003ch2\u003eThis lab will cover:\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003ePart 0: Load modules\u003c/li\u003e\n  \u003cli\u003ePart 1: Read and check the initial dataset\u003c/li\u003e\n  \u003cli\u003eIntermezzo: Nice visualization with SQL\u003c/li\u003e\n  \u003cli\u003ePart 2: Prepare data structure\u003c/li\u003e\n  \u003cli\u003ePart 3: Split data\u003c/li\u003e\n  \u003cli\u003ePart 4: Create a decision tree model\u003c/li\u003e\n  \u003cli\u003ePart 5: Make predictions and evaluate the decision tree model\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote that, for reference, you can look up the details of the relevant Spark methods in \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame\"\u003eSpark\u0026rsquo;s DataFrame Python API\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eDecission Tree Classifier\u003c/h1\u003e\n\u003cp\u003e.\u003ccenter\u003e\u003cimg src\u003d\"http://spark-mooc.github.io/web-assets/images/CS190.1x_Banner_300.png\" alt\u003d\"ML Logo\" /\u003e\u003c/center\u003e\u003c/p\u003e\n\u003cp\u003eThis lab covers a common supervised learning pipeline, using the \u003ca href\u003d\"https://archive.ics.uci.edu/ml/datasets/iris\"\u003eIris dataset\u003c/a\u003e from the \u003cem\u003eUCI Machine Learning Repository\u003c/em\u003e. Our goal is to train a Decission Tree model to predict the flower species. \u003c/p\u003e\n\u003cp\u003eMore information about Decision Tree Classifier can be found on for example the \u003ca href\u003d\"http://scikit-learn.org/stable/modules/tree.html\"\u003eScikit-learn page\u003c/a\u003e. In the end, the decision classifier will have a similar structure as the shown in the image below.\u003c/p\u003e\n\u003cp\u003e. \u003ccenter\u003e \u003cimg src\u003d\"https://pythonmachinelearning.pro/wp-content/uploads/2017/11/Decision-Tree-Iris-Dataset.png\" alt\u003d\"Iris Decision Tree\" /\u003e \u003c/center\u003e\u003c/p\u003e\n\u003ch2\u003eThis lab will cover:\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003ePart 0: Load modules\u003c/li\u003e\n  \u003cli\u003ePart 1: Read and check the initial dataset\u003c/li\u003e\n  \u003cli\u003eIntermezzo: Nice visualization with SQL\u003c/li\u003e\n  \u003cli\u003ePart 2: Prepare data structure\u003c/li\u003e\n  \u003cli\u003ePart 3: Split data\u003c/li\u003e\n  \u003cli\u003ePart 4: Create a decision tree model\u003c/li\u003e\n  \u003cli\u003ePart 5: Make predictions and evaluate the decision tree model\u003c/li\u003e\n  \u003cli\u003ePart 6: Save and load a the created model\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n  \u003cp\u003eNote that, for reference, you can look up the details of the relevant Spark methods in \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame\"\u003eSpark\u0026rsquo;s DataFrame Python API\u003c/a\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -34,20 +35,21 @@
       "jobName": "paragraph_1553956516558_-373736076",
       "id": "20171002-133231_119894138",
       "dateCreated": "2019-03-30 14:35:16.558",
-      "dateStarted": "2019-04-15 19:22:20.558",
-      "dateFinished": "2019-04-15 19:22:20.585",
+      "dateStarted": "2019-05-04 17:05:21.700",
+      "dateFinished": "2019-05-04 17:05:21.712",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 0: Load Modules\n\nPersonally, I prefer to load all the modules we need in a notebook before starting",
       "user": "anonymous",
-      "dateUpdated": "2019-04-30 17:41:23.102",
+      "dateUpdated": "2019-05-04 16:48:48.398",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
@@ -73,15 +75,15 @@
       "jobName": "paragraph_1553956516558_872279427",
       "id": "20171028-204547_829622182",
       "dateCreated": "2019-03-30 14:35:16.558",
-      "dateStarted": "2019-04-30 17:41:23.106",
-      "dateFinished": "2019-04-30 17:41:25.159",
+      "dateStarted": "2019-05-04 16:48:48.447",
+      "dateFinished": "2019-05-04 16:48:48.452",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%pyspark\nimport os.path\nfrom pyspark.ml.feature import StringIndexer, VectorIndexer, VectorAssembler\nfrom pyspark.ml.classification import DecisionTreeClassifier\nfrom pyspark.ml.evaluation import MulticlassClassificationEvaluator\nfrom pyspark.sql.functions import col",
+      "text": "%pyspark\nimport os.path\nfrom pyspark.ml.feature import StringIndexer, VectorIndexer, VectorAssembler\nfrom pyspark.ml.classification import DecisionTreeClassifier, DecisionTreeClassificationModel\nfrom pyspark.ml.evaluation import MulticlassClassificationEvaluator\nfrom pyspark.sql.functions import col",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:08:43.748",
+      "dateUpdated": "2019-05-04 16:48:48.547",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -109,15 +111,15 @@
       "jobName": "paragraph_1553956516559_-1977897148",
       "id": "20171028-205136_1886193056",
       "dateCreated": "2019-03-30 14:35:16.559",
-      "dateStarted": "2019-05-01 16:08:44.061",
-      "dateFinished": "2019-05-01 16:08:57.761",
+      "dateStarted": "2019-05-04 16:48:48.590",
+      "dateFinished": "2019-05-04 16:48:48.634",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 1: Read and check the initial dataset\n\n### (1a) Load and check the data\n\nThe raw data is currently stored in csv file.  We will start by reading this raw data in as a DataFrame. In the same cell, the numeric columns (sepal_length, sepal_width, petal_length, and petal_witdth) are transformed from string to float.\n\nIn the second cell, the DataFrame [`count()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.count) is used to check how many data points we have.  Then we use the `show()` method to see whether DataFrame is correctly created.",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:12.775",
+      "dateUpdated": "2019-05-04 16:48:48.689",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -148,15 +150,15 @@
       "jobName": "paragraph_1553956516559_-638663298",
       "id": "20171028-213719_990326359",
       "dateCreated": "2019-03-30 14:35:16.559",
-      "dateStarted": "2019-04-15 19:18:12.946",
-      "dateFinished": "2019-04-15 19:18:12.963",
+      "dateStarted": "2019-05-04 16:48:48.737",
+      "dateFinished": "2019-05-04 16:48:48.747",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%pyspark\n# Read in Data\n\nfile_name \u003d \u0027/data/iris.csv\u0027\n\nraw_data_df \u003d sqlContext.read.option(\"header\", True).csv(file_name)\n\nraw_data_df \u003d raw_data_df.select(col(\"species\"), *(col(c).cast(\"float\").alias(c) for c in raw_data_df.columns[0:-1]))",
+      "text": "%pyspark\n# Read in Data\n\nfile_name \u003d \u0027/data/iris.csv\u0027\n\nraw_data_df \u003d sqlContext.read.option(\"header\", True).csv(file_name)\n\nraw_data_df \u003d raw_data_df.select(col(\"species\"), *(col(c).cast(\"float\").alias(c) for c in raw_data_df.columns[0:-1]))\nraw_data_df.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:08:48.677",
+      "dateUpdated": "2019-05-04 16:48:48.837",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -168,7 +170,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -176,7 +180,12 @@
       },
       "results": {
         "code": "SUCCESS",
-        "msg": []
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- species: string (nullable \u003d true)\n |-- sepal_length: float (nullable \u003d true)\n |-- sepal_width: float (nullable \u003d true)\n |-- petal_length: float (nullable \u003d true)\n |-- petal_width: float (nullable \u003d true)\n\n"
+          }
+        ]
       },
       "runtimeInfos": {
         "jobUrl": {
@@ -185,7 +194,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d0"
+            "http://172.18.0.3:4040/jobs/job?id\u003d111"
           ],
           "interpreterSettingId": "spark"
         }
@@ -194,15 +203,15 @@
       "jobName": "paragraph_1553956516559_693132804",
       "id": "20171028-205249_1826262919",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-05-01 16:08:48.918",
-      "dateFinished": "2019-05-01 16:09:00.752",
+      "dateStarted": "2019-05-04 16:48:48.908",
+      "dateFinished": "2019-05-04 16:48:49.166",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nnum_points \u003d raw_data_df.count()\nprint num_points\nsample_points \u003d raw_data_df.show(5)",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:08:50.958",
+      "dateUpdated": "2019-05-04 16:48:49.209",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -214,7 +223,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -236,8 +247,8 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d1",
-            "http://172.19.0.3:4040/jobs/job?id\u003d2"
+            "http://172.18.0.3:4040/jobs/job?id\u003d112",
+            "http://172.18.0.3:4040/jobs/job?id\u003d113"
           ],
           "interpreterSettingId": "spark"
         }
@@ -246,15 +257,15 @@
       "jobName": "paragraph_1553956516560_822462105",
       "id": "20171028-205427_1442324244",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-05-01 16:08:58.425",
-      "dateFinished": "2019-05-01 16:09:01.545",
+      "dateStarted": "2019-05-04 16:48:49.302",
+      "dateFinished": "2019-05-04 16:48:49.617",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### (1b) Descriptive statistics\n\nBefore starting to create a decision tree, the data need to be checked and cleaned. The [`describe()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.describe) together with the `show()` method are used to visualize the results.\n\n\u003e As this tutorial foucsses mainly on an introduction to machine learning wiht Spark dataframes, no data cleansing and transformation is done. These topics will be covered in other courses.\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:18.602",
+      "dateUpdated": "2019-05-04 16:48:49.705",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -285,15 +296,15 @@
       "jobName": "paragraph_1553956516560_-1697849405",
       "id": "20171028-214022_1041473355",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-04-15 19:18:18.726",
-      "dateFinished": "2019-04-15 19:18:18.743",
+      "dateStarted": "2019-05-04 16:48:50.270",
+      "dateFinished": "2019-05-04 16:48:50.325",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nraw_data_df.describe().show()",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:09:08.655",
+      "dateUpdated": "2019-05-04 16:48:50.370",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -329,7 +340,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d4"
+            "http://172.18.0.3:4040/jobs/job?id\u003d114"
           ],
           "interpreterSettingId": "spark"
         }
@@ -338,20 +349,21 @@
       "jobName": "paragraph_1553956516560_-702957580",
       "id": "20171028-214058_397404640",
       "dateCreated": "2019-03-30 14:35:16.560",
-      "dateStarted": "2019-05-01 16:09:08.736",
-      "dateFinished": "2019-05-01 16:09:09.279",
+      "dateStarted": "2019-05-04 16:48:50.422",
+      "dateFinished": "2019-05-04 16:48:50.759",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Intermezzo: Nice visualization with SQL\n\nA spark session contains amongst others a SparkContext and a SQLContext. It is possible to transform a dataframe to an _TempTable_ in the SQLContex by using the [`registerTempTable()` method](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.registerTempTable). When a dataframe it transformed to a TempTable some additional actions can be executed:\n\n* Using almost all SQL query functionalities (vs. limited SQL capabilities with  `select()\u0027 in dataframes)\n* Zeppelin contains a nice SQL API (**%sql**) that allows you to write queries as if you where in a full-blown SQL environment. Additionally visualization of query results within Zeppelin is superb, which makes it an optimal tool for data exploration and visualization.\n\n\u003e Techinically, the `registerTempTable()` method saves the dataframe as a HIVE table stored in memory.",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:20.400",
+      "dateUpdated": "2019-05-04 16:48:50.825",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
@@ -377,15 +389,15 @@
       "jobName": "paragraph_1553956516561_1101849793",
       "id": "20171028-231213_1667131502",
       "dateCreated": "2019-03-30 14:35:16.561",
-      "dateStarted": "2019-04-15 19:18:20.548",
-      "dateFinished": "2019-04-15 19:18:20.584",
+      "dateStarted": "2019-05-04 16:48:50.939",
+      "dateFinished": "2019-05-04 16:48:50.950",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Save dataframe as a TempTable\nraw_data_df.registerTempTable(\"raw_data\")",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:09:11.625",
+      "dateUpdated": "2019-05-04 16:48:51.039",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -397,7 +409,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -411,22 +425,22 @@
       "jobName": "paragraph_1553956516561_-2016649384",
       "id": "20171028-225947_1197043878",
       "dateCreated": "2019-03-30 14:35:16.561",
-      "dateStarted": "2019-05-01 16:09:11.693",
-      "dateFinished": "2019-05-01 16:09:11.760",
+      "dateStarted": "2019-05-04 16:48:51.092",
+      "dateFinished": "2019-05-04 16:48:51.163",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect species, avg(petal_width) as avg_petal_width\nfrom raw_data\ngroup by species",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:05:56.337",
+      "dateUpdated": "2019-05-04 17:03:29.776",
       "config": {
         "colWidth": 6.0,
         "editorMode": "ace/mode/sql",
         "results": {
           "0": {
             "graph": {
-              "mode": "pieChart",
+              "mode": "multiBarChart",
               "height": 300.0,
               "optionOpen": false,
               "setting": {
@@ -496,7 +510,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -507,7 +523,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "species\tavg_petal_width\nvirginica\t2.026\nversicolor\t1.3259999999999998\nsetosa\t0.2439999999999999\n"
+            "data": "species\tavg_petal_width\nvirginica\t2.0259999775886537\nversicolor\t1.3259999918937684\nsetosa\t0.24400000482797624\n"
           },
           {
             "type": "TEXT",
@@ -515,19 +531,35 @@
           }
         ]
       },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.18.0.3:4040/jobs/job?id\u003d115",
+            "http://172.18.0.3:4040/jobs/job?id\u003d116",
+            "http://172.18.0.3:4040/jobs/job?id\u003d117",
+            "http://172.18.0.3:4040/jobs/job?id\u003d118",
+            "http://172.18.0.3:4040/jobs/job?id\u003d119"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "apps": [],
       "jobName": "paragraph_1553956516561_777986406",
       "id": "20171028-230434_1558099602",
       "dateCreated": "2019-03-30 14:35:16.561",
-      "dateStarted": "2019-05-01 16:05:42.614",
-      "dateFinished": "2019-05-01 16:05:43.485",
+      "dateStarted": "2019-05-04 16:48:51.303",
+      "dateFinished": "2019-05-04 16:48:52.330",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect  petal_length, petal_width, sepal_width, petal_width, species\nfrom raw_data\n",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:04:04.168",
+      "dateUpdated": "2019-05-04 16:48:52.407",
       "config": {
         "colWidth": 6.0,
         "editorMode": "ace/mode/sql",
@@ -539,18 +571,71 @@
               "optionOpen": false,
               "setting": {
                 "scatterChart": {
-                  "yAxis": {
-                    "name": "petal_width",
-                    "index": 1.0,
-                    "aggr": "sum"
-                  },
                   "xAxis": {
                     "name": "petal_length",
                     "index": 0.0,
                     "aggr": "sum"
+                  },
+                  "yAxis": {
+                    "name": "sepal_width",
+                    "index": 2.0,
+                    "aggr": "sum"
                   }
+                },
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "petal_length": "string",
+                      "petal_width": "string",
+                      "sepal_width": "string",
+                      "species": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
                 }
-              }
+              },
+              "keys": [
+                {
+                  "name": "petal_length",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "petal_width",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
             },
             "helium": {}
           }
@@ -562,7 +647,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -581,24 +668,37 @@
           }
         ]
       },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.18.0.3:4040/jobs/job?id\u003d120"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "apps": [],
       "jobName": "paragraph_1553956516562_1425279083",
       "id": "20171028-230532_1530379443",
       "dateCreated": "2019-03-30 14:35:16.562",
-      "dateStarted": "2019-05-01 16:04:04.242",
-      "dateFinished": "2019-05-01 16:04:04.432",
+      "dateStarted": "2019-05-04 16:48:52.456",
+      "dateFinished": "2019-05-04 16:48:52.542",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 2: Prepare data structure\n\nA Spark ML Decision Tree (and most other ML models) require two input columns an **labelCol** and **featuresCol**. In this specific case, the labelColl is the species column. In Part 1 is shown that _species_ is a string variable so no mean and stddev can be calculated. More importantly, the decision tree classifier in Spark does not allow string variables as dependent variable. Therefore we are going to transform the _species_ variable from string to float.\nNext to that, there are multiple columns containing independent variables (sepal_length, sepal_with, petal_length, petal_width). These variables need to be combined into a featureCol that contains a vector (\u003dlist). In this Part, two things are done:\n\n* Transforming the _species_ columns from string to numeric\n* Combining the independent variables in one feature column",
       "user": "anonymous",
-      "dateUpdated": "2019-04-30 17:44:37.157",
+      "dateUpdated": "2019-05-04 16:48:52.556",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
@@ -624,20 +724,21 @@
       "jobName": "paragraph_1553956516562_113990241",
       "id": "20171028-215104_1409181389",
       "dateCreated": "2019-03-30 14:35:16.562",
-      "dateStarted": "2019-04-30 17:44:37.162",
-      "dateFinished": "2019-04-30 17:44:37.210",
+      "dateStarted": "2019-05-04 16:48:52.644",
+      "dateFinished": "2019-05-04 16:48:52.656",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### (2a) Transforming the species columns from string to numeric\n\nIn this part the [`stringIndexer()` method](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.feature.StringIndexer) is used, as first pyspark ML API method. the `stringIndexer()` is specifically design to transform string variables to a numerical index (variable).\n\nIn the machine learning API of Spark a lot of methods use the `fit()` and `transform()` function. The reasoning is always similar: `fit()` models data and `transform()` applies the fitted model to data. In the `stringIndexer()` context this means that fit will detect which distinct string values are present in the data (column) and maps them to a float. `transform()` will apply this model or mapping on data. This data can be both data on which we fitted the model or new data which is not yet seen by the model. This procedure is often used to train and afterwards validate a model.",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:23.869",
+      "dateUpdated": "2019-05-04 16:48:52.745",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
@@ -663,15 +764,15 @@
       "jobName": "paragraph_1553956516563_-1682239969",
       "id": "20171028-215823_455156514",
       "dateCreated": "2019-03-30 14:35:16.563",
-      "dateStarted": "2019-04-15 19:18:23.960",
-      "dateFinished": "2019-04-15 19:18:23.995",
+      "dateStarted": "2019-05-04 16:48:52.788",
+      "dateFinished": "2019-05-04 16:48:52.808",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Fit on whole dataset to include all labels in index.\nlabelIndexer \u003d StringIndexer(inputCol\u003d\"species\", outputCol\u003d\"label\").fit(raw_data_df)\n\n# Apply labelIndexer \u003d mapping or model\nlabeled_data_df \u003d labelIndexer.transform(raw_data_df)",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:09:14.908",
+      "dateUpdated": "2019-05-04 16:48:52.888",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -702,7 +803,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d5"
+            "http://172.18.0.3:4040/jobs/job?id\u003d121"
           ],
           "interpreterSettingId": "spark"
         }
@@ -711,15 +812,15 @@
       "jobName": "paragraph_1553956516563_2024986580",
       "id": "20171028-223155_2042779534",
       "dateCreated": "2019-03-30 14:35:16.563",
-      "dateStarted": "2019-05-01 16:09:14.984",
-      "dateFinished": "2019-05-01 16:09:15.527",
+      "dateStarted": "2019-05-04 16:48:52.952",
+      "dateFinished": "2019-05-04 16:48:53.178",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Show the results of the index transformation\nlabeled_data_df.show(5)\nlabeled_data_df.describe().show()\nlabeled_data_df.groupBy(\"species\", \"label\").count().show()",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:09:17.134",
+      "dateUpdated": "2019-05-04 16:48:53.255",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -731,7 +832,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -753,13 +856,13 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d6",
-            "http://172.19.0.3:4040/jobs/job?id\u003d7",
-            "http://172.19.0.3:4040/jobs/job?id\u003d8",
-            "http://172.19.0.3:4040/jobs/job?id\u003d9",
-            "http://172.19.0.3:4040/jobs/job?id\u003d10",
-            "http://172.19.0.3:4040/jobs/job?id\u003d11",
-            "http://172.19.0.3:4040/jobs/job?id\u003d12"
+            "http://172.18.0.3:4040/jobs/job?id\u003d122",
+            "http://172.18.0.3:4040/jobs/job?id\u003d123",
+            "http://172.18.0.3:4040/jobs/job?id\u003d124",
+            "http://172.18.0.3:4040/jobs/job?id\u003d125",
+            "http://172.18.0.3:4040/jobs/job?id\u003d126",
+            "http://172.18.0.3:4040/jobs/job?id\u003d127",
+            "http://172.18.0.3:4040/jobs/job?id\u003d128"
           ],
           "interpreterSettingId": "spark"
         }
@@ -768,20 +871,21 @@
       "jobName": "paragraph_1553956516563_-824105689",
       "id": "20171028-220131_246138058",
       "dateCreated": "2019-03-30 14:35:16.563",
-      "dateStarted": "2019-05-01 16:09:17.192",
-      "dateFinished": "2019-05-01 16:09:20.151",
+      "dateStarted": "2019-05-04 16:48:53.307",
+      "dateFinished": "2019-05-04 16:48:55.029",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### (2b) Combining the independent variables in one feature column\n\nTo combine multiple columns into one featuresCol containing a vector, the [`VectorAssembler()` method](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.feature.VectorAssembler) is used. This method is specifically created to combine multiple columns into a vector. As here no model or mapping needs to be done, because we only do a combination action, only the `transform()` method exists, while the `fit()` method is obsolete.\n\n\n\n\n\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:27.326",
+      "dateUpdated": "2019-05-04 16:48:55.120",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
@@ -807,15 +911,15 @@
       "jobName": "paragraph_1553956516564_-1478777839",
       "id": "20171028-224056_109020565",
       "dateCreated": "2019-03-30 14:35:16.564",
-      "dateStarted": "2019-04-15 19:18:27.404",
-      "dateFinished": "2019-04-15 19:18:27.432",
+      "dateStarted": "2019-05-04 16:48:55.180",
+      "dateFinished": "2019-05-04 16:48:55.189",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nparsed_data_df \u003d (VectorAssembler(inputCols\u003dlabeled_data_df.columns[1:-1], outputCol\u003d\"features\")\n                    .transform(labeled_data_df))\n\nparsed_data_df.sample(False, 0.03333, seed\u003d0).show(truncate\u003dFalse)\n\nparsed_data_df \u003d parsed_data_df.select(\"label\", \"features\")\nparsed_data_df.show(5, truncate\u003dFalse)",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:09:21.449",
+      "dateUpdated": "2019-05-04 16:48:55.281",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -827,7 +931,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -849,8 +955,8 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d13",
-            "http://172.19.0.3:4040/jobs/job?id\u003d14"
+            "http://172.18.0.3:4040/jobs/job?id\u003d129",
+            "http://172.18.0.3:4040/jobs/job?id\u003d130"
           ],
           "interpreterSettingId": "spark"
         }
@@ -859,20 +965,21 @@
       "jobName": "paragraph_1553956516564_-2136902774",
       "id": "20171028-220204_1244153646",
       "dateCreated": "2019-03-30 14:35:16.564",
-      "dateStarted": "2019-05-01 16:09:21.512",
-      "dateFinished": "2019-05-01 16:09:21.974",
+      "dateStarted": "2019-05-04 16:48:55.340",
+      "dateFinished": "2019-05-04 16:48:55.581",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 3: Split data\n\nIn Machine learning, the original dataset is split into three distinct subsample to allow a training, validation, and testing procedure. The biggest sample of the dataset (60%-80%) is taken as training data, while the remaining sample is split into a validation and test sample. The latter two sample are used to evaluated the trained (\u003d fitted) model on unseen data. This procedure prevents overfitting and ensures robustness of the model.\n\nThis Part takes a [`randomSplit()`](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.randomSplit) with weights (80%, 10%, 10%) to split the data into train-, validation-, and test sample.",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:28.061",
+      "dateUpdated": "2019-05-04 16:48:55.641",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
@@ -898,15 +1005,15 @@
       "jobName": "paragraph_1553956516564_-1298032903",
       "id": "20171028-224325_1591194910",
       "dateCreated": "2019-03-30 14:35:16.564",
-      "dateStarted": "2019-04-15 19:18:28.256",
-      "dateFinished": "2019-04-15 19:18:28.300",
+      "dateStarted": "2019-05-04 16:48:55.711",
+      "dateFinished": "2019-05-04 16:48:55.728",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\nweights \u003d [.8, .1, .1]\nseed \u003d 42\nparsed_train_data_df, parsed_val_data_df, parsed_test_data_df \u003d parsed_data_df.randomSplit(weights, seed\u003dseed)\n\n# caching\nparsed_train_data_df.cache()\nparsed_val_data_df.cache()\nparsed_test_data_df.cache()\n\n# Checking is split is done correctly\nn_train \u003d parsed_train_data_df.count()\nn_val \u003d parsed_val_data_df.count()\nn_test \u003d parsed_test_data_df.count()\n\nprint n_train, n_val, n_test, n_train + n_val + n_test\nprint parsed_data_df.count()\n",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:09:28.777",
+      "dateUpdated": "2019-05-04 16:48:55.811",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -918,7 +1025,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -940,10 +1049,10 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d15",
-            "http://172.19.0.3:4040/jobs/job?id\u003d16",
-            "http://172.19.0.3:4040/jobs/job?id\u003d17",
-            "http://172.19.0.3:4040/jobs/job?id\u003d18"
+            "http://172.18.0.3:4040/jobs/job?id\u003d131",
+            "http://172.18.0.3:4040/jobs/job?id\u003d132",
+            "http://172.18.0.3:4040/jobs/job?id\u003d133",
+            "http://172.18.0.3:4040/jobs/job?id\u003d134"
           ],
           "interpreterSettingId": "spark"
         }
@@ -952,20 +1061,21 @@
       "jobName": "paragraph_1553956516564_-2046242012",
       "id": "20171028-225143_607359770",
       "dateCreated": "2019-03-30 14:35:16.565",
-      "dateStarted": "2019-05-01 16:09:28.850",
-      "dateFinished": "2019-05-01 16:09:29.816",
+      "dateStarted": "2019-05-04 16:48:55.858",
+      "dateFinished": "2019-05-04 16:48:56.480",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 4: Create a decision tree model\n\nA decision tree needs to be fitted on the training data. As a first step, the decision tree needs to be configured and initialized. To do this the [`DecisionTreeClassifier()`  method](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.classification.DecisionTreeClassifier) needs to be called. In this case we limt ourself to setting the _labelCol_ and _featuresCol_ arguments. The detailed configuration of a decision tree goes beyond the scope of this course, but all details and configuration options can be found [here](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.classification.DecisionTreeClassifier). \n\nWhen the `DecisionTreeClassifier()` is initialized, the tree is fitted (modeled) on the training dataframe, parsed_train_data_df in this case.\n\n\u003e The `DecisionTreeClassifier()` is just one of the many classification models in spark ML. A complete overview can be found [here](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#module-pyspark.ml.classification). ",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:29.778",
+      "dateUpdated": "2019-05-04 16:48:56.561",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
@@ -991,15 +1101,15 @@
       "jobName": "paragraph_1553956516565_-1334265317",
       "id": "20171028-225621_415064816",
       "dateCreated": "2019-03-30 14:35:16.565",
-      "dateStarted": "2019-04-15 19:18:30.026",
-      "dateFinished": "2019-04-15 19:18:30.097",
+      "dateStarted": "2019-05-04 16:48:56.610",
+      "dateFinished": "2019-05-04 16:48:56.620",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n\n# Initialize the DecisionTree model\ndt \u003d DecisionTreeClassifier(labelCol\u003d\"label\", featuresCol\u003d\"features\")\n\n# Train model.\nmodel \u003d dt.fit(parsed_train_data_df)",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:09:47.222",
+      "dateUpdated": "2019-05-04 16:48:56.711",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -1011,7 +1121,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -1028,14 +1140,14 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d19",
-            "http://172.19.0.3:4040/jobs/job?id\u003d20",
-            "http://172.19.0.3:4040/jobs/job?id\u003d21",
-            "http://172.19.0.3:4040/jobs/job?id\u003d22",
-            "http://172.19.0.3:4040/jobs/job?id\u003d23",
-            "http://172.19.0.3:4040/jobs/job?id\u003d24",
-            "http://172.19.0.3:4040/jobs/job?id\u003d25",
-            "http://172.19.0.3:4040/jobs/job?id\u003d26"
+            "http://172.18.0.3:4040/jobs/job?id\u003d135",
+            "http://172.18.0.3:4040/jobs/job?id\u003d136",
+            "http://172.18.0.3:4040/jobs/job?id\u003d137",
+            "http://172.18.0.3:4040/jobs/job?id\u003d138",
+            "http://172.18.0.3:4040/jobs/job?id\u003d139",
+            "http://172.18.0.3:4040/jobs/job?id\u003d140",
+            "http://172.18.0.3:4040/jobs/job?id\u003d141",
+            "http://172.18.0.3:4040/jobs/job?id\u003d142"
           ],
           "interpreterSettingId": "spark"
         }
@@ -1044,15 +1156,134 @@
       "jobName": "paragraph_1553956516565_955044741",
       "id": "20171028-225156_1962219966",
       "dateCreated": "2019-03-30 14:35:16.565",
-      "dateStarted": "2019-05-01 16:09:47.285",
-      "dateFinished": "2019-05-01 16:09:48.175",
+      "dateStarted": "2019-05-04 16:48:56.759",
+      "dateFinished": "2019-05-04 16:48:57.191",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nhelp(DecisionTreeClassifier)",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 16:48:57.263",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Help on class DecisionTreeClassifier in module pyspark.ml.classification:\n\nclass DecisionTreeClassifier(pyspark.ml.wrapper.JavaEstimator, pyspark.ml.param.shared.HasFeaturesCol, pyspark.ml.param.shared.HasLabelCol, pyspark.ml.param.shared.HasPredictionCol, pyspark.ml.param.shared.HasProbabilityCol, pyspark.ml.param.shared.HasRawPredictionCol, pyspark.ml.param.shared.DecisionTreeParams, TreeClassifierParams, pyspark.ml.param.shared.HasCheckpointInterval, pyspark.ml.param.shared.HasSeed, pyspark.ml.util.JavaMLWritable, pyspark.ml.util.JavaMLReadable)\n |  `Decision tree \u003chttp://en.wikipedia.org/wiki/Decision_tree_learning\u003e`_\n |  learning algorithm for classification.\n |  It supports both binary and multiclass labels, as well as both continuous and categorical\n |  features.\n |  \n |  \u003e\u003e\u003e from pyspark.ml.linalg import Vectors\n |  \u003e\u003e\u003e from pyspark.ml.feature import StringIndexer\n |  \u003e\u003e\u003e df \u003d spark.createDataFrame([\n |  ...     (1.0, Vectors.dense(1.0)),\n |  ...     (0.0, Vectors.sparse(1, [], []))], [\"label\", \"features\"])\n |  \u003e\u003e\u003e stringIndexer \u003d StringIndexer(inputCol\u003d\"label\", outputCol\u003d\"indexed\")\n |  \u003e\u003e\u003e si_model \u003d stringIndexer.fit(df)\n |  \u003e\u003e\u003e td \u003d si_model.transform(df)\n |  \u003e\u003e\u003e dt \u003d DecisionTreeClassifier(maxDepth\u003d2, labelCol\u003d\"indexed\")\n |  \u003e\u003e\u003e model \u003d dt.fit(td)\n |  \u003e\u003e\u003e model.numNodes\n |  3\n |  \u003e\u003e\u003e model.depth\n |  1\n |  \u003e\u003e\u003e model.featureImportances\n |  SparseVector(1, {0: 1.0})\n |  \u003e\u003e\u003e model.numFeatures\n |  1\n |  \u003e\u003e\u003e model.numClasses\n |  2\n |  \u003e\u003e\u003e print(model.toDebugString)\n |  DecisionTreeClassificationModel (uid\u003d...) of depth 1 with 3 nodes...\n |  \u003e\u003e\u003e test0 \u003d spark.createDataFrame([(Vectors.dense(-1.0),)], [\"features\"])\n |  \u003e\u003e\u003e result \u003d model.transform(test0).head()\n |  \u003e\u003e\u003e result.prediction\n |  0.0\n |  \u003e\u003e\u003e result.probability\n |  DenseVector([1.0, 0.0])\n |  \u003e\u003e\u003e result.rawPrediction\n |  DenseVector([1.0, 0.0])\n |  \u003e\u003e\u003e test1 \u003d spark.createDataFrame([(Vectors.sparse(1, [0], [1.0]),)], [\"features\"])\n |  \u003e\u003e\u003e model.transform(test1).head().prediction\n |  1.0\n |  \n |  \u003e\u003e\u003e dtc_path \u003d temp_path + \"/dtc\"\n |  \u003e\u003e\u003e dt.save(dtc_path)\n |  \u003e\u003e\u003e dt2 \u003d DecisionTreeClassifier.load(dtc_path)\n |  \u003e\u003e\u003e dt2.getMaxDepth()\n |  2\n |  \u003e\u003e\u003e model_path \u003d temp_path + \"/dtc_model\"\n |  \u003e\u003e\u003e model.save(model_path)\n |  \u003e\u003e\u003e model2 \u003d DecisionTreeClassificationModel.load(model_path)\n |  \u003e\u003e\u003e model.featureImportances \u003d\u003d model2.featureImportances\n |  True\n |  \n |  .. versionadded:: 1.4.0\n |  \n |  Method resolution order:\n |      DecisionTreeClassifier\n |      pyspark.ml.wrapper.JavaEstimator\n |      pyspark.ml.wrapper.JavaParams\n |      pyspark.ml.wrapper.JavaWrapper\n |      pyspark.ml.base.Estimator\n |      pyspark.ml.param.shared.HasFeaturesCol\n |      pyspark.ml.param.shared.HasLabelCol\n |      pyspark.ml.param.shared.HasPredictionCol\n |      pyspark.ml.param.shared.HasProbabilityCol\n |      pyspark.ml.param.shared.HasRawPredictionCol\n |      pyspark.ml.param.shared.DecisionTreeParams\n |      TreeClassifierParams\n |      pyspark.ml.param.shared.HasCheckpointInterval\n |      pyspark.ml.param.shared.HasSeed\n |      pyspark.ml.param.Params\n |      pyspark.ml.util.Identifiable\n |      pyspark.ml.util.JavaMLWritable\n |      pyspark.ml.util.MLWritable\n |      pyspark.ml.util.JavaMLReadable\n |      pyspark.ml.util.MLReadable\n |      __builtin__.object\n |  \n |  Methods defined here:\n |  \n |  __init__(self, *args, **kwargs)\n |      __init__(self, featuresCol\u003d\"features\", labelCol\u003d\"label\", predictionCol\u003d\"prediction\",                  probabilityCol\u003d\"probability\", rawPredictionCol\u003d\"rawPrediction\",                  maxDepth\u003d5, maxBins\u003d32, minInstancesPerNode\u003d1, minInfoGain\u003d0.0,                  maxMemoryInMB\u003d256, cacheNodeIds\u003dFalse, checkpointInterval\u003d10, impurity\u003d\"gini\",                  seed\u003dNone)\n |  \n |  setParams(self, *args, **kwargs)\n |      setParams(self, featuresCol\u003d\"features\", labelCol\u003d\"label\", predictionCol\u003d\"prediction\",                   probabilityCol\u003d\"probability\", rawPredictionCol\u003d\"rawPrediction\",                   maxDepth\u003d5, maxBins\u003d32, minInstancesPerNode\u003d1, minInfoGain\u003d0.0,                   maxMemoryInMB\u003d256, cacheNodeIds\u003dFalse, checkpointInterval\u003d10, impurity\u003d\"gini\",                   seed\u003dNone)\n |      Sets params for the DecisionTreeClassifier.\n |      \n |      .. versionadded:: 1.4.0\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes defined here:\n |  \n |  __abstractmethods__ \u003d frozenset([])\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from pyspark.ml.wrapper.JavaEstimator:\n |  \n |  __metaclass__ \u003d \u003cclass \u0027abc.ABCMeta\u0027\u003e\n |      Metaclass for defining Abstract Base Classes (ABCs).\n |      \n |      Use this metaclass to create an ABC.  An ABC can be subclassed\n |      directly, and then acts as a mix-in class.  You can also register\n |      unrelated concrete classes (even built-in classes) and unrelated\n |      ABCs as \u0027virtual subclasses\u0027 -- these and their descendants will\n |      be considered subclasses of the registering ABC by the built-in\n |      issubclass() function, but the registering ABC won\u0027t show up in\n |      their MRO (Method Resolution Order) nor will method\n |      implementations defined by the registering ABC be callable (not\n |      even via super()).\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.wrapper.JavaParams:\n |  \n |  __del__(self)\n |  \n |  copy(self, extra\u003dNone)\n |      Creates a copy of this instance with the same uid and some\n |      extra params. This implementation first calls Params.copy and\n |      then make a copy of the companion Java pipeline component with\n |      extra params. So both the Python wrapper and the Java pipeline\n |      component get copied.\n |      \n |      :param extra: Extra parameters to copy to the new instance\n |      :return: Copy of this instance\n |  \n |  ----------------------------------------------------------------------\n |  Data descriptors inherited from pyspark.ml.wrapper.JavaWrapper:\n |  \n |  __dict__\n |      dictionary for instance variables (if defined)\n |  \n |  __weakref__\n |      list of weak references to the object (if defined)\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.base.Estimator:\n |  \n |  fit(self, dataset, params\u003dNone)\n |      Fits a model to the input dataset with optional parameters.\n |      \n |      :param dataset: input dataset, which is an instance of :py:class:`pyspark.sql.DataFrame`\n |      :param params: an optional param map that overrides embedded params. If a list/tuple of\n |                     param maps is given, this calls fit on each param map and returns a list of\n |                     models.\n |      :returns: fitted model(s)\n |      \n |      .. versionadded:: 1.3.0\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.param.shared.HasFeaturesCol:\n |  \n |  getFeaturesCol(self)\n |      Gets the value of featuresCol or its default value.\n |  \n |  setFeaturesCol(self, value)\n |      Sets the value of :py:attr:`featuresCol`.\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from pyspark.ml.param.shared.HasFeaturesCol:\n |  \n |  featuresCol \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027featuresCol\u0027, doc\u003d\u0027featu...\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.param.shared.HasLabelCol:\n |  \n |  getLabelCol(self)\n |      Gets the value of labelCol or its default value.\n |  \n |  setLabelCol(self, value)\n |      Sets the value of :py:attr:`labelCol`.\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from pyspark.ml.param.shared.HasLabelCol:\n |  \n |  labelCol \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027labelCol\u0027, doc\u003d\u0027label colum...\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.param.shared.HasPredictionCol:\n |  \n |  getPredictionCol(self)\n |      Gets the value of predictionCol or its default value.\n |  \n |  setPredictionCol(self, value)\n |      Sets the value of :py:attr:`predictionCol`.\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from pyspark.ml.param.shared.HasPredictionCol:\n |  \n |  predictionCol \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027predictionCol\u0027, doc\u003d\u0027p...\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.param.shared.HasProbabilityCol:\n |  \n |  getProbabilityCol(self)\n |      Gets the value of probabilityCol or its default value.\n |  \n |  setProbabilityCol(self, value)\n |      Sets the value of :py:attr:`probabilityCol`.\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from pyspark.ml.param.shared.HasProbabilityCol:\n |  \n |  probabilityCol \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027probabilityCol\u0027,...at...\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.param.shared.HasRawPredictionCol:\n |  \n |  getRawPredictionCol(self)\n |      Gets the value of rawPredictionCol or its default value.\n |  \n |  setRawPredictionCol(self, value)\n |      Sets the value of :py:attr:`rawPredictionCol`.\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from pyspark.ml.param.shared.HasRawPredictionCol:\n |  \n |  rawPredictionCol \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027rawPredictionCol......\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.param.shared.DecisionTreeParams:\n |  \n |  getCacheNodeIds(self)\n |      Gets the value of cacheNodeIds or its default value.\n |  \n |  getMaxBins(self)\n |      Gets the value of maxBins or its default value.\n |  \n |  getMaxDepth(self)\n |      Gets the value of maxDepth or its default value.\n |  \n |  getMaxMemoryInMB(self)\n |      Gets the value of maxMemoryInMB or its default value.\n |  \n |  getMinInfoGain(self)\n |      Gets the value of minInfoGain or its default value.\n |  \n |  getMinInstancesPerNode(self)\n |      Gets the value of minInstancesPerNode or its default value.\n |  \n |  setCacheNodeIds(self, value)\n |      Sets the value of :py:attr:`cacheNodeIds`.\n |  \n |  setMaxBins(self, value)\n |      Sets the value of :py:attr:`maxBins`.\n |  \n |  setMaxDepth(self, value)\n |      Sets the value of :py:attr:`maxDepth`.\n |  \n |  setMaxMemoryInMB(self, value)\n |      Sets the value of :py:attr:`maxMemoryInMB`.\n |  \n |  setMinInfoGain(self, value)\n |      Sets the value of :py:attr:`minInfoGain`.\n |  \n |  setMinInstancesPerNode(self, value)\n |      Sets the value of :py:attr:`minInstancesPerNode`.\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from pyspark.ml.param.shared.DecisionTreeParams:\n |  \n |  cacheNodeIds \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027cacheNodeIds\u0027, d...ed o...\n |  \n |  maxBins \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027maxBins\u0027, doc\u003d\u0027M...mber of c...\n |  \n |  maxDepth \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027maxDepth\u0027, doc\u003d\u0027...; depth ...\n |  \n |  maxMemoryInMB \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027maxMemoryInMB\u0027, ...ati...\n |  \n |  minInfoGain \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027minInfoGain\u0027, do...in fo...\n |  \n |  minInstancesPerNode \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027minInstancesPerN...\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from TreeClassifierParams:\n |  \n |  getImpurity(self)\n |      Gets the value of impurity or its default value.\n |      \n |      .. versionadded:: 1.6.0\n |  \n |  setImpurity(self, value)\n |      Sets the value of :py:attr:`impurity`.\n |      \n |      .. versionadded:: 1.6.0\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from TreeClassifierParams:\n |  \n |  impurity \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027impurity\u0027, doc\u003d\u0027...-insensi...\n |  \n |  supportedImpurities \u003d [\u0027entropy\u0027, \u0027gini\u0027]\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.param.shared.HasCheckpointInterval:\n |  \n |  getCheckpointInterval(self)\n |      Gets the value of checkpointInterval or its default value.\n |  \n |  setCheckpointInterval(self, value)\n |      Sets the value of :py:attr:`checkpointInterval`.\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from pyspark.ml.param.shared.HasCheckpointInterval:\n |  \n |  checkpointInterval \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027checkpointInterv....\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.param.shared.HasSeed:\n |  \n |  getSeed(self)\n |      Gets the value of seed or its default value.\n |  \n |  setSeed(self, value)\n |      Sets the value of :py:attr:`seed`.\n |  \n |  ----------------------------------------------------------------------\n |  Data and other attributes inherited from pyspark.ml.param.shared.HasSeed:\n |  \n |  seed \u003d Param(parent\u003d\u0027undefined\u0027, name\u003d\u0027seed\u0027, doc\u003d\u0027random seed.\u0027)\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.param.Params:\n |  \n |  explainParam(self, param)\n |      Explains a single param and returns its name, doc, and optional\n |      default value and user-supplied value in a string.\n |  \n |  explainParams(self)\n |      Returns the documentation of all params with their optionally\n |      default values and user-supplied values.\n |  \n |  extractParamMap(self, extra\u003dNone)\n |      Extracts the embedded default param values and user-supplied\n |      values, and then merges them with extra values from input into\n |      a flat param map, where the latter value is used if there exist\n |      conflicts, i.e., with ordering: default param values \u003c\n |      user-supplied values \u003c extra.\n |      \n |      :param extra: extra param values\n |      :return: merged param map\n |  \n |  getOrDefault(self, param)\n |      Gets the value of a param in the user-supplied param map or its\n |      default value. Raises an error if neither is set.\n |  \n |  getParam(self, paramName)\n |      Gets a param by its name.\n |  \n |  hasDefault(self, param)\n |      Checks whether a param has a default value.\n |  \n |  hasParam(self, paramName)\n |      Tests whether this instance contains a param with a given\n |      (string) name.\n |  \n |  isDefined(self, param)\n |      Checks whether a param is explicitly set by user or has\n |      a default value.\n |  \n |  isSet(self, param)\n |      Checks whether a param is explicitly set by user.\n |  \n |  ----------------------------------------------------------------------\n |  Data descriptors inherited from pyspark.ml.param.Params:\n |  \n |  params\n |      Returns all params ordered by name. The default implementation\n |      uses :py:func:`dir` to get all attributes of type\n |      :py:class:`Param`.\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.util.Identifiable:\n |  \n |  __repr__(self)\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.util.JavaMLWritable:\n |  \n |  write(self)\n |      Returns an MLWriter instance for this ML instance.\n |  \n |  ----------------------------------------------------------------------\n |  Methods inherited from pyspark.ml.util.MLWritable:\n |  \n |  save(self, path)\n |      Save this ML instance to the given path, a shortcut of `write().save(path)`.\n |  \n |  ----------------------------------------------------------------------\n |  Class methods inherited from pyspark.ml.util.JavaMLReadable:\n |  \n |  read(cls) from abc.ABCMeta\n |      Returns an MLReader instance for this class.\n |  \n |  ----------------------------------------------------------------------\n |  Class methods inherited from pyspark.ml.util.MLReadable:\n |  \n |  load(cls, path) from abc.ABCMeta\n |      Reads an ML instance from the input path, a shortcut of `read().load(path)`.\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556987808354_1307581466",
+      "id": "20190504-163648_1193379634",
+      "dateCreated": "2019-05-04 16:36:48.354",
+      "dateStarted": "2019-05-04 16:48:57.308",
+      "dateFinished": "2019-05-04 16:48:57.378",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nIn the cell below is shown how to print statistics of the Decision Tree",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 16:48:57.408",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eIn the cell below is shown how to print statistics of the Decision Tree\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556988064128_-776489917",
+      "id": "20190504-164104_1178854679",
+      "dateCreated": "2019-05-04 16:41:04.128",
+      "dateStarted": "2019-05-04 16:48:57.487",
+      "dateFinished": "2019-05-04 16:48:57.492",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nprint(\"Number of Nodes :\" + str(model.numNodes))\nprint(\"Depth: \" + str(model.depth))\nprint(\"Feature importances:\")\nmodel.featureImportances",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 16:48:57.586",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Number of Nodes :15\nDepth: 5\nFeature importances:\nSparseVector(4, {0: 0.0308, 2: 0.554, 3: 0.4152})"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556987848255_1018888792",
+      "id": "20190504-163728_1493550853",
+      "dateCreated": "2019-05-04 16:37:28.255",
+      "dateStarted": "2019-05-04 16:48:57.636",
+      "dateFinished": "2019-05-04 16:48:57.708",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n## Part 5: Make predictions and evaluate the decision tree model\n\nAfter fitting the model on the training data the model needs to be applied on the validation and test dataframes. It is done with the `transform()` method and will results in predictions. In this case there is also a prediction made for the train dataframe. The reasons for making these predictions is twofold:\n\n* Evaluating the model\n* Using predictions in the remainder of the data science pipeline",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:09:50.178",
+      "dateUpdated": "2019-05-04 16:48:57.736",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -1084,15 +1315,15 @@
       "jobName": "paragraph_1553956516566_1370738190",
       "id": "20171028-225641_1315678238",
       "dateCreated": "2019-03-30 14:35:16.566",
-      "dateStarted": "2019-05-01 16:09:50.181",
-      "dateFinished": "2019-05-01 16:09:52.105",
+      "dateStarted": "2019-05-04 16:48:57.802",
+      "dateFinished": "2019-05-04 16:48:57.809",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Make predictions.\ntrain_predictions \u003d model.transform(parsed_train_data_df)\nval_predictions \u003d model.transform(parsed_val_data_df)\ntest_predictions \u003d model.transform(parsed_test_data_df)\n\n#Show predictions\ntest_predictions.select(\"prediction\", \"label\", \"features\").show()",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:09:52.689",
+      "dateUpdated": "2019-05-04 16:48:57.901",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -1104,7 +1335,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -1126,7 +1359,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d27"
+            "http://172.18.0.3:4040/jobs/job?id\u003d143"
           ],
           "interpreterSettingId": "spark"
         }
@@ -1135,20 +1368,21 @@
       "jobName": "paragraph_1553956516566_-857055827",
       "id": "20171028-225412_1099070164",
       "dateCreated": "2019-03-30 14:35:16.566",
-      "dateStarted": "2019-05-01 16:09:52.733",
-      "dateFinished": "2019-05-01 16:09:53.005",
+      "dateStarted": "2019-05-04 16:48:57.946",
+      "dateFinished": "2019-05-04 16:48:58.160",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\nThe final step in the modelling proces is evaluating the model. How this evaluation step looks like, depends on the modeltype. Here we have _Multiclass Classification Model_, so evaluation is done using the [`MulticlassClassificationEvaluator()`\nmethod](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.MulticlassClassificationEvaluator) from the pyspark.ml.evaluation module which we imported in Part 0. \n\nA first step is configuring and initializing the `MulticlassClassificationEvaluator()`. In this case we limt ourself to setting the _labelCol_, _predictionCol_, and _metricName_ arguments. The detailed configuration of the evaluation of a Multiclass Classification Model goes beyond the scope of this course, but all details and configuration options can be found [here](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.evaluation.MulticlassClassificationEvaluator).\n\nIn the case of evaluation, there is no `fit()` or `transform()` method that needs to be called, but an **`evaluate()`** method. This method computes the desired metric defined in the `MulticlassClassificationEvaluator()`, accuracy in this case, on the specified dataframe. In this lab, accuracy evaluation is done for the train, validation, and test dataframe.\n\n\u003e Note if another model type is trained, another evaluator needs to be used. More details out the different evaluators can be found [here](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#module-pyspark.ml.evaluation).",
       "user": "anonymous",
-      "dateUpdated": "2019-04-15 19:18:32.293",
+      "dateUpdated": "2019-05-04 16:56:58.530",
       "config": {
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": true
+          "editOnDblClick": true,
+          "completionSupport": false
         },
         "colWidth": 12.0,
         "editorMode": "ace/mode/markdown",
@@ -1174,15 +1408,15 @@
       "jobName": "paragraph_1553956516566_1418405052",
       "id": "20171029-093927_523304868",
       "dateCreated": "2019-03-30 14:35:16.566",
-      "dateStarted": "2019-04-15 19:18:32.342",
-      "dateFinished": "2019-04-15 19:18:32.364",
+      "dateStarted": "2019-05-04 16:56:58.530",
+      "dateFinished": "2019-05-04 16:56:58.542",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n# Evaluate\n# Select (prediction, true label) and compute test error\nevaluator \u003d MulticlassClassificationEvaluator(labelCol\u003d\"label\", predictionCol\u003d\"prediction\", metricName\u003d\"accuracy\")\n\ntrain_accuracy \u003d evaluator.evaluate(train_predictions)\nval_accuracy \u003d evaluator.evaluate(val_predictions)\ntest_accuracy \u003d evaluator.evaluate(test_predictions)\n\nprint(\"Train accuracy \u003d %g \" % (train_accuracy))\nprint(\"Validation accuracy \u003d %g \" % (val_accuracy))\nprint(\"Test accuracy \u003d %g \" % (test_accuracy))\n",
       "user": "anonymous",
-      "dateUpdated": "2019-05-01 16:10:00.905",
+      "dateUpdated": "2019-05-04 16:48:58.407",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/python",
@@ -1194,7 +1428,9 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9.0
+        "fontSize": 9.0,
+        "editorHide": false,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -1216,12 +1452,12 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.19.0.3:4040/jobs/job?id\u003d28",
-            "http://172.19.0.3:4040/jobs/job?id\u003d29",
-            "http://172.19.0.3:4040/jobs/job?id\u003d30",
-            "http://172.19.0.3:4040/jobs/job?id\u003d31",
-            "http://172.19.0.3:4040/jobs/job?id\u003d32",
-            "http://172.19.0.3:4040/jobs/job?id\u003d33"
+            "http://172.18.0.3:4040/jobs/job?id\u003d144",
+            "http://172.18.0.3:4040/jobs/job?id\u003d145",
+            "http://172.18.0.3:4040/jobs/job?id\u003d146",
+            "http://172.18.0.3:4040/jobs/job?id\u003d147",
+            "http://172.18.0.3:4040/jobs/job?id\u003d148",
+            "http://172.18.0.3:4040/jobs/job?id\u003d149"
           ],
           "interpreterSettingId": "spark"
         }
@@ -1230,24 +1466,212 @@
       "jobName": "paragraph_1553956516567_-392610063",
       "id": "20171028-225432_1139492683",
       "dateCreated": "2019-03-30 14:35:16.567",
-      "dateStarted": "2019-05-01 16:10:00.955",
-      "dateFinished": "2019-05-01 16:10:01.670",
+      "dateStarted": "2019-05-04 16:48:58.454",
+      "dateFinished": "2019-05-04 16:48:59.036",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n# Part 6: Save and load a the created model\nA created decision can be saved using the [`.save()` method] (https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.classification.DecisionTreeClassificationModel) which contains the path as argument. If the the decision tree already exists, the old model can be overwritten using `.write().overwrite().save()`.\n\nTo load the saved model afterwards, the `.load()` method is used. \n",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 16:59:52.655",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorHide": true,
+        "editorMode": "ace/mode/markdown",
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003ePart 6: Save and load a the created model\u003c/h1\u003e\n\u003cp\u003eA created decision can be saved using the \u003ca href\u003d\"https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.classification.DecisionTreeClassificationModel\"\u003e\u003ccode\u003e.save()\u003c/code\u003e method\u003c/a\u003e which contains the path as argument. If the the decision tree already exists, the old model can be overwritten using \u003ccode\u003e.write().overwrite().save()\u003c/code\u003e.\u003c/p\u003e\n\u003cp\u003eTo load the saved model afterwards, the \u003ccode\u003e.load()\u003c/code\u003e method is used.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1556646416733_-750708772",
+      "id": "20190430-174656_453234259",
+      "dateCreated": "2019-04-30 17:46:56.733",
+      "dateStarted": "2019-05-04 16:59:52.655",
+      "dateFinished": "2019-05-04 16:59:52.665",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n#model.save(\"data/models/decisionTree\")\n# If the model already exists:\nmodel.write().overwrite().save(\"data/models/decisionTree\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 16:54:14.285",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.18.0.3:4040/jobs/job?id\u003d150",
+            "http://172.18.0.3:4040/jobs/job?id\u003d151"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1556988142027_-1713792884",
+      "id": "20190504-164222_1078255412",
+      "dateCreated": "2019-05-04 16:42:22.028",
+      "dateStarted": "2019-05-04 16:53:43.529",
+      "dateFinished": "2019-05-04 16:53:43.774",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nloaded_model \u003d DecisionTreeClassificationModel.load(\"data/models/decisionTree\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 16:54:16.211",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.18.0.3:4040/jobs/job?id\u003d152",
+            "http://172.18.0.3:4040/jobs/job?id\u003d153",
+            "http://172.18.0.3:4040/jobs/job?id\u003d154"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1556988214553_-1595330067",
+      "id": "20190504-164334_2057647747",
+      "dateCreated": "2019-05-04 16:43:34.553",
+      "dateStarted": "2019-05-04 16:54:16.250",
+      "dateFinished": "2019-05-04 16:54:16.632",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ntest_results \u003d loaded_model.transform(parsed_test_data_df)\nevaluator.evaluate(test_results)",
+      "user": "anonymous",
+      "dateUpdated": "2019-05-04 16:54:46.692",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "0.875"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.18.0.3:4040/jobs/job?id\u003d155",
+            "http://172.18.0.3:4040/jobs/job?id\u003d156"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1556988244479_1802669154",
+      "id": "20190504-164404_1406474670",
+      "dateCreated": "2019-05-04 16:44:04.479",
+      "dateStarted": "2019-05-04 16:54:46.728",
+      "dateFinished": "2019-05-04 16:54:46.936",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n",
       "user": "anonymous",
-      "dateUpdated": "2019-04-30 17:46:56.734",
+      "dateUpdated": "2019-05-04 16:48:26.133",
       "config": {},
       "settings": {
         "params": {},
         "forms": {}
       },
       "apps": [],
-      "jobName": "paragraph_1556646416733_-750708772",
-      "id": "20190430-174656_453234259",
-      "dateCreated": "2019-04-30 17:46:56.733",
+      "jobName": "paragraph_1556988506132_176331330",
+      "id": "20190504-164826_442060927",
+      "dateCreated": "2019-05-04 16:48:26.132",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }
