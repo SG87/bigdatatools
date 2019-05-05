@@ -16,11 +16,17 @@ PUT /_cluster/settings
 # List indexes
 GET /_cat/indices?v
 
+# Create index
+PUT /product
+
 # Delete an index
 DELETE /product
 
-# Create index
+# Create index with replicas
 PUT /product
+{"number_of_shards":4,
+"number_of_replicas": 2}
+
 
 # List indexes
 GET /_cat/indices?v
@@ -111,6 +117,8 @@ POST /product/default
   "category": "book"
 }
 
+GET /product/default/_count
+
 POST /product/_delete_by_query
 {
   "query": {
@@ -120,6 +128,8 @@ POST /product/_delete_by_query
   }
 }
 
+GET /product/default/_count
+
 # Deleting index
 DELETE /product
 
@@ -127,6 +137,7 @@ GET /_cat/indices?v
 
 
 # Bulk processing
+## Bulk creation
 POST /product/default/_bulk
 { "index": { "_id": "100" } }
 { "price": 100 }
@@ -136,7 +147,7 @@ POST /product/default/_bulk
 GET /product/default/100
 GET /product/default/101
 
-
+### Bulk update & Bulk delete
 POST /product/default/_bulk
 { "update": { "_id": "100" } }
 { "doc": { "price": 1000 } }
