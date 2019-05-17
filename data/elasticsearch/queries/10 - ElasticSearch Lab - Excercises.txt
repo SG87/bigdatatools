@@ -45,7 +45,7 @@
 
 #14) Find documents in the product index containing a number within the name field.
 
-#15) Return documents in the product index created in the last rolling year.
+#15) Return documents in the product index created in the 3 last rolling years.
 
 # 16) Perform a search within the recipe index for the sentence "Pasta with parmesan and spinach" in the title field.
 
@@ -59,7 +59,7 @@
 
 # 21) Write a query that returns recipes of which the description contains “pasta”, but not “carbonara” and of which the cooking time is less than 15 minutes.
 
-# 22) Write a query that returns recipes of which the description contains “pasta” and “carbonara”, but not “parmesan”. Additionally, the dishes should be created in the last year and recipes with “”parsley” should be preferred, but other recipes are also ok.
+# 22) Write a query that returns recipes of which the description contains “pasta” and “carbonara”, but not “parmesan”. Additionally, the dishes should be created in the last 3 year and recipes with “”parsley” should be preferred, but other recipes are also ok.
 
 # 23) Search within the department index for the managers below 40 years of age.
 
